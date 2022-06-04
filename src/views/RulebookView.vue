@@ -13,6 +13,7 @@
 <template>
   <section class="hero is-primary">
     <div class="hero-body">
+      <p class="heading">Wersja 1.1</p>
       <p class="title">
         BOOST
       </p>

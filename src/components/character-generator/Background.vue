@@ -13,6 +13,7 @@
                             "Grzebień do wąsów",
                             "Plecak"
                         ],
+                        hidden: true,
                         chosen: false,
                     },
                     artist: {
@@ -61,6 +62,41 @@
                         hidden: true,
                         chosen: false,
                     },
+                    forester: {
+                        name: "Gajowy",
+                        description: "Znasz się na roślinach. Potrafisz obciąć nożyczkami żywopłot w dwie minuty lepiej niż kto inny szczypcami przez godzinę. Jak spytają cię czy to pokrzywa czy ziele angielskie to na pewno nie powiesz że to bakłażan.",
+                        inventory: [
+                            "Nożyce",
+                            "4 srebrne monety",
+                            "Łopata",
+                            "Sadzonka wybranej rośliny"
+                        ],
+                        hidden: true,
+                        chosen: false,
+                    },
+                    scavenger: {
+                        name: "Złomiarz",
+                        description: "Od kiedy pamiętasz, zbierasz wszystko co zobaczysz. Twój wór pełny jest śmieci które nie omieszkasz sprzedać jeśli tylko ktoś kupi. Uwielbiasz puste pola bitwy, które możesz przemierzać szukając łupów.",
+                        inventory: [
+                            "Kości do gry",
+                            "Butelka Rumu",
+                            "6 srebrnych monet",
+                            "Złoty ząb"
+                        ],
+                        hidden: true,
+                        chosen: false,
+                    },
+                    innkeeper: {
+                        name: "Karczmarz",
+                        description: "Wiesz co nieco o otaczającym cię świecie. Nie jest to dziwne bo przecież pół życia spędziłeś za ladą lejąc trunki i słuchając lokalnych. Możesz upędzić bimber, który nie będzie smakował jak psie szczyny.",
+                        inventory: [
+                            "Twój ulubiony fartuch",
+                            "Antałek bimbru",
+                            "8 srebrnych monet",
+                        ],
+                        hidden: true,
+                        chosen: false,
+                    }
                 }
             }
         },
@@ -84,7 +120,7 @@
 </script>
 
 <template>
-    <label class="label is-medium mb-2">Zanim twoja postać wyruszyła na przygodę, powinna była czymś się zajmować. Chyba że preferujesz nudę. Możesz przerzucić kość która ci się nie podoba gdy wykonujesz czynność związaną z twoim zawodem.</label>
+    <label class="label is-medium mb-2">Zanim twoja postać wyruszyła na przygodę, powinna była czymś się zajmować. Chyba że preferujesz nudę. Możesz przerzucić kość i wybrać lepszy wynik, gdy wykonujesz czynność związaną z twoim zawodem.</label>
     <div class="card mb-2" :class="{'chosen': background.chosen}" v-for="(background, bName) in backgroundList" :key="bName"
         @click="showBackground(bName)">
         <header class="card-header">
