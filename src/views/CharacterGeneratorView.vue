@@ -27,7 +27,7 @@
     <div class="content">
 
       <Stats />
-      
+
       <br>
 
       <Class />
@@ -35,3 +35,9 @@
     </div>
   </section>
 </template>
+
+<style lang="scss">
+  .chosen {
+    border: 2px solid #34A873;
+  }
+</style>

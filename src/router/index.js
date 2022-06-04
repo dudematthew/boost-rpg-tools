@@ -10,12 +10,12 @@ const routes = [
   {
     path: '/rulebook',
     name: 'rulebook',
-    component: () => import(/* webpackChunkName: "about" */ '../views/RulebookView.vue')
+    component: () => import('../views/RulebookView.vue')
   },
   {
     path: '/generator',
     name: 'generator',
-    component: () => import(/* webpackChunkName: "about" */ '../views/CharacterGeneratorView.vue')
+    component: () => import('../views/CharacterGeneratorView.vue')
   },
   
 ];
