@@ -1,29 +1,10 @@
 <script>
     export default {
         name: 'Stats',
-        data() {
-            return {
-                abilityPoints: [6, 9, 12, 15],
-                chosenPoints: {
-                    strength: {
-                        value: null,
-                        name: "Siła"
-                    },
-                    agility: {
-                        value: null,
-                        name: "Zręczność"
-                    },
-                    intelligence: {
-                        value: null,
-                        name: "Inteligencja"
-                    },
-                    focus: {
-                        value: null,
-                        name: "Skupienie"
-                    }
-                }
-            }
-        },
+        props: [
+            'abilityPoints',
+            'chosenPoints'
+        ],
         computed: {
             abilityPointsText() {
                 return this.abilityPoints.join(", ");

@@ -4,12 +4,40 @@
   import Class from '@/components/character-generator/Class.vue'
   import Background from '@/components/character-generator/Background.vue'
 
+  import Cookie from 'js-cookie'
+
   export default {
     name: 'RulebookView',
+    props: [
+      'abilityPoints',
+      'chosenPoints',
+      'classList',
+      'spellList',
+      'backgroundList'
+    ],
     components: {
       Stats,
       Class,
       Background
+    },
+    data() {
+      return {
+        
+      }
+    },
+    methods: {
+      createCharacter () {
+        let characterStringified = JSON.stringify({
+            chosenPoints: this.chosenPoints,
+            classList: this.classList,
+            spellList: this.spellList,
+            backgroundList: this.backgroundList
+        });
+
+        this.$router.push({ name: 'character sheet', params: {
+          character: characterStringified
+        }});
+      }
     }
   }
 </script>
@@ -28,15 +56,25 @@
   <section class="section">
     <div class="content">
 
-      <Stats />
+      <Stats :abilityPoints="abilityPoints" :chosenPoints="chosenPoints" />
 
       <br>
 
-      <Class />
+      <Class :classList="classList" :spellList="spellList" />
 
       <br>
 
-      <Background />
+      <Background :backgroundList="backgroundList" />
+
+      <br>
+
+      <div class="field">
+        <div class="control">
+            <a class="button is-success is-fullwidth is-large" @click="createCharacter()">
+                Stwórz postać!
+            </a>
+        </div>
+    </div>
 
     </div>
   </section>

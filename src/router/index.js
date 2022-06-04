@@ -17,6 +17,11 @@ const routes = [
     name: 'generator',
     component: () => import('../views/CharacterGeneratorView.vue')
   },
+  {
+    path: '/character-sheet',
+    name: 'character sheet',
+    component: () => import('../views/CharacterSheetView.vue')
+  },
   
 ];
 
