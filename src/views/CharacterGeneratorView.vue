@@ -2,12 +2,14 @@
   // @ is an alias to /src
   import Stats from '@/components/character-generator/Stats.vue'
   import Class from '@/components/character-generator/Class.vue'
+  import Background from '@/components/character-generator/Background.vue'
 
   export default {
     name: 'RulebookView',
     components: {
       Stats,
-      Class
+      Class,
+      Background
     }
   }
 </script>
@@ -31,6 +33,10 @@
       <br>
 
       <Class />
+
+      <br>
+
+      <Background />
 
     </div>
   </section>
