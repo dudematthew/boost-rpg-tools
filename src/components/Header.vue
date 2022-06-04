@@ -1,5 +1,12 @@
+<script>
+export default {
+  name: 'Header'
+}
+</script>
+
+
 <template>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <router-link class="navbar-item" to="/">
         <img src="@/assets/logo.png" width="112" height="28">
@@ -65,9 +72,4 @@
   </nav>
 </template>
 
-<script>
-export default {
-  name: 'Header'
-}
-</script>
 

@@ -4,4 +4,4 @@ import router from './router'
 
 import '@vizuaalog/bulmajs';
 
-createApp(App).use(router).mount('#app')
+createApp(App).use(router).mount('#app');
