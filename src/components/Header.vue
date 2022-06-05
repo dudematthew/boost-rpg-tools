@@ -33,7 +33,7 @@ export default {
           Generator Postaci
         </router-link>
 
-        <router-link class="navbar-item" to="/generator">
+        <router-link class="navbar-item" to="/character-sheet">
           Karta Postaci
         </router-link>
 
