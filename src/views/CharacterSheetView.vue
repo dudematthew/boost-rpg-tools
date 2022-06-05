@@ -45,17 +45,27 @@
 
   <section>
     <div class="tile is-ancestor">
-      <div class="tile is-vertical">
-        <div class="tile">
-          <div class="tile is-parent is-vertical">
-            <article class="tile is-child notification is-info">
-              <label class="label is-medium">Imię postaci</label>
+      <div class="tile is-parent is-12 is-vertical">
+        <div class="tile is-child notification is-info">
+          <div class="tile is-parent is-12">
+            <div class="tile is-child is-6 p-2">
+              <label class="label is-medium is-size-3">Imię postaci</label>
               <div class="control mb-3">
-                <input class="input" type="text">
+                <input class="input is-large" type="text">
               </div>
-              <label class="label is-medium">Klasa</label>
+            </div>
+            <div class="tile is-child is-6 p-2">
+              <label class="label is-medium is-size-3">Poziom</label>
               <div class="control mb-3">
-                <div class="select is-fullwidth">
+                <input class="input is-large" type="number">
+              </div>
+            </div>
+          </div>
+          <div class="tile is-parent is-12">
+            <div class="tile is-child is-6 p-2">
+              <label class="label is-medium is-size-3">Klasa</label>
+              <div class="control mb-3">
+                <div class="select is-fullwidth is-large">
                   <select>
                     <option v-for="(cClass, cName) in classList" :key="cName">
                       {{cClass.name}}
@@ -63,13 +73,11 @@
                   </select>
                 </div>
               </div>
-              <label class="label is-medium">Poziom</label>
+            </div>
+            <div class="tile is-child is-6 p-2">
+              <label class="label is-medium is-size-3">Tło fabularne</label>
               <div class="control mb-3">
-                <input class="input" type="text">
-              </div>
-              <label class="label is-medium">Tło fabularne</label>
-              <div class="control mb-3">
-                <div class="select is-fullwidth">
+                <div class="select is-fullwidth is-large">
                   <select>
                     <option v-for="(background, bName) in backgroundList" :key="bName">
                       {{background.name}}
@@ -77,29 +85,179 @@
                   </select>
                 </div>
               </div>
-            </article>
-            <article class="tile is-parent">
-              <div class="tile is-12 is-child is-horizontal">
-                <div class="tile is-half notification is-warning">
-                  <label class="label is-medium">Siła</label>
-                  <div class="control is-half mb-3">
-                    <input class="input" style="width: 50%" type="text">
-                  </div>
+            </div>
+          </div>
+        </div>
+        <div class="tile is-child notification is-warning ">
+          <div class="tile is-parent is-12">
+            <div class="tile is-child is-4 p-2">
+
+              <label class="label is-medium is-size-3 has-text-black">Siła</label>
+              <div class="field has-addons">
+                <div class="control">
+                    <input class="input is-large" type="number" placeholder="Bazowa...">
+                </div>
+                <div class="control">
+                    <input class="input is-large" type="number" placeholder="Aktualna...">
+                </div>
+                <div class="control">
+                    <button class="button is-large">
+                      <span class="icon is-small">
+                        <i class="fa-solid fa-dice-d20"></i>
+                      </span>
+                    </button>
                 </div>
               </div>
-            </article>
+
+            </div>
+            <div class="tile is-child is-4 p-2">
+
+              <label class="label is-medium is-size-3 has-text-black">Zręczność</label>
+              <div class="field has-addons">
+                <div class="control">
+                    <input class="input is-large" type="number" placeholder="Bazowa...">
+                </div>
+                <div class="control">
+                    <input class="input is-large" type="number" placeholder="Aktualna...">
+                </div>
+                <div class="control">
+                    <button class="button is-large">
+                      <span class="icon is-small">
+                        <i class="fa-solid fa-dice-d20"></i>
+                      </span>
+                    </button>
+                </div>
+              </div>
+              
+
+            </div>
+            <div class="tile is-child is-4 p-2">
+
+              <label class="label is-medium is-size-3 has-text-black">Inteligencja</label>
+              <div class="field has-addons">
+                <div class="control">
+                    <input class="input is-large" type="number" placeholder="Bazowa...">
+                </div>
+                <div class="control">
+                    <input class="input is-large" type="number" placeholder="Aktualna...">
+                </div>
+                <div class="control">
+                    <button class="button is-large">
+                      <span class="icon is-small">
+                        <i class="fa-solid fa-dice-d20"></i>
+                      </span>
+                    </button>
+                </div>
+              </div>
+
+            </div>
           </div>
-          <div class="tile is-parent">
-            <article class="tile is-child notification is-info">
-              <p class="title">Middle tile</p>
-              <p class="subtitle">With an image</p>
-              <figure class="image is-4by3">
-                <img src="https://bulma.io/images/placeholders/640x480.png">
-              </figure>
-            </article>
+          <div class="tile is-parent is-12">
+            <div class="tile is-child is-4 p-2">
+
+              <label class="label is-medium is-size-3 has-text-black">Skupienie</label>
+              <div class="field has-addons">
+                <div class="control">
+                    <input class="input is-large" type="number" placeholder="Bazowa...">
+                </div>
+                <div class="control">
+                    <input class="input is-large" type="number" placeholder="Aktualna...">
+                </div>
+                <div class="control">
+                    <button class="button is-large">
+                      <span class="icon is-small">
+                        <i class="fa-solid fa-dice-d20"></i>
+                      </span>
+                    </button>
+                </div>
+              </div>
+
+            </div>
+            <div class="tile is-child is-4 p-2">
+
+              <label class="label is-medium is-size-3 has-text-black">Żywotność</label>
+              <div class="field has-addons">
+                <div class="control">
+                    <input class="input is-large" type="number" placeholder="Bazowa..." disabled>
+                </div>
+                <div class="control">
+                    <input class="input is-large" type="number" placeholder="Aktualna...">
+                </div>
+                <div class="control">
+                    <button class="button is-large">
+                      <span class="icon is-small">
+                        <i class="fa-solid fa-heart-crack"></i>
+                      </span>
+                    </button>
+                </div>
+              </div>
+              
+
+            </div>
+            <div class="tile is-child is-4 p-2">
+
+              <label class="label is-medium is-size-3 has-text-black">Mana</label>
+              <div class="field has-addons">
+                <div class="control">
+                    <input class="input is-large" type="number" placeholder="Bazowa..." disabled>
+                </div>
+                <div class="control">
+                    <input class="input is-large" type="number" placeholder="Aktualna...">
+                </div>
+                <div class="control">
+                    <button class="button is-large">
+                      <span class="icon is-small">
+                        <i class="fa-solid fa-wand-sparkles"></i>
+                      </span>
+                    </button>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- <article class="tile is-child notification is-info">
+    <div class="tile is-parent">
+      <div class="tile is-6 is-vertical m-2">
+        <label class="label is-medium">Imię postaci</label>
+        <div class="control mb-3">
+          <input class="input" type="text">
+        </div>
+      </div>
+      <div class="tile is-6 is-vertical m-2">
+        <label class="label is-medium">Klasa</label>
+        <div class="control mb-3">
+          <div class="select is-fullwidth">
+            <select>
+              <option v-for="(cClass, cName) in classList" :key="cName">
+                {{cClass.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="tile is-6 is-vertical m-2">
+        <label class="label is-medium">Poziom</label>
+        <div class="control mb-3">
+          <input class="input" type="text">
+        </div>
+      </div>
+      <div class="tile is-6 is-vertical m-2">
+        <label class="label is-medium">Tło fabularne</label>
+        <div class="control mb-3">
+          <div class="select is-fullwidth">
+            <select>
+              <option v-for="(background, bName) in backgroundList" :key="bName">
+                {{background.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article> -->
 </template>

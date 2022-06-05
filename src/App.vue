@@ -284,4 +284,5 @@
 
   @import 'bulma';
   @import 'bulma-prefers-dark';
+  @import '@fortawesome/fontawesome-free/css/all.css';
 </style>
