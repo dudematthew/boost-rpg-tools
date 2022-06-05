@@ -1,4 +1,6 @@
 <script>
+  import StatModal from '@/components/character-sheet/StatModal.vue'
+
   import Cookies from 'js-cookie'
 
   export default {
@@ -14,7 +16,7 @@
     },
     methods: {
       loadCharacter(passedCharacter) {
-
+        
       }
     },
     mounted() {
@@ -216,48 +218,39 @@
             </div>
           </div>
         </div>
+        <div class="tile is-child notification is-success">
+          <div class="tile is-parent is-12">
+            <div class="tile is-child is-6 p-2">
+              <label class="label is-medium is-size-3">Umiejętności</label>
+              <div class="control mb-3">
+                <textarea class="textarea is-medium is-fullwidth" placeholder="Umiejętności..."></textarea>
+              </div>
+            </div>
+            <div class="tile is-child is-6 p-2">
+              <label class="label is-medium is-size-3">Ekwipunek</label>
+              <div class="control mb-3">
+                <textarea class="textarea is-medium is-fullwidth" placeholder="Umiejętności..."></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="tile is-parent is-12">
+            <div class="tile is-child is-6 p-2">
+              <label class="label is-medium is-size-3">Notatki</label>
+              <div class="control mb-3">
+                <textarea class="textarea is-medium is-fullwidth" placeholder="Umiejętności..."></textarea>
+              </div>
+            </div>
+            <!-- <div class="tile is-child is-6 p-2">
+              <label class="label is-medium is-size-3">Portret postaci</label>
+              <div class="control mb-3">
+                <textarea class="textarea is-medium is-fullwidth" placeholder="Umiejętności..."></textarea>
+              </div>
+            </div> -->
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- <article class="tile is-child notification is-info">
-    <div class="tile is-parent">
-      <div class="tile is-6 is-vertical m-2">
-        <label class="label is-medium">Imię postaci</label>
-        <div class="control mb-3">
-          <input class="input" type="text">
-        </div>
-      </div>
-      <div class="tile is-6 is-vertical m-2">
-        <label class="label is-medium">Klasa</label>
-        <div class="control mb-3">
-          <div class="select is-fullwidth">
-            <select>
-              <option v-for="(cClass, cName) in classList" :key="cName">
-                {{cClass.name}}
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="tile is-6 is-vertical m-2">
-        <label class="label is-medium">Poziom</label>
-        <div class="control mb-3">
-          <input class="input" type="text">
-        </div>
-      </div>
-      <div class="tile is-6 is-vertical m-2">
-        <label class="label is-medium">Tło fabularne</label>
-        <div class="control mb-3">
-          <div class="select is-fullwidth">
-            <select>
-              <option v-for="(background, bName) in backgroundList" :key="bName">
-                {{background.name}}
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
-  </article> -->
+
 </template>
