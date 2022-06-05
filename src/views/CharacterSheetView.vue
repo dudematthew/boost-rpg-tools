@@ -5,6 +5,9 @@
 
   export default {
     name: 'CharacterSheetView',
+    components: {
+      StatModal
+    },
     props: [
       'classList',
       'backgroundList'
@@ -252,5 +255,26 @@
     </div>
   </section>
 
+  <StatModal :active="true">
+
+    <template v-slot:input>
+        
+    </template>
+
+    <template v-slot:result>
+      <section class="modal-card-body">
+        <div class="media">
+          <div class="media-left">
+            <p class="title is-large has-text-black">12 / 14</p>
+          </div>
+          <div class="media-content">
+            <p class="title is-4 has-text-black">Zdane!</p>
+            <p class="subtitle is-6">Przebiłeś wymaganą liczbę o 2!</p>
+          </div>
+        </div>
+      </section>
+    </template>
+    
+  </StatModal>
 
 </template>
