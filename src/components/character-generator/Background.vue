@@ -25,10 +25,10 @@
 
 <template>
     <label class="label is-medium mb-2">Zanim twoja postać wyruszyła na przygodę, powinna była czymś się zajmować. Chyba że preferujesz nudę. Możesz przerzucić kość i wybrać lepszy wynik, gdy wykonujesz czynność związaną z twoim zawodem.</label>
-    <div class="card mb-2" :class="{'chosen': background.chosen}" v-for="(background, bName) in backgroundList" :key="bName"
+    <div class="card mb-2 is-size-5 is-size-6-mobile" :class="{'chosen': background.chosen}" v-for="(background, bName) in backgroundList" :key="bName"
         @click="showBackground(bName)">
         <header class="card-header">
-            <p class="card-header-title is-size-4 m-0 mt-1">
+            <p class="card-header-title m-0 mt-1">
                 {{background.name}}
             </p>
             <button class="card-header-icon" aria-label="more options">
@@ -38,9 +38,10 @@
             </button>
         </header>
         <div class="card-content" :class="{'is-hidden': background.hidden}">
-            <div class="content is-size-5">
-                {{background.description}}
-                <br>
+            <div class="content">
+                <p class="is-italic has-text-weight-medium">
+                    {{background.description}}
+                </p>
                 <br>
                 Ekwipunek:
                 <ul class="mt-0">

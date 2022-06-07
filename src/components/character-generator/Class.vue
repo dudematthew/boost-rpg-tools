@@ -72,10 +72,10 @@
 
 <template>
     <label class="label is-medium mb-2">Wybierz sobie swoją wymarzoną Klasę</label>
-    <div class="card mb-2" :class="{'chosen': cClass.chosen}" v-for="(cClass, cName) in classList" :key="cName"
+    <div class="card mb-2 is-size-5 is-size-6-mobile" :class="{'chosen': cClass.chosen}" v-for="(cClass, cName) in classList" :key="cName"
         @click="showClass(cName)">
         <header class="card-header">
-            <p class="card-header-title is-size-4 m-0 mt-1">
+            <p class="card-header-title m-0 mt-1">
                 {{cClass.name}}
             </p>
             <button class="card-header-icon" aria-label="more options">
@@ -85,7 +85,7 @@
             </button>
         </header>
         <div class="card-content" :class="{'is-hidden': cClass.hidden}">
-            <div class="content is-size-5">
+            <div class="content">
                 Typ: {{cClass.type}}
                 <br>
                 <br>
