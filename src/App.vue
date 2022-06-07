@@ -13,19 +13,23 @@
         chosenPoints: {
           strength: {
             value: null,
-            name: "Siła"
+            name: "Siła",
+            nameGenitive: "Siłę"
           },
           agility: {
             value: null,
-            name: "Zręczność"
+            name: "Zręczność",
+            nameGenitive: "Zręczność"
           },
           intelligence: {
             value: null,
-            name: "Inteligencja"
+            name: "Inteligencja",
+            nameGenitive: "Inteligencję"
           },
           focus: {
             value: null,
-            name: "Skupienie"
+            name: "Skupienie",
+            nameGenitive: "Skupienie"
           }
         },
         classList: {
