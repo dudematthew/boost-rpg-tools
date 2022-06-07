@@ -37,11 +37,11 @@
         statystyki:</label>
     <div class="field has-addons" v-for="(point, pointId) in chosenPoints" :key="pointId">
         <div class="control">
-            <input class="input is-large" type="text" :value="point.name" disabled>
+            <input class="input is-size-4 is-size-6-mobile" type="text" :value="point.name" disabled>
         </div>
 
         <div v-for="(abilityPoint, index) in abilityPoints" :key="index" class="control">
-            <a class="button is-large" @click="choosePoint(pointId, abilityPoint, point.value)"
+            <a class="button is-size-4 is-size-6-mobile" @click="choosePoint(pointId, abilityPoint, point.value)"
                 :class="{ 'is-info': point.value != abilityPoint, 'is-success': point.value == abilityPoint }">
                 {{abilityPoint}}
             </a>
@@ -49,20 +49,20 @@
     </div>
     <div class="field has-addons">
         <div class="control">
-            <input class="input is-large" type="text" value="Żywotność" disabled>
+            <input class="input is-size-4 is-size-6-mobile" type="text" value="Żywotność" disabled>
         </div>
 
         <div class="control">
-            <input class="input is-large" type="text" :value="healthPoint" disabled>
+            <input class="input is-size-4 is-size-6-mobile" type="text" :value="healthPoint" disabled>
         </div>
     </div>
     <div class="field has-addons">
         <div class="control">
-            <input class="input is-large" type="text" value="Mana" disabled>
+            <input class="input is-size-4 is-size-6-mobile" type="text" value="Mana" disabled>
         </div>
 
         <div class="control">
-            <input class="input is-large" type="text" :value="manaPoint" disabled>
+            <input class="input is-size-4 is-size-6-mobile" type="text" :value="manaPoint" disabled>
         </div>
     </div>
 </template>
