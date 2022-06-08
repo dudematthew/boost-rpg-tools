@@ -13,7 +13,7 @@
 <template>
   <section class="hero is-primary">
     <div class="hero-body">
-      <p class="heading">Wersja 1.2</p>
+      <p class="heading">Wersja 1.3</p>
       <p class="title">
         BOOST
       </p>
@@ -75,9 +75,11 @@
       </ul>
       <h2>Tworzenie przeciwnika</h2>
       <p>Przeciwnicy z kt&oacute;rymi przyjdzie wam walczyć nie są tak skomplikowani jak wy. Mają dosłownie jeden
-        atrybut od kt&oacute;rego zależy ich siła.</p>
+        atrybut
+        od kt&oacute;rego zależy ich siła.</p>
       <p>MG tworząc potwora ustala jaką rangę mu da. Najniżej - jeden, najwyżej - jak mu się spodoba. Następnie ustala
-        typ potwora, kt&oacute;ry ustala statystyki:</p>
+        typ
+        potwora, kt&oacute;ry ustala statystyki:</p>
       <ul>
         <li>Magiczny:</li>
         <ul>
@@ -101,13 +103,15 @@
       <p>Żywotność przeciwnika r&oacute;wna jest Ranga * 5</p>
       <h2>Walka</h2>
       <p>Walczymy w turach. Sprawdzamy kto ma najwięcej zręczności i od tego ustalamy kolejność. Jeśli przeciwnicy mają
-        tę samą zręczność, sami ustalają kto pierwszy, to samo gracze.</p>
+        tę
+        samą zręczność, sami ustalają kto pierwszy, to samo gracze.</p>
       <p>W każdej turze macie akcję i reakcję. Za pomocą akcji możecie robić rzeczy, np. uderzyć niezapowiedzianie kogoś
-        w głowę, rzucić zaklęcie czy zaśpiewać refren piosenki. Za pomocą reakcji możecie reagować na rzeczy, np.
-        obronić się przed ciosem, czy uderzyć kogoś kto niezapowiedziany odchodzi od zwarcia.</p>
+        w
+        głowę, rzucić zaklęcie czy zaśpiewać refren piosenki. Za pomocą reakcji możecie reagować na rzeczy, np. obronić
+        się przed ciosem, czy uderzyć kogoś kto niezapowiedziany odchodzi od zwarcia.</p>
       <p>Jeśli chcesz zaatakować, rzucasz na Siłę. Jeśli chcesz uniknąć ciosu, rzucasz na Zręczność. Jeśli chcesz
-        strzelić r&oacute;wnież rzucasz na Zręczność. Nie możesz uniknąć magii ani pocisku. Nie możesz strzelać w
-        zwarciu.</p>
+        strzelić
+        r&oacute;wnież rzucasz na Zręczność. Nie możesz uniknąć magii ani pocisku. Nie możesz strzelać w zwarciu.</p>
       <p>Jeśli uda ci się kogoś trafić, rzucasz na obrażenia:</p>
       <ul>
         <li>Lekkie bronie zadają k6 obrażeń</li>
@@ -123,7 +127,8 @@
         <li>Płytowa - 5</li>
       </ul>
       <p>Zbroje, kt&oacute;re mają wartość wyższą niż 2 uniemożliwiają skradanie się. Tarcza daje modyfikator -2
-        postaciom kt&oacute;re cię atakują i jest przedmiotem typu lekkiego.</p>
+        postaciom
+        kt&oacute;re cię atakują i jest przedmiotem typu lekkiego.</p>
       <h2>Magia</h2>
       <p>Jeśli twoja klasa jest typem magicznym, możesz wybrać sobie na start trzy zaklęcia z poniższej listy. Każde
         zaklęcie spala twoją jedną Manę. Mana regeneruje się jeśli się prześpisz.</p>
@@ -142,7 +147,7 @@
       <ul>
         <li>Wojownik</li>
         <ul>
-          <li>Typ klasy: lekki</li>
+          <li>Typ klasy: Lekki</li>
           <li>Ekwipunek:</li>
           <ul>
             <li>Lekka broń</li>
@@ -154,7 +159,7 @@
         </ul>
         <li>Zab&oacute;jca</li>
         <ul>
-          <li>Typ klasy: lekki</li>
+          <li>Typ klasy: Lekki</li>
           <li>Ekwipunek:</li>
           <ul>
             <li>Lekka broń</li>
@@ -165,7 +170,7 @@
         </ul>
         <li>Paladyn</li>
         <ul>
-          <li>Typ klasy: ciężki, magiczny (tylko jedno startowe zaklęcie)</li>
+          <li>Typ klasy: Ciężki, Magiczny (tylko jedno startowe zaklęcie)</li>
           <li>Ekwipunek:</li>
           <ul>
             <li>Ciężka broń</li>
@@ -191,13 +196,23 @@
         </ul>
         <li>Mag</li>
         <ul>
-          <li>Typ klasy: magiczny</li>
+          <li>Typ klasy: Magiczny</li>
           <li>Ekwipunek:</li>
           <ul>
             <li>Laska maga (+1 do Skupienia)</li>
             <li>Toga</li>
           </ul>
-          <li>Specjalna zasada: Mag zadaje k6 obrażeń zaklęciem blast</li>
+          <li>Specjalna zasada: Mag posiada 6 zaklęć do wyboru na start</li>
+        </ul>
+        <li>Czarnoksiężnik</li>
+        <ul>
+          <li>Typ klasy: Magiczny</li>
+          <li>Ekwipunek</li>
+          <ul>
+            <li>Zw&oacute;j Przywołania (Jednorazowo przyzywa lekkiego pomocnika 2 Rangi)</li>
+            <li>Mroczny Płaszcz</li>
+          </ul>
+          <li>Specjalna zasada: Czarnoksiężnik zadaje k6 obrażeń zaklęciem blast</li>
         </ul>
         <li>Kleryk</li>
         <ul>
@@ -314,7 +329,8 @@
         <ul>
           <li>Morze to tw&oacute;j dom. Jeśli kiedykolwiek ktoś do ciebie przysiądzie to albo dostanie łyk rumu albo
             przegraną w kości. Tw&oacute;j statek niekoniecznie jest przy tobie fizycznie ale na pewno można go znaleźć
-            w twoim sercu.</li>
+            w
+            twoim sercu.</li>
           <li>Ekwipunek:</li>
           <ul>
             <li>Kości do gry</li>
@@ -326,8 +342,10 @@
         <li>Karczmarz</li>
         <ul>
           <li>Wiesz co nieco o otaczającym cię świecie. Nie jest to dziwne bo przecież p&oacute;ł życia spędziłeś za
-            ladą lejąc trunki i słuchając lokalnych. Możesz upędzić bimber, kt&oacute;ry nie będzie smakował jak psie
-            szczyny.</li>
+            ladą
+            lejąc trunki i słuchając lokalnych. Możesz upędzić bimber, kt&oacute;ry nie będzie smakował jak psie
+            szczyny.
+          </li>
           <li>Ekwipunek:</li>
           <ul>
             <li>Tw&oacute;j ulubiony fartuch</li>

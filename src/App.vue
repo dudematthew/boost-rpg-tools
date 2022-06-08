@@ -13,24 +13,34 @@
         chosenPoints: {
           strength: {
             value: null,
+            currentValue: null,
             name: "Siła",
             nameGenitive: "Siłę"
           },
           agility: {
             value: null,
+            currentValue: null,
             name: "Zręczność",
             nameGenitive: "Zręczność"
           },
           inteligence: {
             value: null,
+            currentValue: null,
             name: "Inteligencja",
             nameGenitive: "Inteligencję"
           },
           focus: {
             value: null,
+            currentValue: null,
             name: "Skupienie",
             nameGenitive: "Skupienie"
           }
+        },
+        other: {
+          currentHP: 0,
+          currentMP: 0,
+          name: "",
+          level: 1,
         },
         classList: {
           warrior: {
@@ -91,13 +101,26 @@
           mage: {
             name: "Mag",
             type: "Magiczny",
-            spellAmount: 3,
+            spellAmount: 6,
             availableSpells: ["heal", "blast", "protect", "enchant", "curse", "bless"],
             inventory: [
               "Laska maga (+1 do Skupienia)",
               "Toga",
             ],
-            ability: " Mag zadaje k6 obrażeń zaklęciem blast",
+            ability: "Mag posiada 6 zaklęć do wyboru na start",
+            hidden: true,
+            chosen: false
+          },
+          warlock: {
+            name: "Czarnoksiężnik",
+            type: "Magiczny",
+            spellAmount: 3,
+            availableSpells: ["heal", "blast", "protect", "enchant", "curse", "bless"],
+            inventory: [
+              "Zwój Przywołania (Jednorazowo przyzywa lekkiego pomocnika 2 Rangi)",
+              "Mroczny Płaszcz",
+            ],
+            ability: "Czarnoksiężnik zadaje k6 obrażeń zaklęciem blast",
             hidden: true,
             chosen: false
           },
@@ -264,7 +287,7 @@
 
   <Header />
 
-  <router-view :abilityPoints="abilityPoints" :chosenPoints="chosenPoints" :classList="classList" :spellList="spellList" :backgroundList="backgroundList" />
+  <router-view :abilityPoints="abilityPoints" :chosenPoints="chosenPoints" :classList="classList" :spellList="spellList" :backgroundList="backgroundList" :other="other" />
 
   <Footer />
   
