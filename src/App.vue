@@ -21,7 +21,7 @@
             name: "Zręczność",
             nameGenitive: "Zręczność"
           },
-          intelligence: {
+          inteligence: {
             value: null,
             name: "Inteligencja",
             nameGenitive: "Inteligencję"

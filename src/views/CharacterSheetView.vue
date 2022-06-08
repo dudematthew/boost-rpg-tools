@@ -16,16 +16,24 @@
     data() {
       return {
         passedCharacter: null,
-        throwStatistic: this.chosenPoints.strength 
+        throwStatistic: this.chosenPoints.strength, // default
       }
     },
     methods: {
       loadCharacter(character) {
         
+      },
+      drawStat (statId) {
+        this.throwStatistic = this.chosenPoints[statId];
+        console.log("drawing", this.passedCharacter);
+        this.$options.childInterface.show();
+      },
+      getChildInterface(childInterface) {
+        this.$options.childInterface = childInterface;
       }
     },
     mounted() {
-      // Feature completion of data
+      // Future completion of data
       if (typeof this.$route.params.character !== "undefined")
         this.passedCharacter = JSON.parse(this.$route.params.character) ?? null;
 
@@ -33,7 +41,12 @@
         this.loadCharacter(this.passedCharacter);
 
       console.log(this.passedCharacter, this.classList);
-    }
+
+      // For testing
+      for (let statId in this.chosenPoints) {
+        this.chosenPoints[statId].value = 10;
+      }
+    },
   }
 </script>
 
@@ -108,7 +121,7 @@
                     <input class="input is-large" type="number" placeholder="Aktualna...">
                 </div>
                 <div class="control">
-                    <button class="button is-large">
+                    <button class="button is-large" @click="drawStat('strength')">
                       <span class="icon is-small">
                         <i class="fa-solid fa-dice-d20"></i>
                       </span>
@@ -128,7 +141,7 @@
                     <input class="input is-large" type="number" placeholder="Aktualna...">
                 </div>
                 <div class="control">
-                    <button class="button is-large">
+                    <button class="button is-large" @click="drawStat('agility')">
                       <span class="icon is-small">
                         <i class="fa-solid fa-dice-d20"></i>
                       </span>
@@ -149,7 +162,7 @@
                     <input class="input is-large" type="number" placeholder="Aktualna...">
                 </div>
                 <div class="control">
-                    <button class="button is-large">
+                    <button class="button is-large" @click="drawStat('inteligence')">
                       <span class="icon is-small">
                         <i class="fa-solid fa-dice-d20"></i>
                       </span>
@@ -171,7 +184,7 @@
                     <input class="input is-large" type="number" placeholder="Aktualna...">
                 </div>
                 <div class="control">
-                    <button class="button is-large">
+                    <button class="button is-large" @click="drawStat('focus')">
                       <span class="icon is-small">
                         <i class="fa-solid fa-dice-d20"></i>
                       </span>
@@ -257,6 +270,6 @@
     </div>
   </section>
 
-  <StatModal :active="true" :state="'modifier'" :throwStatistic="throwStatistic"></StatModal>
+  <StatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></StatModal>
 
 </template>

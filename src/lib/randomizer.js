@@ -1,5 +1,5 @@
 export default class Randomizer {
-    
+
     /**
      * Allows efficient use of www.random.org true
      * random numbers with ability to store numbers
@@ -31,7 +31,7 @@ export default class Randomizer {
         let randomNumberSet = (randomNumberSetKey != null) ? this.randomNumberSets[randomNumberSetKey] : null;
 
         if (randomNumberSet != null) {
-            if (randomNumberSet.numbers.length <= this.randomNumbersKeepAmount*(this.neededPercentToRefill/100)) {
+            if (randomNumberSet.numbers.length <= this.randomNumbersKeepAmount * (this.neededPercentToRefill / 100)) {
                 this.refillRandomNumbers(from, to);
             }
             return randomNumberSet.numbers.pop();
@@ -40,7 +40,7 @@ export default class Randomizer {
             return await this.getRandomNumber(from, to);
         }
     }
-    
+
     /**
      * Get saved number set key
      * or if doesn't exists returns null
@@ -122,6 +122,30 @@ export default class Randomizer {
         }
     }
 
+    makeRequest(method, url) {
+        return new Promise(function (resolve, reject) {
+            var xhr = new XMLHttpRequest();
+            xhr.open(method, url);
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    resolve(xhr.response);
+                } else {
+                    reject({
+                        status: xhr.status,
+                        statusText: xhr.statusText
+                    });
+                }
+            };
+            xhr.onerror = function () {
+                reject({
+                    status: xhr.status,
+                    statusText: xhr.statusText
+                });
+            };
+            xhr.send();
+        });
+    }
+
     /**
      * Gets specific amount of random numbers from
      * www.random.org api
@@ -131,12 +155,14 @@ export default class Randomizer {
      * @returns {array} array of random numbers
      */
     async fetchRandomNumbers(from = 0, to = 0, amount) {
-
+        
         let randomNumbers = null;
 
-        await getJSON("https://www.random.org/integers/?num=" + amount + "&min=" + from + "&max=" + to + "&col=1&base=10&format=plain&rnd=new", (data) => {
+        await this.makeRequest('GET', "https://www.random.org/integers/?num=" + amount + "&min=" + from + "&max=" + to + "&col=1&base=10&format=plain&rnd=new")
+            .then(function (data) {
                 randomNumbers = data.trim().split('\n');
-            }, (err) => {
+            })
+            .catch(function (err) {
                 this.connectionError(err);
             });
 
