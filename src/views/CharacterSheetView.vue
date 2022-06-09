@@ -101,7 +101,7 @@
         let returner = {};
 
         try {
-          returner = JSON.parse(data);
+          returner = JSON.parse(data) ?? {};
           console.log("Pobrano listę: ", returner);
         } catch (e) {
           console.log("Nie załadowano listy:", data, e);
