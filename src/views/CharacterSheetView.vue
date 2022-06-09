@@ -76,6 +76,7 @@
         return JSON.stringify(character);
       },
 
+      // Get current character attributes bundled to object
       getCurrentCharacter() {
         return {
           chosenPoints: this.chosenPoints ?? {},
@@ -86,6 +87,10 @@
         };
       },
 
+      /**
+       *  Save character object to Local Storage 
+       *  under it's id
+       */
       saveCharacterToList (character, id) {
         let charactersList = this.loadCharactersList();
 

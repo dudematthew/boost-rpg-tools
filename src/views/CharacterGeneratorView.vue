@@ -29,7 +29,11 @@
             chosenPoints: this.chosenPoints,
             classList: this.classList,
             spellList: this.spellList,
-            backgroundList: this.backgroundList
+            backgroundList: this.backgroundList,
+            other: {
+              level: 1,
+              name: ""
+            },
         });
 
         this.$router.push({ name: 'character sheet', params: {
