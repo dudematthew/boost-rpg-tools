@@ -173,6 +173,12 @@
 
         this.other.skills += `\n• ${this.chosenClass.ability}`;
         this.other.skills += `\n• ${this.chosenBackground.description}`;
+
+        for (let sId in this.spellList) {
+          if (this.spellList[sId].chosen)
+            this.other.skills += `\n• ${this.spellList[sId].name} - ${this.spellList[sId].description}`;
+        }
+
         this.other.skills = this.other.skills.trim();
       },
 
