@@ -39,10 +39,8 @@
         for (let attribute in character) {
           if (!!character[attribute])
             for (let innerAttribute in character[attribute]) {
-              console.log("Przekładanie podAtrybutu ", innerAttribute, " do atrybutu ", attribute, ", którego zawartość jest równa ", character[attribute][innerAttribute]);
               this[attribute][innerAttribute] = character[attribute][innerAttribute];
             }
-            console.log("Ostatecznie dane w this atrybutu ", attribute, " wyglądają tak: ", this[attribute]);
         }
 
         // Add skills if empty
@@ -95,8 +93,6 @@
 
         let stringifiedList = JSON.stringify(charactersList);
 
-        console.log("Zapisano listę:", stringifiedList);
-
         ls.set('characterList', stringifiedList);
       },
 
@@ -136,7 +132,6 @@
         let characters = this.loadCharactersList();
 
         for (let cId in characters) {
-          console.log(cId, "<< cId | id >>", id);
           if (!!cId == !!id)
             return characters[cId];
         }
@@ -146,14 +141,11 @@
 
       loadCurrentCharacter () {
         let id = this.loadCurrentCharacterId();
-        console.log("id: ", id);
-        console.log((!id) ? null : this.loadCharacter(id));
         return (!id) ? null : this.loadCharacter(id);
       },
 
       drawStat (statId) {
         this.throwStatistic = this.chosenPoints[statId];
-        console.log("drawing", this.passedCharacter);
         this.$options.childInterface.show();
       },
 
@@ -241,13 +233,25 @@
       if (typeof this.$route.params.character !== "undefined")
         this.passedCharacter = JSON.parse(this.$route.params.character) ?? null;
 
-      if (this.passedCharacter !== null) {
+      if (!!this.passedCharacter) {
+
+        console.log("Przekazano postać!", this.passedCharacter);
+
         this.passedCharacter.other = this.passedCharacter.other ?? {};
         this.passedCharacter.other.id = this.generateId(this.passedCharacter);
+
         this.setupCharacter(this.passedCharacter);
+
+        // Generate current stats based on main stats
+        for (let statId in this.chosenPoints) {
+          this.chosenPoints[statId].currentValue = this.chosenPoints[statId].value;
+        }
+
         this.saveCurrentCharacterToList();
         this.saveCurrentCharacterId(this.other.id);
+
       } else {
+
         let loadedCurrentCharacter = this.loadCurrentCharacter();
 
         if (!!loadedCurrentCharacter) {
@@ -255,6 +259,7 @@
             this.setupCharacter(loadedCurrentCharacter);
           }
         } else {
+          // Generate current stats based on main stats
           for (let statId in this.chosenPoints) {
             this.chosenPoints[statId].currentValue = this.chosenPoints[statId].value;
           }
