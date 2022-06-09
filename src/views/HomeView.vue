@@ -33,4 +33,7 @@
       Zerknij na <router-link class="link" to="/rulebook">Zasady Gry</router-link>.
     </h2>
   </section>
+  <figure class="image is-16by9 is-hidden-">
+    <img src="@/assets/background.jpg">
+  </figure>
 </template>
