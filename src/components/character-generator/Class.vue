@@ -37,9 +37,9 @@
                 return i;
             },
             spellAmountText() {
-                return (chosenClass.spellAmount == 1) 
+                return (this.chosenClass.spellAmount == 1) 
                     ? "zaklęcie" 
-                    : (chosenClass.spellAmount in [5, 6]) 
+                    : ([5, 6].includes(this.chosenClass.spellAmount)) 
                         ? "zaklęć" 
                         : "zaklęcia";
             }
