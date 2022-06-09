@@ -6,7 +6,7 @@
             'spellList'
         ],
         computed: {
-            chosenClass () {
+            chosenClass() {
                 for (let cClass in this.classList) {
                     if (this.classList[cClass].chosen) {
                         return this.classList[cClass];
@@ -14,7 +14,7 @@
                 }
                 return null;
             },
-            availableSpells () {
+            availableSpells() {
                 if (this.chosenClass == null)
                     return {};
 
@@ -27,7 +27,7 @@
 
                 return availableSpells;
             },
-            chosenSpellsAmount () {
+            chosenSpellsAmount() {
                 let i = 0;
 
                 for (let sId in this.spellList)
@@ -36,15 +36,22 @@
 
                 return i;
             },
+            spellAmountText() {
+                return (chosenClass.spellAmount == 1) 
+                    ? "zaklęcie" 
+                    : (chosenClass.spellAmount in [5, 6]) 
+                        ? "zaklęć" 
+                        : "zaklęcia";
+            }
         },
         methods: {
-            showClass (id) {
+            showClass(id) {
                 for (let cId in this.classList)
                     this.classList[cId].hidden = true;
 
                 this.classList[id].hidden = false;
             },
-            chooseClass (id) {
+            chooseClass(id) {
                 for (let cId in this.classList)
                     this.classList[cId].chosen = false;
 
@@ -52,7 +59,7 @@
 
                 this.resetSpellChoices();
             },
-            switchSpellChoice (id) {
+            switchSpellChoice(id) {
                 if (this.spellList[id].chosen == true) {
                     this.spellList[id].chosen = false;
                 } else {
@@ -62,7 +69,7 @@
                     this.spellList[id].chosen = true;
                 }
             },
-            resetSpellChoices () {
+            resetSpellChoices() {
                 for (let sId in this.spellList)
                     this.spellList[sId].chosen = false;
             }
@@ -72,8 +79,8 @@
 
 <template>
     <label class="label is-medium mb-2">Wybierz sobie swoją wymarzoną Klasę</label>
-    <div class="card mb-2 is-size-5 is-size-6-mobile" :class="{'chosen': cClass.chosen}" v-for="(cClass, cName) in classList" :key="cName"
-        @click="showClass(cName)">
+    <div class="card mb-2 is-size-5 is-size-6-mobile" :class="{'chosen': cClass.chosen}"
+        v-for="(cClass, cName) in classList" :key="cName" @click="showClass(cName)">
         <header class="card-header">
             <p class="card-header-title m-0 mt-1">
                 {{cClass.name}}
@@ -106,8 +113,10 @@
     </div>
 
     <div v-if="chosenClass != null && chosenClass.spellAmount > 0">
-        <label class="label is-medium mt-5 mb-2">{{chosenClass.name}} ma {{chosenClass.spellAmount}} {{(chosenClass.spellAmount == 1) ? "zaklęcie" : "zaklęcia"}}, wybierz je!</label>
-        <div class="card mb-2" :class="{'chosen': spell.chosen}" v-for="(spell, spellName) in availableSpells" :key="spellName">
+        <label class="label is-medium mt-5 mb-2">{{chosenClass.name}} ma {{chosenClass.spellAmount}}
+            {{spellAmountText}}, wybierz je!</label>
+        <div class="card mb-2" :class="{'chosen': spell.chosen}" v-for="(spell, spellName) in availableSpells"
+            :key="spellName">
             <div class="card-content">
                 <nav class="level-left">
                     <div class="level-item has-text-left lg-mr-5">
@@ -124,7 +133,7 @@
             </div>
             <footer class="card-footer">
                 <button class="card-footer-item button" :class="{'is-success': spell.chosen}"
-                @click="switchSpellChoice(spellName)">{{spell.chosen ? "Oddaj" : "Wybierz"}}</button>
+                    @click="switchSpellChoice(spellName)">{{spell.chosen ? "Oddaj" : "Wybierz"}}</button>
             </footer>
         </div>
     </div>
