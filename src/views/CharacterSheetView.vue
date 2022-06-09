@@ -485,14 +485,14 @@
               </div>
               <div class="field has-addons">
                   <div class="control" style="width: 50%">
-                      <a class="button is-fullwidth" @click="addDot('skills')">
+                      <a class="button is-fullwidth" title="Dodaj punkt" @click="addDot('skills')">
                           <span class="icon is-small">
                             <i class="fa-solid fa-circle"></i>
                           </span>
                       </a>
                   </div>
                   <div class="control" style="width: 50%">
-                      <a class="button is-fullwidth" @click="addSkills()">
+                      <a class="button is-fullwidth" title="Uzupełnij automatycznie" @click="addSkills()">
                           <span class="icon is-small">
                             <i class="fa-solid fa-file-arrow-down"></i>
                           </span>
@@ -507,14 +507,14 @@
               </div>
               <div class="field has-addons">
                   <div class="control" style="width: 50%">
-                      <a class="button is-fullwidth" @click="addDot('inventory')">
+                      <a class="button is-fullwidth" title="Dodaj punkt" @click="addDot('inventory')">
                           <span class="icon is-small">
                             <i class="fa-solid fa-circle"></i>
                           </span>
                       </a>
                   </div>
                   <div class="control" style="width: 50%">
-                      <a class="button is-fullwidth" @click="addInventory()">
+                      <a class="button is-fullwidth" title="Uzupełnij automatycznie" @click="addInventory()">
                           <span class="icon is-small">
                             <i class="fa-solid fa-file-arrow-down"></i>
                           </span>
@@ -531,7 +531,7 @@
               </div>
               <div class="field">
                   <div class="control" style="width: 100%">
-                      <a class="button is-fullwidth" @click="addDot('description')">
+                      <a class="button is-fullwidth" title="Dodaj punkt" @click="addDot('notes')">
                           <span class="icon is-small">
                             <i class="fa-solid fa-circle"></i>
                           </span>
