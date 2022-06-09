@@ -1,7 +1,7 @@
 <script>
   import StatModal from '@/components/character-sheet/StatModal.vue'
 
-  import Cookies from 'js-cookie'
+  import ls from 'local-storage'
   import md5 from 'crypto-js/md5'
 
   export default {
@@ -37,13 +37,13 @@
 
         // Unpack all character attributes to memory
         for (let attribute in character) {
-          console.log("attrib:", attribute);
           if (!!character[attribute])
             for (let innerAttribute in character[attribute]) {
+              console.log("Przekładanie podAtrybutu ", innerAttribute, " do atrybutu ", attribute, ", którego zawartość jest równa ", character[attribute][innerAttribute]);
               this[attribute][innerAttribute] = character[attribute][innerAttribute];
             }
+            console.log("Ostatecznie dane w this atrybutu ", attribute, " wyglądają tak: ", this[attribute]);
         }
-        console.log("character: ", character);
 
         // Add skills if empty
         try {
@@ -95,20 +95,20 @@
 
         let stringifiedList = JSON.stringify(charactersList);
 
-        console.log("ZAPISUJĘ:", stringifiedList);
+        console.log("Zapisano listę:", stringifiedList);
 
-        Cookies.set('characterList', stringifiedList);
+        ls.set('characterList', stringifiedList);
       },
 
       loadCharactersList () {
-        let cookie = Cookies.get('characterList');
+        let data = ls.get('characterList');
         let returner = {};
 
         try {
-          returner = JSON.parse(cookie);
+          returner = JSON.parse(data);
           console.log("Pobrano listę: ", returner);
         } catch (e) {
-          console.log("Nie załadowano listy:", cookie, e);
+          console.log("Nie załadowano listy:", data, e);
         }
 
         return returner;
@@ -125,11 +125,11 @@
       },
 
       loadCurrentCharacterId () {
-        return Cookies.get('currentCharacterId') ?? null;
+        return ls.get('currentCharacterId') ?? null;
       },
 
       saveCurrentCharacterId (id) {
-        Cookies.set('currentCharacterId', id);
+        ls.set('currentCharacterId', id);
       },
 
       loadCharacter (id) {
@@ -162,6 +162,9 @@
       },
 
       addInventory () {
+        this.correctClassChoice();
+        this.correctBackgroundChoice();
+
         this.other.inventory = this.other.inventory ?? "";
         this.chosenClass.inventory.concat(this.chosenBackground.inventory).forEach(item => {
           this.other.inventory = this.other.inventory.trim();
@@ -170,10 +173,12 @@
       },
 
       addSkills () {
-        
+        this.correctClassChoice();
+        this.correctBackgroundChoice();
+
         this.other.skills = this.other.skills ?? "";
         this.other.skills = this.other.skills.trim();
-        
+
         this.other.skills += `\n• ${this.chosenClass.ability}`;
         this.other.skills += `\n• ${this.chosenBackground.description}`;
         this.other.skills = this.other.skills.trim();
@@ -193,6 +198,20 @@
         return md5(JSON.stringify(object) + Math.random()).toString();
       },
 
+      // If no class is chosen, default to warrior
+      correctClassChoice () {
+        if (!this.chosenClass) {
+          this.classList.warrior.chosen = true;
+        }
+      },
+
+      // If no background is chosen, default to craftsman
+      correctBackgroundChoice () {
+        if (!!this.chosenClass) {
+          this.backgroundList.craftsman.chosen = true;
+        }
+      },
+
       update () {
         if (this.mounted) {
           this.saveCurrentCharacterToList();
@@ -206,6 +225,7 @@
           if (this.classList[cId].chosen)
             return this.classList[cId];
         }
+        return null;
       },
 
       chosenBackground() {
@@ -216,9 +236,6 @@
       }
     },
     mounted() {
-
-      Cookies.set('characterList', "{}");
-      console.log("Cookie:", Cookies.get('characterList'));
 
       // Future completion of data
       if (typeof this.$route.params.character !== "undefined")
@@ -232,26 +249,27 @@
         this.saveCurrentCharacterId(this.other.id);
       } else {
         let loadedCurrentCharacter = this.loadCurrentCharacter();
-        console.log("starting character: ", loadedCurrentCharacter);
 
         if (!!loadedCurrentCharacter) {
-          this.setupCharacter(loadedCurrentCharacter);
+          if (!!loadedCurrentCharacter) {
+            this.setupCharacter(loadedCurrentCharacter);
+          }
+        } else {
+          for (let statId in this.chosenPoints) {
+            this.chosenPoints[statId].currentValue = this.chosenPoints[statId].value;
+          }
         }
-      }
 
+      }
 
       // Set stats starting value based on other stats
       this.other.currentHP = this.chosenPoints.strength.value;
       this.other.currentMP = this.chosenPoints.focus.value / 3;
 
-      for (let statId in this.chosenPoints) {
-        this.chosenPoints[statId].currentValue = this.chosenPoints[statId].value;
-      }
+      this.correctClassChoice();
+      this.correctBackgroundChoice();
 
       this.mounted = true;
-
-      Cookies.set('test', '{"d41d8cd98f00b204e9800998ecf8427e":{"chosenPoints":{"strength":{"value":12,"currentValue":null,"name":"Siła","nameGenitive":"Siłę"},"agility":{"value":null,"currentValue":null,"name":"Zręczność","nameGenitive":"Zręczność"},"inteligence":{"value":null,"currentValue":null,"name":"Inteligencja","nameGenitive":"Inteligencję"},"focus":{"value":null,"currentValue":null,"name":"Skupienie","nameGenitive":"Skupienie"}},"classList":{"warrior":{"name":"Wojownik","type":"Lekki","spellAmount":0,"availableSpells":[],"inventory":["Lekka Broń","Tarcza","Zbroja kolcza (3)"],"ability":"Wojownik za pomocą tarczy może zużyć swoją reakcję by rzutem na zręczność ochronić kogoś obok siebie","hidden":true,"chosen":false},"killer":{"name":"Zabójca","type":"Lekki","spellAmount":0,"availableSpells":[],"inventory":["Lekka Broń","Zbroja skórzana (1)","Peleryna"],"ability":"Zabójca zadaje podwójne obrażenia w plecy","hidden":true,"chosen":false},"paladin":{"name":"Paladyn","type":"Ciężki, Magiczny (tylko jedno startowe zaklęcie)","spellAmount":1,"availableSpells":["heal","enchant","bless"],"inventory":["Ciężka broń","Zbroja Przeszywana (2)","Symbol Boga"],"ability":"Paladyn może wybrać jedno startowe zaklęcie spośród: Heal, Enchant, Bless","hidden":true,"chosen":false},"barbarian":{"name":"Barbarzyńca","type":"Ciężki","spellAmount":0,"availableSpells":[],"inventory":["Ciężka broń","Dowolna ilość czaszek wrogów"],"ability":"Barbarzyńca potrafi poświęcić reakcję w jednej turze aby zaatakować drugi raz","hidden":true,"chosen":false},"mage":{"name":"Mag","type":"Magiczny","spellAmount":6,"availableSpells":["heal","blast","protect","enchant","curse","bless"],"inventory":["Laska maga (+1 do Skupienia)","Toga"],"ability":"Mag posiada 6 zaklęć do wyboru na start","hidden":true,"chosen":false},"warlock":{"name":"Czarnoksiężnik","type":"Magiczny","spellAmount":3,"availableSpells":["heal","blast","protect","enchant","curse","bless"],"inventory":["Zwój Przywołania (Jednorazowo przyzywa lekkiego pomocnika 2 Rangi)","Mroczny Płaszcz"],"ability":"Czarnoksiężnik zadaje k6 obrażeń zaklęciem blast","hidden":true,"chosen":false},"cleric":{"name":"Kleryk","type":"Magiczny","spellAmount":3,"availableSpells":["heal","blast","protect","enchant","curse","bless"],"inventory":["Toga","Fiolka Życia (1k3 leczonych obrażeń)"],"ability":"Kleryk przywraca k6 Żywotności zaklęciem Heal","hidden":true,"chosen":false},"shooter":{"name":"Strzelec","type":"Lekki","spellAmount":0,"availableSpells":[],"inventory":["Lekka broń dystansowa","12 pocisków"],"ability":"Strzelec zadaje dodatkowe 2 obrażenia bronią dystansową","hidden":true,"chosen":false}},"spellList":{"heal":{"name":"Heal","description":"Leczy 1k3 Żywotności","chosen":false},"blast":{"name":"Blast","description":"Magiczny pocisk o obrażeniach 1k3","chosen":false},"protect":{"name":"Protect","description":"Dotykasz kogoś i przez całą turę obrażenia na niego zmniejszają');
-      console.log(Cookies.get('test'));
     },
   }
 </script>

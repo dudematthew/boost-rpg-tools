@@ -4,8 +4,6 @@
   import Class from '@/components/character-generator/Class.vue'
   import Background from '@/components/character-generator/Background.vue'
 
-  import Cookie from 'js-cookie'
-
   export default {
     name: 'RulebookView',
     props: [
