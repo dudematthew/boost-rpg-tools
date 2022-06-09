@@ -233,7 +233,7 @@
           },
           miner: {
             name: "Górnik",
-            description: "Czyjeś rzeczy to twoje rzeczy. Weź wszystko i nie dawaj nic w zamian.",
+            description: "Jaskinie to twój drugi dom. Ten pierwszy to piwo w karczmie. Możesz też walnąć komuś z kilofa jak podskakuje.",
             inventory: [
               "Wybrane narzędzia złodzieja",
               "4 srebrne monety",
