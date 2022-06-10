@@ -327,9 +327,8 @@
   @import '@fortawesome/fontawesome-free/css/all.css';
 
   button,
-  button span,
-  a.button,
-  a.button span {
+  button span
+  {
     display: block !important;
     text-align: center !important;
   }

@@ -210,9 +210,15 @@
         }
       },
 
+      // Remove characterList from Local Storage
+      clearLocalStorage () {
+        ls.remove('characterList');
+        console.log("Usunięto! Pamięć: ", ls.get('characterList'));
+      },
+
       // If no background is chosen, default to craftsman
       correctBackgroundChoice () {
-        if (!!this.chosenBackground) {
+        if (!this.chosenBackground) {
           this.backgroundList.craftsman.chosen = true;
         }
       },
@@ -329,6 +335,13 @@
   </section>
 
   <section>
+    <div class="field">
+      <div class="control">
+        <button class="button is-fullwidth is-large is-danger mb-5" @click="clearLocalStorage()">
+          <span>Wyczyść Zapisane Dane</span>
+        </button>
+      </div>
+    </div>
     <div class="tile is-ancestor">
       <div class="tile is-parent is-12 is-vertical">
         <div class="tile is-child notification is-info">
