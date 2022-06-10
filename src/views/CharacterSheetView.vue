@@ -493,7 +493,7 @@
                     <input class="input is-large" type="number" placeholder="Aktualna..." v-model="other.currentMP" v-on:change="update()">
                 </div>
                 <div class="control">
-                    <button class="button is-large">
+                    <button class="button is-large" @click="if (other.currentMP > 0) other.currentMP--;">
                       <span class="icon is-small">
                         <i class="fa-solid fa-wand-sparkles"></i>
                       </span>
