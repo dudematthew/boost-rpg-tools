@@ -11,7 +11,8 @@
       'chosenPoints',
       'classList',
       'spellList',
-      'backgroundList'
+      'backgroundList',
+      'other'
     ],
     components: {
       Stats,
@@ -35,10 +36,7 @@
           classList: this.classList,
           spellList: this.spellList,
           backgroundList: this.backgroundList,
-          other: {
-            level: 1,
-            name: ""
-          },
+          other: this.other,
         });
 
         // Send character to characterSheetView
@@ -180,6 +178,17 @@
 
       <div id="background"></div>
       <Background id="background" :backgroundList="backgroundList" />
+
+      <br>
+
+      <label class="label is-medium mt-5 mb-2">Na koniec, obdaruj twoją postać imieniem</label>
+      <div class="field">
+        <div class="control">
+          <div class="control">
+              <input class="input is-large" type="text" placeholder="Legendarne imię..." v-model="other.name">
+          </div>
+        </div>
+      </div>
 
       <br>
 
