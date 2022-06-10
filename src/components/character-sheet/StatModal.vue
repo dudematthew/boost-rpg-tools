@@ -12,7 +12,7 @@
                 modifier: 0,
                 result: 0,
                 active: false,
-                state: "modifier",
+                state: "input",
             }
         },
         computed: {
@@ -28,8 +28,11 @@
             }
         },
         methods: {
+            // Reset data and show the modal
             show() {
-                this.state = "modifier";
+                this.result = 0;
+                this.modifier = 0;
+                this.state = "input";
                 this.active = true;
             },
             async draw() {
@@ -66,9 +69,9 @@
                 <p class="modal-card-title">Rzut na {{ throwStatistic.nameGenitive }}</p>
                 <button class="delete" @click="active = false"></button>
             </header>
-            <section class="modal-card-body" v-if="state == 'modifier'">
-                <p class="title is-4 is-spaced">Podaj modyfikator</p>
-                <p class="subtitle is-6">Zsumuj wszystkie plusy i minusy</p>
+            <section class="modal-card-body" v-if="state == 'input'">
+                <p class="title is-4 is-spaced has-text-black">Podaj modyfikator</p>
+                <p class="subtitle is-6 has-text-black">Zsumuj wszystkie plusy i minusy</p>
                 <div class="control mb-3">
                     <div class="field has-addons">
                         <div class="control">
@@ -104,7 +107,7 @@
                     </div>
                 </div>
             </section>
-            <footer class="modal-card-foot" v-if="state == 'modifier'">
+            <footer class="modal-card-foot" v-if="state == 'input'">
                 <button class="button is-success" @click="draw()">Rzucaj</button>
                 <button class="button" @click="active = false">Anuluj</button>
             </footer>
@@ -113,7 +116,5 @@
                 <button class="button" @click="show()">Jeszcze raz!</button>
             </footer>
         </div>
-
-        <button class="modal-close is-large" @click="active = false"></button>
     </div>
 </template>

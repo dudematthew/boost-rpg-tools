@@ -83,6 +83,9 @@
         } else if (!this.isSpellsValid) {
           this.submitButtonDisplayErrorText("Jak to tak, a zaklęcia?");
           this.scroll("spells", 1000);
+        } else if (!this.isNameValid) {
+          this.submitButtonDisplayErrorText("Bez imienia to wstyd!");
+          this.scroll("name", 1000);
         }
         else
           return true;
@@ -139,6 +142,10 @@
         return chosenSpellsAmount >= this.chosenClass.spellAmount;
       },
 
+      isNameValid () {
+        return this.other.name.trim() != "";
+      },
+
       chosenClass() {
           for (let cClass in this.classList) {
               if (this.classList[cClass].chosen) {
@@ -147,6 +154,7 @@
           }
           return null;
       },
+
       
     }
   }
@@ -181,6 +189,7 @@
 
       <br>
 
+      <div id="name"></div>
       <label class="label is-medium mt-5 mb-2">Na koniec, obdaruj twoją postać imieniem</label>
       <div class="field">
         <div class="control">

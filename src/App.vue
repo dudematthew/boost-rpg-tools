@@ -328,8 +328,8 @@
   @import 'bulma-prefers-dark';
   @import '@fortawesome/fontawesome-free/css/all.css';
 
-  button,
-  button span
+  button.is-fullwidth,
+  button.is-fullwidth span
   {
     display: block !important;
     text-align: center !important;
@@ -412,6 +412,12 @@
     background-color: #000;
     border-radius: 5px;
     height: 53px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .modal-background {
+      background-color: rgba(48, 46, 46, 0.808);
+    }
   }
 
 </style>

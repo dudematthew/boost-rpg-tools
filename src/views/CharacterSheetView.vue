@@ -1,5 +1,6 @@
 <script>
   import StatModal from '@/components/character-sheet/StatModal.vue'
+  import DamageModal from '@/components/character-sheet/DamageModal.vue'
   import Select from '@/components/Select.vue'
 
   import ls from 'local-storage'
@@ -9,6 +10,7 @@
     name: 'CharacterSheetView',
     components: {
       StatModal,
+      DamageModal,
       Select
     },
     props: [
@@ -589,4 +591,5 @@
 
   <StatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></StatModal>
 
+  <DamageModal :currentHP="other.currentHP" :baseHP="chosenPoints.strength.value"></DamageModal>
 </template>
