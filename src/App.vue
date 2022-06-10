@@ -120,7 +120,7 @@
               "Zwój Przywołania (Jednorazowo przyzywa lekkiego pomocnika 2 Rangi)",
               "Mroczny Płaszcz",
             ],
-            ability: "Czarnoksiężnik zadaje k6 obrażeń zaklęciem blast",
+            ability: "Czarnoksiężnik zadaje k6 obrażeń zaklęciem Blast",
             hidden: true,
             chosen: false
           },
@@ -317,11 +317,12 @@
   @import 'bulma/sass/helpers/_all.sass';
   @import 'bulma/sass/layout/_all.sass';
   @import 'bulma/sass/utilities/_all.sass';
-  @import 'bulma/sass/form/shared.sass';
-  @import 'bulma/sass/form/checkbox-radio.sass';
-  @import 'bulma/sass/form/file.sass';
-  @import 'bulma/sass/form/input-textarea.sass';
-  @import 'bulma/sass/form/tools.sass';
+  @import 'bulma/sass/form/_all.sass';
+  // @import 'bulma/sass/form/shared.sass';
+  // @import 'bulma/sass/form/checkbox-radio.sass';
+  // @import 'bulma/sass/form/file.sass';
+  // @import 'bulma/sass/form/input-textarea.sass';
+  // @import 'bulma/sass/form/tools.sass';
 
   @import 'bulma-prefers-dark';
   @import '@fortawesome/fontawesome-free/css/all.css';

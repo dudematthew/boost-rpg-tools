@@ -1,6 +1,6 @@
 <script>
   import StatModal from '@/components/character-sheet/StatModal.vue'
-  import vSelect from 'vue-select'
+  import Select from '@/components/Select.vue'
 
   import ls from 'local-storage'
   import md5 from 'crypto-js/md5'
@@ -9,7 +9,7 @@
     name: 'CharacterSheetView',
     components: {
       StatModal,
-      vSelect
+      Select
     },
     props: [
       'abilityPoints',
@@ -232,8 +232,6 @@
         this.classList[value.id].chosen = true;
 
         this.correctClassChoice();
-
-        console.log(this.classList);
       },
 
       update () {
@@ -335,13 +333,6 @@
   </section>
 
   <section>
-    <div class="field">
-      <div class="control">
-        <button class="button is-fullwidth is-large is-danger mb-5" @click="clearLocalStorage()">
-          <span>Wyczyść Zapisane Dane</span>
-        </button>
-      </div>
-    </div>
     <div class="tile is-ancestor">
       <div class="tile is-parent is-12 is-vertical">
         <div class="tile is-child notification is-info">
@@ -364,23 +355,23 @@
               <label class="label is-medium is-size-3">Klasa</label>
               <div class="control mb-3">
                 <div class="select is-fullwidth is-large is-size-4 has-text-weight-medium">
-                  <v-select label="name" :value="{id: 'mage'}" :options="classListArray" @option:selected="selectClass">
-                    <div class="spinner" v-show="mutableLoading">Ładowanie...</div>
-                    <slot name="no-options">Jaka?! Nie ma takiej klasy!</slot>
-                  </v-select>
+                  <Select :data="classList" label="name" switchAttrib="chosen"></Select>
                 </div>
               </div>
             </div>
             <div class="tile is-child is-6 p-2">
               <label class="label is-medium is-size-3">Tło fabularne</label>
               <div class="control mb-3">
-                <div class="select is-fullwidth is-large">
+                <div class="select is-fullwidth is-large is-size-4 has-text-weight-medium">
+                  <Select :data="backgroundList" label="name" switchAttrib="chosen"></Select>
+                </div>
+                <!-- <div class="select is-fullwidth is-large">
                   <select>
                     <option v-for="(background, bName) in backgroundList" :key="bName" v-on:change="update()">
                       {{background.name}}
                     </option>
                   </select>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -587,6 +578,14 @@
       </div>
     </div>
   </section>
+
+  <!-- <div class="field">
+    <div class="control">
+      <button class="button is-fullwidth is-large is-danger mt-3" @click="clearLocalStorage()">
+        <span>Wyczyść Zapisane Dane</span>
+      </button>
+    </div>
+  </div> -->
 
   <StatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></StatModal>
 
