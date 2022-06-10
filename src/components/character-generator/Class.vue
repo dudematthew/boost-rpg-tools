@@ -125,6 +125,7 @@
         </footer>
     </div>
 
+    <div id="spells"></div>
     <div v-if="chosenClass != null && chosenClass.spellAmount > 0">
         <label class="label is-medium mt-5 mb-2">{{chosenClass.name}} ma {{chosenClass.spellAmount}}
             {{spellAmountText}}, wybierz je!</label>

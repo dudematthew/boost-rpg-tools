@@ -82,7 +82,11 @@
         else if (!this.isBackgroundValid) {
           this.submitButtonDisplayErrorText("No jak to bez zawodu...");
           this.scroll("background", 1000);
-        } else
+        } else if (!this.isSpellsValid) {
+          this.submitButtonDisplayErrorText("Jak to tak, a zaklęcia?");
+          this.scroll("spells", 1000);
+        }
+        else
           return true;
 
         return false;
@@ -125,6 +129,27 @@
 
         return validFlag;
       },
+
+      isSpellsValid () {
+        let chosenSpellsAmount = 0;
+
+        for (let sId in this.spellList) {
+          if (this.spellList[sId].chosen)
+            chosenSpellsAmount++;
+        }
+
+        return chosenSpellsAmount >= this.chosenClass.spellAmount;
+      },
+
+      chosenClass() {
+          for (let cClass in this.classList) {
+              if (this.classList[cClass].chosen) {
+                  return this.classList[cClass];
+              }
+          }
+          return null;
+      },
+      
     }
   }
 </script>
