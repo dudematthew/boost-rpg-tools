@@ -579,13 +579,13 @@
     </div>
   </section>
 
-  <!-- <div class="field">
+  <div class="field">
     <div class="control">
       <button class="button is-fullwidth is-large is-danger mt-3" @click="clearLocalStorage()">
         <span>Wyczyść Zapisane Dane</span>
       </button>
     </div>
-  </div> -->
+  </div>
 
   <StatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></StatModal>
 

@@ -310,19 +310,20 @@
   }
 
   // Import Bulma
-  @import 'bulma/sass/base/_all.sass';
-  @import 'bulma/sass/components/_all.sass';
-  @import 'bulma/sass/elements/_all.sass';
-  @import 'bulma/sass/grid/_all.sass';
-  @import 'bulma/sass/helpers/_all.sass';
-  @import 'bulma/sass/layout/_all.sass';
-  @import 'bulma/sass/utilities/_all.sass';
-  @import 'bulma/sass/form/_all.sass';
+  // @import 'bulma/sass/base/_all.sass';
+  // @import 'bulma/sass/components/_all.sass';
+  // @import 'bulma/sass/elements/_all.sass';
+  // @import 'bulma/sass/grid/_all.sass';
+  // @import 'bulma/sass/helpers/_all.sass';
+  // @import 'bulma/sass/layout/_all.sass';
+  // @import 'bulma/sass/utilities/_all.sass';
+  // @import 'bulma/sass/form/_all.sass';
   // @import 'bulma/sass/form/shared.sass';
   // @import 'bulma/sass/form/checkbox-radio.sass';
   // @import 'bulma/sass/form/file.sass';
   // @import 'bulma/sass/form/input-textarea.sass';
   // @import 'bulma/sass/form/tools.sass';
+  @import 'bulma';
 
   @import 'bulma-prefers-dark';
   @import '@fortawesome/fontawesome-free/css/all.css';
