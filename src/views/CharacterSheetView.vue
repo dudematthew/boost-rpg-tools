@@ -350,7 +350,7 @@
             <div class="tile is-child is-6 p-2">
               <label class="label is-medium is-size-3">Klasa</label>
               <div class="control mb-3">
-                <div class="select is-fullwidth is-large">
+                <div class="select is-fullwidth is-large is-size-4 has-text-weight-medium">
                   <v-select label="name" :value="{id: 'mage'}" :options="classListArray" @option:selected="selectClass">
                     <div class="spinner" v-show="mutableLoading">Ładowanie...</div>
                     <slot name="no-options">Jaka?! Nie ma takiej klasy!</slot>

@@ -14,6 +14,7 @@
                 }
                 return null;
             },
+
             availableSpells() {
                 if (this.chosenClass == null)
                     return {};
@@ -27,6 +28,7 @@
 
                 return availableSpells;
             },
+
             chosenSpellsAmount() {
                 let i = 0;
 
@@ -36,6 +38,7 @@
 
                 return i;
             },
+
             spellAmountText() {
                 return (this.chosenClass.spellAmount == 1) 
                     ? "zaklęcie" 
@@ -51,14 +54,20 @@
 
                 this.classList[id].hidden = false;
             },
+
             chooseClass(id) {
+                this.resetClassChoice();
+
+                this.classList[id].chosen = true;
+            },
+
+            resetClassChoice() {
                 for (let cId in this.classList)
                     this.classList[cId].chosen = false;
 
-                this.classList[id].chosen = true;
-
                 this.resetSpellChoices();
             },
+
             switchSpellChoice(id) {
                 if (this.spellList[id].chosen == true) {
                     this.spellList[id].chosen = false;
@@ -69,10 +78,14 @@
                     this.spellList[id].chosen = true;
                 }
             },
+
             resetSpellChoices() {
                 for (let sId in this.spellList)
                     this.spellList[sId].chosen = false;
             }
+        },
+        mounted () {
+            this.resetClassChoice();
         }
     }
 </script>

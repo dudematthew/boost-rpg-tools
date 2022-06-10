@@ -13,12 +13,20 @@
 
                 this.backgroundList[id].hidden = false;
             },
+
             chooseBackground (id) {
-                for (let bId in this.backgroundList)
-                    this.backgroundList[bId].chosen = false;
+                this.resetBackgroundChoice();
 
                 this.backgroundList[id].chosen = true;
             },
+
+            resetBackgroundChoice () {
+                for (let bId in this.backgroundList)
+                    this.backgroundList[bId].chosen = false;
+            }
+        },
+        mounted () {
+            this.resetBackgroundChoice();
         }
     }
 </script>

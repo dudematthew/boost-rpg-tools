@@ -308,6 +308,7 @@
   @media (prefers-color-scheme: light) {
     $grey-light: $beige-light;
   }
+
   // Import Bulma
   @import 'bulma/sass/base/_all.sass';
   @import 'bulma/sass/components/_all.sass';
@@ -324,6 +325,14 @@
 
   @import 'bulma-prefers-dark';
   @import '@fortawesome/fontawesome-free/css/all.css';
+
+  button,
+  button span,
+  a.button,
+  a.button span {
+    display: block !important;
+    text-align: center !important;
+  }
 
   // Customize vue-select css
   :root {

@@ -19,15 +19,22 @@
         methods: {
             choosePoint(index, value, lastValue) {
                 for (let pointId in this.chosenPoints) {
-                    let point = this.chosenPoints[pointId];
-
-                    if (point.value == value) {
+                    if (this.chosenPoints[pointId].value == value) {
                         this.chosenPoints[pointId].value = lastValue;
                     }
                 }
 
                 this.chosenPoints[index].value = value;
-            }
+            },
+
+            clearPoints () {
+                for (let pointId in this.chosenPoints) {
+                    this.chosenPoints[pointId].value = null;
+                }
+            },
+        },
+        mounted () {
+            this.clearPoints();
         }
     }
 </script>
