@@ -1,5 +1,6 @@
 <script>
   import StatModal from '@/components/character-sheet/StatModal.vue'
+  import vSelect from 'vue-select'
 
   import ls from 'local-storage'
   import md5 from 'crypto-js/md5'
@@ -7,7 +8,8 @@
   export default {
     name: 'CharacterSheetView',
     components: {
-      StatModal
+      StatModal,
+      vSelect
     },
     props: [
       'abilityPoints',
@@ -210,9 +212,22 @@
 
       // If no background is chosen, default to craftsman
       correctBackgroundChoice () {
-        if (!!this.chosenClass) {
+        if (!!this.chosenBackground) {
           this.backgroundList.craftsman.chosen = true;
         }
+      },
+
+      // Fired when user chooses class from select
+      selectClass(value) {
+        for (let cId in this.classList) {
+          this.classList[cId].chosen = false;
+        }
+
+        this.classList[value.id].chosen = true;
+
+        this.correctClassChoice();
+
+        console.log(this.classList);
       },
 
       update () {
@@ -236,6 +251,16 @@
           if (this.backgroundList[bId].chosen)
             return this.backgroundList[bId];
         }
+      },
+
+      classListArray () {
+        let newVal = this.classList;
+
+        for (let cId in this.classList) {
+          newVal[cId].id = cId;
+        }
+
+        return Object.values(newVal);
       }
     },
     mounted() {
@@ -326,11 +351,10 @@
               <label class="label is-medium is-size-3">Klasa</label>
               <div class="control mb-3">
                 <div class="select is-fullwidth is-large">
-                  <select>
-                    <option v-for="(cClass, cName) in classList" :key="cName" v-on:change="update()">
-                      {{cClass.name}}
-                    </option>
-                  </select>
+                  <v-select label="name" :value="{id: 'mage'}" :options="classListArray" @option:selected="selectClass">
+                    <div class="spinner" v-show="mutableLoading">Ładowanie...</div>
+                    <slot name="no-options">Jaka?! Nie ma takiej klasy!</slot>
+                  </v-select>
                 </div>
               </div>
             </div>

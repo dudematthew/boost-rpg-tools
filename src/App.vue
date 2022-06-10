@@ -308,8 +308,100 @@
   @media (prefers-color-scheme: light) {
     $grey-light: $beige-light;
   }
+  // Import Bulma
+  @import 'bulma/sass/base/_all.sass';
+  @import 'bulma/sass/components/_all.sass';
+  @import 'bulma/sass/elements/_all.sass';
+  @import 'bulma/sass/grid/_all.sass';
+  @import 'bulma/sass/helpers/_all.sass';
+  @import 'bulma/sass/layout/_all.sass';
+  @import 'bulma/sass/utilities/_all.sass';
+  @import 'bulma/sass/form/shared.sass';
+  @import 'bulma/sass/form/checkbox-radio.sass';
+  @import 'bulma/sass/form/file.sass';
+  @import 'bulma/sass/form/input-textarea.sass';
+  @import 'bulma/sass/form/tools.sass';
 
-  @import 'bulma';
   @import 'bulma-prefers-dark';
   @import '@fortawesome/fontawesome-free/css/all.css';
+
+  // Customize vue-select css
+  :root {
+    --vs-colors--lightest: rgba(60, 60, 60, 1);
+    --vs-colors--light: rgba(60, 60, 60, 1);
+    --vs-colors--dark: #333;
+    --vs-colors--darkest: rgb(0, 0, 0);
+
+    /* Search Input */
+    --vs-search-input-color: inherit;
+    --vs-search-input-placeholder-color: inherit;
+
+    /* Font */
+    --vs-font-size: 1rem;
+    --vs-line-height: 1.4;
+
+    /* Disabled State */
+    // --vs-state-disabled-bg: rgb(248, 248, 248);
+    --vs-state-disabled-bg: rgb(0, 0, 0);
+    --vs-state-disabled-color: var(--vs-colors--darkest);
+    --vs-state-disabled-controls-color: var(--vs-colors--dark);
+    --vs-state-disabled-cursor: not-allowed;
+
+    /* Borders */
+    --vs-border-color: var(--vs-colors--dark);
+    --vs-border-width: 1px;
+    --vs-border-style: solid;
+    --vs-border-radius: 4px;
+
+    /* Actions: house the component controls */
+    --vs-actions-padding: 4px 6px 0 3px;
+
+    /* Component Controls: Clear, Open Indicator */
+    --vs-controls-color: var(--vs-colors--light);
+    --vs-controls-size: 1;
+    --vs-controls--deselect-text-shadow: 0 1px 0 #fff;
+
+    /* Selected */
+    --vs-selected-bg: var(--vs-colors--dark);
+    --vs-selected-color: var(--vs-colors--dark);
+    --vs-selected-border-color: var(--vs-border-color);
+    --vs-selected-border-style: var(--vs-border-style);
+    --vs-selected-border-width: var(--vs-border-width);
+
+    /* Dropdown */
+    --vs-dropdown-bg: var(--vs-colors--darkest);
+    --vs-dropdown-color: inherit;
+    --vs-dropdown-z-index: 1000;
+    --vs-dropdown-min-width: 160px;
+    --vs-dropdown-max-height: 350px;
+    --vs-dropdown-box-shadow: 0px 3px 6px 0px var(--vs-colors--darkest);
+
+    /* Options */
+    --vs-dropdown-option-bg: #000;
+    --vs-dropdown-option-color: var(--vs-dropdown-color);
+    --vs-dropdown-option-padding: 3px 20px;
+
+    /* Active State */
+    --vs-dropdown-option--active-bg: rgb(243, 0, 0);
+    --vs-dropdown-option--active-color: var(--vs-colors--darkest);
+
+    /* Deselect State */
+    --vs-dropdown-option--deselect-bg: #fb5858;
+    --vs-dropdown-option--deselect-color: var(--vs-colors--darkest);
+
+    /* Transitions */
+    --vs-transition-timing-function: cubic-bezier(1, -0.115, 0.975, 0.855);
+    --vs-transition-duration: 150ms;
+  }
+
+  @import 'vue-select/dist/vue-select.css';
+
+  .v-select,
+  .vs__dropdown-toggle
+  {
+    background-color: #000;
+    border-radius: 5px;
+    height: 53px;
+  }
+
 </style>

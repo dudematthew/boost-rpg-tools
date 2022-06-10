@@ -21,7 +21,8 @@
     "local-storage": "^2.0.0",
     "simple-get-json": "^8.2.0",
     "vue": "^3.2.13",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "vue-select": "^4.0.0-beta.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
