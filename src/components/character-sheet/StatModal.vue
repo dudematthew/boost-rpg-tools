@@ -22,9 +22,9 @@
             resultText() {
                 return (this.result > this.target) ?
                     `Zabrakło ci ${Math.abs(this.target - this.result)}...` :
-                    this.result < this.target ?
+                    (this.result < this.target) ?
                         `Przebiłeś wymagania o ${Math.abs(this.result - this.target)}!` :
-                        "Trafiłeś idealnie!"
+                        "Trafiłeś idealnie!";
             }
         },
         methods: {

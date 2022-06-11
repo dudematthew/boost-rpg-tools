@@ -42,7 +42,6 @@
                 for(let rtId in this.resultTexts) {
                     rtId = parseInt(rtId);
                     let nextRtId = parseInt(rtId) + 10;
-                        console.log(this.percentage, rtId, nextRtId);
 
                     if ((this.percentage * 100) < nextRtId) {
                         return this.resultTexts[rtId];
@@ -64,9 +63,8 @@
         methods: {
             // Reset data and show the modal
             show() {
-                this.result = 0,
-                this.armor = 0,
-                this.damage = 0,
+                this.result = 0;
+                this.damage = 0;
                 this.state = "input";
                 this.active = true;
             },
@@ -89,7 +87,6 @@
         watch: {
             active: function (val) {
                 document.querySelector("html").classList.toggle("is-clipped", val);
-                console.log(val);
             }
         },
         mounted() {

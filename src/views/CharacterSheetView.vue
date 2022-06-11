@@ -2,6 +2,7 @@
   import StatModal from '@/components/character-sheet/StatModal.vue'
   import DamageModal from '@/components/character-sheet/DamageModal.vue'
   import Select from '@/components/Select.vue'
+  import SpellSelect from '@/components/character-sheet/SpellSelect.vue'
 
   import ls from 'local-storage'
   import md5 from 'crypto-js/md5'
@@ -11,7 +12,8 @@
     components: {
       StatModal,
       DamageModal,
-      Select
+      Select,
+      SpellSelect
     },
     props: [
       'abilityPoints',
@@ -376,6 +378,18 @@
               <div class="control mb-3">
                 <div class="select is-fullwidth is-large is-size-4 has-text-weight-medium">
                   <Select :data="backgroundList" label="name" switchAttrib="chosen"></Select>
+                </div>
+                <!-- <div class="select is-fullwidth is-large">
+                  <select>
+                    <option v-for="(background, bName) in backgroundList" :key="bName" v-on:change="update()">
+                      {{background.name}}
+                    </option>
+                  </select>
+                </div> -->
+              </div>
+              <div class="control mb-3">
+                <div class="select is-fullwidth is-large is-size-4 has-text-weight-medium">
+                  <SpellSelect :classList="classList" :spellList="spellList"></SpellSelect>
                 </div>
                 <!-- <div class="select is-fullwidth is-large">
                   <select>

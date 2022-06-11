@@ -25,7 +25,7 @@ export default {
 <template>
   <div class="select is-fullwidth is-large">
     <select @change="onSelectChange">
-        <option v-for="(item, itemName) in data" :key="itemName" :selected="item[switchAttrib]" :value="itemName">
+        <option v-for="(item, itemId) in data" :key="itemId" :selected="item[switchAttrib]" :value="itemId">
             {{item[label]}}
         </option>
     </select>

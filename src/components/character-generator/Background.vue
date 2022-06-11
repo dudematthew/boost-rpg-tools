@@ -4,8 +4,6 @@
         props: [
             'backgroundList'
         ],
-        computed: {
-        },
         methods: {
             showBackground(id) {
                 for (let bId in this.backgroundList)

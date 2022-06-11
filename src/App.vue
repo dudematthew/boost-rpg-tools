@@ -418,6 +418,14 @@
     .modal-background {
       background-color: rgba(48, 46, 46, 0.808);
     }
+
+    .select[multiple] {
+      background-color: rgba(48, 46, 46, 0.808) !important;
+    }
+
+    select:internal-list-box option:checked {
+      background-color: red !important;
+    }
   }
 
 </style>
