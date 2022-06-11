@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './router'
 
 import '@vizuaalog/bulmajs';
+import 'vue-multiselect/'
 
 // Single Page Apps for GitHub Pages
 // MIT License

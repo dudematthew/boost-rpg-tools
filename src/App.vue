@@ -404,15 +404,15 @@
     --vs-transition-duration: 150ms;
   }
 
-  @import 'vue-select/dist/vue-select.css';
+  @import 'vue-multiselect/dist/vue-multiselect.css';
 
-  .v-select,
-  .vs__dropdown-toggle
-  {
-    background-color: #000;
-    border-radius: 5px;
-    height: 53px;
-  }
+  // .v-select,
+  // .vs__dropdown-toggle
+  // {
+  //   background-color: #000;
+  //   border-radius: 5px;
+  //   height: 53px;
+  // }
 
   @media (prefers-color-scheme: dark) {
     .modal-background {
