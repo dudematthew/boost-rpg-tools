@@ -1,10 +1,10 @@
 <script>
     export default {
         name: 'DamageModal',
-        props: {
-            currentHP: Number,
-            baseHP: Number
-        },
+        props: [
+            'other',
+            'baseHP'
+        ],
         data() {
             return {
                 damage: 0,
@@ -29,15 +29,36 @@
         },
         computed: {
             resultText() {
-                return "Test";
+                return this.resultArrayText[0];
             },
 
             resultSubText() {
-                return "chujowo";
+                return this.resultArrayText[1];
+            },
+
+            resultArrayText () {
+                // For each result type, check if it's between
+                // current and next one
+                for(let rtId in this.resultTexts) {
+                    rtId = parseInt(rtId);
+                    let nextRtId = parseInt(rtId) + 10;
+                        console.log(this.percentage, rtId, nextRtId);
+
+                    if ((this.percentage * 100) < nextRtId) {
+                        return this.resultTexts[rtId];
+                    }
+                }
+
+                // Defaults to > 100%
+                return this.resultTexts[100];
+            },
+
+            currentHP () {
+                return this.other.currentHP;
             },
 
             percentage() {
-                return (this.baseHP/100) * this.currentHP;
+                return (this.currentHP/this.baseHP);
             },
         },
         methods: {
@@ -52,6 +73,8 @@
 
             async harm() {
                 this.result = parseInt(this.damage) - parseInt(this.armor);
+
+                this.other.currentHP = parseInt(this.currentHP) - parseInt(this.result);
 
                 this.state = "result";
             },
@@ -144,11 +167,13 @@
             <section class="modal-card-body" v-if="state == 'result'">
                 <div class="media">
                     <div class="media-left">
-                        <p class="title is-large has-text-black">{{result}}</p>
+                        <p class="title is-large has-text-black">
+                            {{result}}!
+                        </p>
                     </div>
                     <div class="media-content">
-                        <p class="title is-4 has-text-black">{{resultText}}</p>
-                        <p class="subtitle is-6">{{resultSubText}}</p>
+                        <p class="title is-4 has-text-black">Zostało ci {{currentHP}} HP. {{resultText}}</p>
+                        <p class="subtitle is-6 has-text-black">{{resultSubText}}</p>
                     </div>
                 </div>
             </section>

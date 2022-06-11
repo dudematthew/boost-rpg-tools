@@ -591,5 +591,5 @@
 
   <StatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></StatModal>
 
-  <DamageModal :currentHP="other.currentHP" :baseHP="chosenPoints.strength.value"></DamageModal>
+  <DamageModal :other="other" :baseHP="chosenPoints.strength.value"></DamageModal>
 </template>
