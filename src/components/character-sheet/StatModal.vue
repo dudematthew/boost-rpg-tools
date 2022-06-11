@@ -23,7 +23,7 @@
                 return (this.result > this.target) ?
                     `Zabrakło ci ${Math.abs(this.target - this.result)}...` :
                     this.result < this.target ?
-                        `Przebiłeś wymaganą liczbę o ${Math.abs(this.result - this.target)}!` :
+                        `Przebiłeś wymagania o ${Math.abs(this.result - this.target)}!` :
                         "Trafiłeś idealnie!"
             }
         },
@@ -43,7 +43,7 @@
             // Emits interface to parent
             emitInterface() {
                 this.$emit("interface", {
-                    show: () => this.show()
+                    showStatModal: () => this.show()
                 });
             }
         },

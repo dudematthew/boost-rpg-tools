@@ -155,11 +155,21 @@
 
       drawStat (statId) {
         this.throwStatistic = this.chosenPoints[statId];
-        this.$options.childInterface.show();
+        this.$options.childInterface.showStatModal();
+      },
+
+      harm() {
+        this.$options.childInterface.showDamageModal();
       },
 
       getChildInterface(childInterface) {
-        this.$options.childInterface = childInterface;
+        console.log(childInterface);
+        
+        this.$options.childInterface = Object.assign(this.$options.childInterface ?? {}, childInterface);
+
+        console.log("childInterface: ", this.$options.childInterface);
+
+        // this.$options.childInterface = childInterface;
       },
 
       addInventory () {
@@ -474,7 +484,7 @@
                     <input class="input is-large" type="number" placeholder="Aktualna..." v-model="other.currentHP" v-on:change="update()">
                 </div>
                 <div class="control">
-                    <button class="button is-large">
+                    <button class="button is-large" @click="harm()">
                       <span class="icon is-small">
                         <i class="fa-solid fa-heart-crack"></i>
                       </span>
@@ -591,5 +601,5 @@
 
   <StatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></StatModal>
 
-  <DamageModal :other="other" :baseHP="chosenPoints.strength.value"></DamageModal>
+  <DamageModal :other="other" :baseHP="chosenPoints.strength.value" @interface="getChildInterface"></DamageModal>
 </template>
