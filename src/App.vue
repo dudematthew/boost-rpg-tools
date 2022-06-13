@@ -102,7 +102,7 @@
             name: "Mag",
             type: "Magiczny",
             spellAmount: 6,
-            availableSpells: ["heal", "blast", "protect", "enchant", "curse", "bless"],
+            availableSpells: ["heal", "blast", "protect", "enchant", "curse", "bless", "ilusion", "telekinesis", "levitation", "polymorphy"],
             inventory: [
               "Laska maga (+1 do Skupienia)",
               "Toga",
@@ -115,7 +115,7 @@
             name: "Czarnoksiężnik",
             type: "Magiczny",
             spellAmount: 3,
-            availableSpells: ["heal", "blast", "protect", "enchant", "curse", "bless"],
+            availableSpells: ["heal", "blast", "protect", "enchant", "curse", "bless", "ilusion", "telekinesis", "levitation", "polymorphy"],
             inventory: [
               "Zwój Przywołania (Jednorazowo przyzywa lekkiego pomocnika 2 Rangi)",
               "Mroczny Płaszcz",
@@ -128,7 +128,7 @@
             name: "Kleryk",
             type: "Magiczny",
             spellAmount: 3,
-            availableSpells: ["heal", "blast", "protect", "enchant", "curse", "bless"],
+            availableSpells: ["heal", "blast", "protect", "enchant", "curse", "bless", "ilusion", "telekinesis", "levitation", "polymorphy"],
             inventory: [
               "Toga",
               "Fiolka Życia (1k3 leczonych obrażeń)",
@@ -180,6 +180,26 @@
           bless: {
             name: "Bless",
             description: "Dotykasz kogoś i zwiększasz mu daną statystykę o 4 przy jego następnym rzucie",
+            chosen: false
+          },
+          ilusion: {
+            name: "Ilusion",
+            description: "Tworzysz hologram który może się ruszać w prosty sposób o maksymalnej wielkości 2m3",
+            chosen: false
+          },
+          telekinesis: {
+            name: "Telekinesis",
+            description: "Przenosisz nieduży przedmiot siłą umysłu, możesz też się z kimś siłować np. wyrywając mu ulubioną buławę",
+            chosen: false
+          },
+          levitation: {
+            name: "Levitation",
+            description: "Dotykasz kogokolwiek i od teraz może się również przemieszczać w górę albo dół",
+            chosen: false
+          },
+          polymorphy: {
+            name: "Polymorphy",
+            description: "Zmieniasz się w nie większe od ciebie stworzenie, MG decyduje co ci to daje",
             chosen: false
           },
         },

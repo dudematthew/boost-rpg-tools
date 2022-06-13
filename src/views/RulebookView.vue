@@ -13,7 +13,7 @@
 <template>
   <section class="hero is-primary">
     <div class="hero-body">
-      <p class="heading">Wersja 1.3</p>
+      <p class="heading">Wersja 1.4</p>
       <p class="title">
         BOOST
       </p>
@@ -75,11 +75,9 @@
       </ul>
       <h2>Tworzenie przeciwnika</h2>
       <p>Przeciwnicy z kt&oacute;rymi przyjdzie wam walczyć nie są tak skomplikowani jak wy. Mają dosłownie jeden
-        atrybut
-        od kt&oacute;rego zależy ich siła.</p>
-      <p>MG tworząc potwora ustala jaką rangę mu da. Najniżej - jeden, najwyżej - jak mu się spodoba. Następnie ustala
-        typ
-        potwora, kt&oacute;ry ustala statystyki:</p>
+        atrybut od kt&oacute;rego zależy ich siła.</p>
+      <p>MG tworząc przeciwnika ustala jaką rangę mu da. Najniżej - jeden, najwyżej - jak mu się spodoba. Następnie
+        ustala jego typ, kt&oacute;ry ustala statystyki:</p>
       <ul>
         <li>Magiczny:</li>
         <ul>
@@ -103,15 +101,13 @@
       <p>Żywotność przeciwnika r&oacute;wna jest Ranga * 5</p>
       <h2>Walka</h2>
       <p>Walczymy w turach. Sprawdzamy kto ma najwięcej zręczności i od tego ustalamy kolejność. Jeśli przeciwnicy mają
-        tę
-        samą zręczność, sami ustalają kto pierwszy, to samo gracze.</p>
+        tę samą zręczność, sami ustalają kto pierwszy, to samo gracze.</p>
       <p>W każdej turze macie akcję i reakcję. Za pomocą akcji możecie robić rzeczy, np. uderzyć niezapowiedzianie kogoś
-        w
-        głowę, rzucić zaklęcie czy zaśpiewać refren piosenki. Za pomocą reakcji możecie reagować na rzeczy, np. obronić
-        się przed ciosem, czy uderzyć kogoś kto niezapowiedziany odchodzi od zwarcia.</p>
+        w głowę, rzucić zaklęcie czy zaśpiewać refren piosenki. Za pomocą reakcji możecie reagować na rzeczy, np.
+        obronić się przed ciosem, czy uderzyć kogoś kto niezapowiedziany odchodzi od zwarcia.</p>
       <p>Jeśli chcesz zaatakować, rzucasz na Siłę. Jeśli chcesz uniknąć ciosu, rzucasz na Zręczność. Jeśli chcesz
-        strzelić
-        r&oacute;wnież rzucasz na Zręczność. Nie możesz uniknąć magii ani pocisku. Nie możesz strzelać w zwarciu.</p>
+        strzelić r&oacute;wnież rzucasz na Zręczność. Nie możesz uniknąć magii ani pocisku. Nie możesz strzelać w
+        zwarciu.</p>
       <p>Jeśli uda ci się kogoś trafić, rzucasz na obrażenia:</p>
       <ul>
         <li>Lekkie bronie zadają k6 obrażeń</li>
@@ -127,20 +123,26 @@
         <li>Płytowa - 5</li>
       </ul>
       <p>Zbroje, kt&oacute;re mają wartość wyższą niż 2 uniemożliwiają skradanie się. Tarcza daje modyfikator -2
-        postaciom
-        kt&oacute;re cię atakują i jest przedmiotem typu lekkiego.</p>
+        postaciom kt&oacute;re cię atakują i jest przedmiotem typu lekkiego.</p>
       <h2>Magia</h2>
       <p>Jeśli twoja klasa jest typem magicznym, możesz wybrać sobie na start trzy zaklęcia z poniższej listy. Każde
         zaklęcie spala twoją jedną Manę. Mana regeneruje się jeśli się prześpisz.</p>
       <ul>
         <li>Heal - leczy 1k3 Żywotności</li>
         <li>Blast - magiczny pocisk o obrażeniach 1k3</li>
-        <li>Protect - dotykasz kogoś i przez całą turę obrażenia na niego zmniejszają się o 1</li>
+        <li>Protect - dotykasz kogokolwiek i przez całą turę obrażenia na niego zmniejszają się o 1</li>
         <li>Enchant - dotykasz przedmiot i wybierasz czy przez 6 rund zadaje o 1 większe obrażenia czy daje o 2 większe
           szanse trafienia</li>
         <li>Curse - rzucasz na przeciwnika i zmniejszasz mu dwie statystyki o 4 (Musisz zdać na Skupienie) na 4 rundy
         </li>
-        <li>Bless - dotykasz kogoś i zwiększasz mu daną statystykę o 4 przy jego następnym rzucie</li>
+        <li>Bless - dotykasz kogokolwiek i zwiększasz mu daną statystykę o 4 przy jego następnym rzucie</li>
+        <li>Ilusion - tworzysz hologram kt&oacute;ry może się ruszać w prosty spos&oacute;b o maksymalnej wielkości 2m3
+        </li>
+        <li>Telekinesis - przenosisz nieduży przedmiot siłą umysłu, możesz też się z kimś siłować np. wyrywając mu
+          ulubioną buławę</li>
+        <li>Levitation - dotykasz kogokolwiek i od teraz może się r&oacute;wnież przemieszczać w g&oacute;rę albo
+          d&oacute;ł</li>
+        <li>Polymorphy - zmieniasz się w nie większe od ciebie stworzenie, MG decyduje co ci to daje</li>
       </ul>
       <h2>Klasy</h2>
       <p>Poniżej opisane klasy do wyboru do koloru:</p>
@@ -329,8 +331,7 @@
         <ul>
           <li>Morze to tw&oacute;j dom. Jeśli kiedykolwiek ktoś do ciebie przysiądzie to albo dostanie łyk rumu albo
             przegraną w kości. Tw&oacute;j statek niekoniecznie jest przy tobie fizycznie ale na pewno można go znaleźć
-            w
-            twoim sercu.</li>
+            w twoim sercu.</li>
           <li>Ekwipunek:</li>
           <ul>
             <li>Kości do gry</li>
@@ -342,10 +343,8 @@
         <li>Karczmarz</li>
         <ul>
           <li>Wiesz co nieco o otaczającym cię świecie. Nie jest to dziwne bo przecież p&oacute;ł życia spędziłeś za
-            ladą
-            lejąc trunki i słuchając lokalnych. Możesz upędzić bimber, kt&oacute;ry nie będzie smakował jak psie
-            szczyny.
-          </li>
+            ladą lejąc trunki i słuchając lokalnych. Możesz upędzić bimber, kt&oacute;ry nie będzie smakował jak psie
+            szczyny.</li>
           <li>Ekwipunek:</li>
           <ul>
             <li>Tw&oacute;j ulubiony fartuch</li>
