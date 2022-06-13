@@ -53,7 +53,7 @@
 
         // Add skills if empty
         try {
-          this.other.skills = character.other.skills;
+          this.other.skills = character.other.skills ?? "";
         } catch (error) {
           this.other.skills = "";
         }
@@ -61,7 +61,7 @@
 
         // Add inventory if empty
         try {
-          this.other.inventory = character.other.inventory;
+          this.other.inventory = character.other.inventory ?? "";
         } catch (error) {
           this.other.inventory = "";
         }
@@ -221,6 +221,7 @@
 
       // If no class is chosen, default to warrior
       correctClassChoice () {
+        console.log("Wybrana klasa: ", this.chosenClass);
         if (!this.chosenClass) {
           this.classList.warrior.chosen = true;
         }
