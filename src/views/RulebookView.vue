@@ -1,7 +1,4 @@
 <script>
-  // @ is an alias to /src
-  import HelloWorld from '@/components/HelloWorld.vue'
-
   export default {
     name: 'HomeView',
   }
@@ -10,7 +7,7 @@
 <template>
   <section class="hero is-primary">
     <div class="hero-body">
-      <p class="heading">Wersja 1.4</p>
+      <p class="heading">Wersja 1.5</p>
       <p class="title">
         BOOST
       </p>
@@ -111,7 +108,7 @@
         <li>Ciężkie bronie zadają k6 obrażeń + 2 i zajmują obie ręce</li>
         <li>Bronie dystansowe (lekkie) zadają k6 obrażeń</li>
       </ul>
-      <p>Od obrażeń odejmowana jest wartość zbroi:</p>
+      <p>Od obrażeń odejmujesz wartość zbroi:</p>
       <ul>
         <li>Sk&oacute;rzana - 1</li>
         <li>Przeszywana - 2</li>
@@ -120,7 +117,9 @@
         <li>Płytowa - 5</li>
       </ul>
       <p>Zbroje, kt&oacute;re mają wartość wyższą niż 2 uniemożliwiają skradanie się. Tarcza daje modyfikator -2
-        postaciom kt&oacute;re cię atakują i jest przedmiotem typu lekkiego.</p>
+        postaciom kt&oacute;re cię atakują i jest lekkim przedmiotem.</p>
+      <p>Nie możesz mieć mniej Żywotności niż 0. Jeśli masz 0 żywotności to padasz nieprzytomny i w ciągu 2 tur
+        umierasz. Chyba że ktoś cię w tym czasie uleczy.</p>
       <h2>Magia</h2>
       <p>Jeśli twoja klasa jest typem magicznym, możesz wybrać sobie na start trzy zaklęcia z poniższej listy. Każde
         zaklęcie spala twoją jedną Manę. Mana regeneruje się jeśli się prześpisz.</p>
@@ -153,8 +152,8 @@
             <li>Tarcza</li>
             <li>Zbroja kolcza (3)</li>
           </ul>
-          <li>Specjalna zasada: Wojownik za pomocą tarczy może zużyć swoją reakcję by rzutem na zręczność ochronić kogoś
-            obok siebie</li>
+          <li>Specjalna zasada: Wojownik za pomocą tarczy może zużyć swoją reakcję by rzutem na zręczność ochronić przed
+            uderzeniem kogoś obok siebie</li>
         </ul>
         <li>Zab&oacute;jca</li>
         <ul>
@@ -347,6 +346,17 @@
             <li>Tw&oacute;j ulubiony fartuch</li>
             <li>Antałek bimbru</li>
             <li>8 srebrnych monet</li>
+          </ul>
+        </ul>
+        <li>Kupiec</li>
+        <ul>
+          <li>Złoto i srebro. Jeśli coś istnieje, na pewno ma wartość a ty dobrze wiesz jaką. Targowanie, owijanie w
+            bawełnę, wyduszanie ostatniej miedzi i liczenie złota to dla ciebie codzienność.</li>
+          <li>Ekwipunek:</li>
+          <ul>
+            <li>10 srebrnych monet</li>
+            <li>Monokl</li>
+            <li>Plecak</li>
           </ul>
         </ul>
       </ul>
