@@ -255,9 +255,9 @@
             name: "Górnik",
             description: "Jaskinie to twój drugi dom. Ten pierwszy to piwo w karczmie. Możesz też walnąć komuś z kilofa jak podskakuje.",
             inventory: [
-              "Wybrane narzędzia złodzieja",
-              "4 srebrne monety",
-              "Torba",
+              "Kilof (ciężka lub lekka broń)",
+              "3 srebrne monety",
+              "Kask ze świeczką lub latarnia",
             ],
             hidden: true,
             chosen: false,
@@ -278,6 +278,17 @@
             name: "Złomiarz",
             description: "Od kiedy pamiętasz, zbierasz wszystko co zobaczysz. Twój wór pełny jest śmieci które nie omieszkasz sprzedać jeśli tylko ktoś kupi. Uwielbiasz puste pola bitwy, które możesz przemierzać szukając łupów.",
             inventory: [
+              "Wór pełen śmieci",
+              "Wybrane narzędzia do szybkiego przeszukiwania",
+              "3 srebrne monety",
+            ],
+            hidden: true,
+            chosen: false,
+          },
+          sailor: {
+            name: "Żeglarz",
+            description: "Morze to twój dom. Jeśli kiedykolwiek ktoś do ciebie przysiądzie to albo dostanie łyk rumu albo przegraną w kości. Twój statek niekoniecznie jest przy tobie fizycznie ale na pewno można go znaleźć w twoim sercu.",
+            inventory: [
               "Kości do gry",
               "Butelka Rumu",
               "6 srebrnych monet",
@@ -296,7 +307,18 @@
             ],
             hidden: true,
             chosen: false,
-          }
+          },
+          merchant: {
+            name: "Kupiec",
+            description: "Złoto i srebro. Jeśli coś istnieje, na pewno ma wartość a ty dobrze wiesz jaką. Targowanie, owijanie w bawełnę, wyduszanie ostatniej miedzi i liczenie złota to dla ciebie codzienność.",
+            inventory: [
+              "10 srebrnych monet",
+              "Monokl",
+              "Plecak",
+            ],
+            hidden: true,
+            chosen: false,
+          },
         }
       }
     }
