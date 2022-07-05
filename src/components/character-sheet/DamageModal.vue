@@ -13,8 +13,8 @@
                 active: false,
                 state: "input",
                 resultTexts: {
-                    0: ["Nie żyjesz.", "Dziękujemy za grę."],
-                    10: ["Zaraz umrzesz.", "Uważaj teraz żeby się nie przeciąć papierem."],
+                    0: ["Czemu jeszcze stoisz?", "Najwidoczniej zapomniałeś jak się umiera."],
+                    10: ["Zaraz padniesz.", "Uważaj teraz żeby się nie przeciąć papierem."],
                     20: ["Jest bardzo źle.", "A właśnie! Masz spisany testament?"],
                     30: ["Jest źle.", "Nie wytrzymasz już długo. Zetrzyj tą krew z oczu bo patrzysz w złą stronę."],
                     40: ["Cholera! To ma tak boleć?.", "Nie wyglądasz za dobrze. Jeśli kiedykolwiek wyglądałeś."],
@@ -37,6 +37,9 @@
             },
 
             resultArrayText () {
+                if (this.percentage == 0)
+                    return ["Tracisz przytomność.", "Za parę tur umrzesz. Dziękujemy za grę."];
+
                 // For each result type, check if it's between
                 // current and next one
                 for(let rtId in this.resultTexts) {
