@@ -57,7 +57,9 @@
         } catch (error) {
           this.other.skills = "";
         }
-        this.addSkills();
+
+        if (this.other.skills == "")
+          this.addSkills();
 
         // Add inventory if empty
         try {
@@ -65,7 +67,9 @@
         } catch (error) {
           this.other.inventory = "";
         }
-        this.addInventory();
+        
+        if (this.other.inventory == "")
+          this.addInventory();
 
       },
       /**
