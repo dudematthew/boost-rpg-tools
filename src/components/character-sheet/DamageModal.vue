@@ -22,7 +22,7 @@
                     60: ["Nie jest tak źle.", "Choć z pewnością bywało lepiej."],
                     70: ["Zraniony przyzwoicie.", "Przygoda! Niczego innego nie oczekujesz od życia."],
                     80: ["Nazywasz to zranieniem?", "Synu, choć, pokażę ci co to znaczy być zranionym."],
-                    90: ["To tylko zadrapanie!", "W gorszym stanie byłem wczorajszej nocy jak uderzyłem palcem o stół!"],
+                    90: ["To tylko zadrapanie!", "\"W gorszym stanie byłem wczorajszej nocy jak uderzyłem palcem o stół!\""],
                     100: ["Jesteś w pełni zdrowia!", " Cokolwiek to było, trzeba trochę więcej na ciebie."],
                 }
             }
