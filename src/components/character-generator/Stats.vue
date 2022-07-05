@@ -42,33 +42,33 @@
 <template>
     <label class="label is-medium">Masz {{ abilityPointsText }} punktów do rozdysponowania pomiędzy 4
         statystyki:</label>
-    <div class="field has-addons" v-for="(point, pointId) in chosenPoints" :key="pointId">
-        <div class="control">
-            <input class="input is-size-4 is-size-6-mobile" type="text" :value="point.name" disabled>
+    <div class="field has-addons is-full" v-for="(point, pointId) in chosenPoints" :key="pointId">
+        <div class="control is-half" style="width: 100%">
+            <input class="input is-full is-size-4 is-size-6-mobile" type="text" :value="point.name" disabled>
         </div>
 
-        <div v-for="(abilityPoint, index) in abilityPoints" :key="index" class="control">
-            <a class="button is-size-4 is-size-6-mobile" @click="choosePoint(pointId, abilityPoint, point.value)"
+        <div v-for="(abilityPoint, index) in abilityPoints" :key="index" class="control is-half" style="width: 25%">
+            <a class="button is-size-4 is-size-6-mobile" style="width: 100%" @click="choosePoint(pointId, abilityPoint, point.value)"
                 :class="{ 'is-info': point.value != abilityPoint, 'is-success': point.value == abilityPoint }">
                 {{abilityPoint}}
             </a>
         </div>
     </div>
-    <div class="field has-addons">
-        <div class="control">
+    <div class="field has-addons is-full">
+        <div class="control" style="width: 50%">
             <input class="input is-size-4 is-size-6-mobile" type="text" value="Żywotność" disabled>
         </div>
 
-        <div class="control">
+        <div class="control" style="width: 50%">
             <input class="input is-size-4 is-size-6-mobile" type="text" :value="healthPoint" disabled>
         </div>
     </div>
-    <div class="field has-addons">
-        <div class="control">
+    <div class="field has-addons is-full">
+        <div class="control" style="width: 50%">
             <input class="input is-size-4 is-size-6-mobile" type="text" value="Mana" disabled>
         </div>
 
-        <div class="control">
+        <div class="control" style="width: 50%">
             <input class="input is-size-4 is-size-6-mobile" type="text" :value="manaPoint" disabled>
         </div>
     </div>
