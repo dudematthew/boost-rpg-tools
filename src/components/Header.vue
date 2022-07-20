@@ -34,8 +34,12 @@ export default {
         </router-link>
 
         <router-link class="navbar-item" to="/character-sheet">
-          Karta Postaci
+          E-Karta Postaci
         </router-link>
+
+        <!-- <a class="navbar-item" href="assets/logo-single.png" target="_blank" download>
+          Pobierz Kartę Postaci
+        </a> -->
 
         <!-- <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">

@@ -332,7 +332,7 @@
           <ul>
             <li>Kości do gry</li>
             <li>Butelka Rumu</li>
-            <li>6 srebrnych monet</li>
+        x    <li>6 srebrnych monet</li>
             <li>Złoty ząb</li>
           </ul>
         </ul>
