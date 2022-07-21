@@ -37,6 +37,10 @@ export default {
           E-Karta Postaci
         </router-link>
 
+        <router-link class="navbar-item" to="/game-master-panel">
+          Panel Mistrza Gry
+        </router-link>
+
         <!-- <a class="navbar-item" href="assets/logo-single.png" target="_blank" download>
           Pobierz Kartę Postaci
         </a> -->

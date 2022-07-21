@@ -22,6 +22,11 @@ const routes = [
     name: 'character sheet',
     component: () => import('../views/CharacterSheetView.vue')
   },
+  {
+    path: '/game-master-panel',
+    name: 'game master panel',
+    component: () => import('../views/GameMasterPanelView.vue')
+  },
   
 ];
 
