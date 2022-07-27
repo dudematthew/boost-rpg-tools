@@ -23,7 +23,7 @@
       return {
         entities: [
           {
-            name: "Nazwa Postaci",
+            name: "Wróg",
             strength: 12,
             agility: 11,
             inteligence: 10,
@@ -32,7 +32,18 @@
             mana: 1,
             dead: false,
             type: 'enemy'
-          }
+          },
+          {
+            name: "Przyjaciel",
+            strength: 12,
+            agility: 11,
+            inteligence: 10,
+            focus: 9,
+            health: 5,
+            mana: 1,
+            dead: false,
+            type: 'ally'
+          },
         ]
       }
     },
@@ -41,9 +52,6 @@
     computed: {
     },
     mounted() {
-      setInterval(() => {
-        console.log(this.entities);
-      }, 5000);
     },
     watch: {
     }
@@ -79,7 +87,7 @@
             <div class="tile is-child is-12">
               <div class="field is-grouped is-grouped-multiline">
 
-                <div class="select pr-1">
+                <div class="select m-1">
                     <select>
                         <option>Wróg</option>
                         <option>Przyjaciel</option>
@@ -87,7 +95,7 @@
                     </select>
                 </div>
 
-                <div class="select pr-1">
+                <div class="select m-1">
                     <select>
                         <option>Ranga 1</option>
                         <option>Ranga 2</option>
@@ -99,7 +107,15 @@
                     </select>
                 </div>
 
-                <div class="control">
+                <div class="select m-1">
+                    <select>
+                        <option>Magiczny</option>
+                        <option>Lekki</option>
+                        <option>Ciężki</option>
+                    </select>
+                </div>
+
+                <div class="control m-1">
                     <button class="button">
                         <span class="icon is-small">
                             <i class="fa-solid fa-plus"></i>

@@ -377,6 +377,12 @@
     text-align: center !important;
   }
 
+  .field {
+    flex-grow: unset !important;
+    flex-shrink: unset !important;
+    flex: 1 1 0 !important;
+  }
+
   // Customize vue-select css
   :root {
     --vs-colors--lightest: rgba(60, 60, 60, 1);

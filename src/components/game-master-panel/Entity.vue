@@ -17,7 +17,7 @@
 </script>
 
 <template>
-    <div class="tile is-child notification is-danger">
+    <div class="tile is-child notification" :class="{'is-danger': entity.type == 'enemy', 'is-success': entity.type == 'ally', 'is-info': entity.type == 'neutral'}">
         <div class="tile is-parent is-vertical is-12 p-0">
 
             <div class="tile is-child is-12">
@@ -31,7 +31,7 @@
                 <div class="field is-grouped is-grouped-multiline">
 
                     <div class="field has-addons is-gruped pr-2">
-                        <p class="control" style="width: 60px;">
+                        <p class="control" style="min-width: 60px;">
                             <input class="input" type="number" placeholder="Siła" :value="entity.strength">
                         </p>
                         <div class="control">
@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="field has-addons is-gruped pr-2">
-                        <p class="control" style="width: 60px;">
+                        <p class="control" style="min-width: 60px;">
                             <input class="input" type="number" placeholder="Zręczność" :value="entity.agility">
                         </p>
                         <div class="control">
@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="field has-addons is-gruped pr-2">
-                        <p class="control" style="width: 60px;">
+                        <p class="control" style="min-width: 60px;">
                             <input class="input" type="number" placeholder="Inteligencja" :value="entity.inteligence">
                         </p>
                         <div class="control">
@@ -70,7 +70,7 @@
                     </div>
 
                     <div class="field has-addons is-gruped pr-2">
-                        <p class="control" style="width: 60px;">
+                        <p class="control" style="min-width: 60px;">
                             <input class="input" type="number" placeholder="Skupienie" :value="entity.focus">
                         </p>
                         <div class="control">
@@ -91,7 +91,7 @@
                                 </span>
                             </button>
                         </div>
-                        <p class="control has-icons-right" style="width: 80px;">
+                        <p class="control has-icons-right" style="min-width: 60px;">
                             <input class="input" type="number" placeholder="Żywotność" :value="entity.health">
                             <span class="icon is-small is-right">
                                 <i class="fa-solid fa-heart"></i>
@@ -108,7 +108,7 @@
                     <!--  -->
 
                     <div class="field has-addons is-gruped pr-2">
-                        <p class="control" style="width: 60px;">
+                        <p class="control" style="min-width: 60px;">
                             <input class="input" type="number" placeholder="Mana" :value="entity.focus">
                         </p>
                         <div class="control">
@@ -120,7 +120,7 @@
                         </div>
                     </div>
 
-                    <div class="control mr-2">
+                    <div class="control mr-2" >
                         <button class="button">
                             <span class="icon is-small">
                                 <i class="fa-solid fa-skull"></i>
@@ -139,7 +139,7 @@
                     <div class="control">
                         <button class="button">
                             <span class="icon is-small">
-                                <i class="fa-solid fa-skull"></i>
+                                <i class="fa-solid fa-angles-up"></i>
                             </span>
                         </button>
                     </div>
