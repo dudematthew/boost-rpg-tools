@@ -377,6 +377,7 @@
     text-align: center !important;
   }
 
+  // Fix Bulma Flex
   .field {
     flex-grow: unset !important;
     flex-shrink: unset !important;
