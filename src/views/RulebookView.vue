@@ -7,7 +7,7 @@
 <template>
   <section class="hero is-primary">
     <div class="hero-body">
-      <p class="heading">Wersja 1.5</p>
+      <p class="heading">Wersja 1.7</p>
       <p class="title">
         BOOST
       </p>
@@ -18,6 +18,8 @@
   </section>
   <section class="section">
     <div class="content is-size-5 is-size-6-mobile mt-2">
+      <p>BOOST</p>
+      <p>Banalnie Oczywisty Odgrywany System Test&oacute;w v1.7</p>
       <h2>Tworzenie postaci</h2>
       <p>Postać składa się z poniższych statystyk:</p>
       <ul>
@@ -41,6 +43,9 @@
           <li>Lekki - pozwala na używanie lekkiego ekwipunku, w tym broni dystansowych</li>
           <li>Ciężki - pozwala na używanie ciężkiego ekwipunku</li>
         </ul>
+      </ul>
+      <p>Zawsze możesz uderzyć kogoś czymś innym, niezależnie od typu walki.</p>
+      <ul>
         <li>Przedmioty, kt&oacute;re dodawane są do ekwipunku</li>
         <li>Specjalną zasadę, kt&oacute;ra definiuje styl gry klasy</li>
       </ul>
@@ -78,6 +83,7 @@
           <li>Skupienie i Inteligencja r&oacute;wna Ranga * 4</li>
           <li>Siła i Zręczność r&oacute;wna Ranga * 2</li>
           <li>Wybrane zaklęcia z listy zaklęć w ilości r&oacute;wnej Randze</li>
+          <li>Mana jest r&oacute;wna Ranga * 2</li>
         </ul>
         <li>Lekki:</li>
         <ul>
@@ -97,7 +103,7 @@
       <p>Walczymy w turach. Sprawdzamy kto ma najwięcej zręczności i od tego ustalamy kolejność. Jeśli przeciwnicy mają
         tę samą zręczność, sami ustalają kto pierwszy, to samo gracze.</p>
       <p>W każdej turze macie akcję i reakcję. Za pomocą akcji możecie robić rzeczy, np. uderzyć niezapowiedzianie kogoś
-        w głowę, rzucić zaklęcie czy zaśpiewać refren piosenki. Za pomocą reakcji możecie reagować na rzeczy, np.
+        w głowę, rzucić zaklęcie czy bezpiecznie odejść od kogoś. Za pomocą reakcji możecie reagować na rzeczy, np.
         obronić się przed ciosem, czy uderzyć kogoś kto niezapowiedziany odchodzi od zwarcia.</p>
       <p>Jeśli chcesz zaatakować, rzucasz na Siłę. Jeśli chcesz uniknąć ciosu, rzucasz na Zręczność. Jeśli chcesz
         strzelić r&oacute;wnież rzucasz na Zręczność. Nie możesz uniknąć magii ani pocisku. Nie możesz strzelać w
@@ -106,7 +112,8 @@
       <ul>
         <li>Lekkie bronie zadają k6 obrażeń</li>
         <li>Ciężkie bronie zadają k6 obrażeń + 2 i zajmują obie ręce</li>
-        <li>Bronie dystansowe (lekkie) zadają k6 obrażeń</li>
+        <li>Bronie dystansowe (lekkie) zadają k6 obrażeń ale nie mogą być używane w zwarciu</li>
+        <li>Wszystko inne zadaje k2 obrażenia</li>
       </ul>
       <p>Od obrażeń odejmujesz wartość zbroi:</p>
       <ul>
@@ -126,7 +133,7 @@
       <ul>
         <li>Heal - leczy 1k3 Żywotności</li>
         <li>Blast - magiczny pocisk o obrażeniach 1k3</li>
-        <li>Protect - dotykasz kogokolwiek i przez całą turę obrażenia na niego zmniejszają się o 1</li>
+        <li>Protect - dotykasz kogokolwiek i przez 4 tury obrażenia na niego zmniejszają się o 1</li>
         <li>Enchant - dotykasz przedmiot i wybierasz czy przez 6 rund zadaje o 1 większe obrażenia czy daje o 2 większe
           szanse trafienia</li>
         <li>Curse - rzucasz na przeciwnika i zmniejszasz mu dwie statystyki o 4 (Musisz zdać na Skupienie) na 4 rundy
@@ -136,8 +143,8 @@
         </li>
         <li>Telekinesis - przenosisz nieduży przedmiot siłą umysłu, możesz też się z kimś siłować np. wyrywając mu
           ulubioną buławę</li>
-        <li>Levitation - dotykasz kogokolwiek i od teraz może się r&oacute;wnież przemieszczać w g&oacute;rę albo
-          d&oacute;ł</li>
+        <li>Levitation - dotykasz kogokolwiek i od teraz przez 6 rund może r&oacute;wnież samotnie przemieszczać się w
+          g&oacute;rę albo d&oacute;ł</li>
         <li>Polymorphy - zmieniasz się w nie większe od ciebie stworzenie, MG decyduje co ci to daje</li>
       </ul>
       <h2>Klasy</h2>
@@ -332,7 +339,7 @@
           <ul>
             <li>Kości do gry</li>
             <li>Butelka Rumu</li>
-        x    <li>6 srebrnych monet</li>
+            <li>6 srebrnych monet</li>
             <li>Złoty ząb</li>
           </ul>
         </ul>
