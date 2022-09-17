@@ -18,8 +18,6 @@
   </section>
   <section class="section">
     <div class="content is-size-5 is-size-6-mobile mt-2">
-      <p>BOOST</p>
-      <p>Banalnie Oczywisty Odgrywany System Test&oacute;w v1.7</p>
       <h2>Tworzenie postaci</h2>
       <p>Postać składa się z poniższych statystyk:</p>
       <ul>
