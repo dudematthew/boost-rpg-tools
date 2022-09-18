@@ -1,7 +1,6 @@
 <script>
-  import Select from '@/components/Select.vue'
   import Entity from '@/components/game-master-panel/Entity'
-  import VueMultiselect from 'vue-multiselect'
+  import GMStatModal from '@/components/game-master-panel/GMStatModal'
 
   import ls from 'local-storage'
   import md5 from 'crypto-js/md5'
@@ -9,7 +8,8 @@
   export default {
     name: 'CharacterSheetView',
     components: {
-      Entity
+      Entity,
+      GMStatModal
     },
     props: [
       'abilityPoints',
@@ -22,25 +22,27 @@
     data() {
       return {
         entities: [
-          {
-            name: "Wróg",
-            strength: 12,
-            agility: 11,
-            intelligence: 10,
-            focus: 9,
-            health: 5,
-            mana: 1,
-            dead: false,
-            type: 'enemy',
-            dead: false
-          },
+          // {
+          //   name: "Wróg",
+          //   strength: 12,
+          //   agility: 11,
+          //   intelligence: 10,
+          //   focus: 9,
+          //   health: 5,
+          //   mana: 1,
+          //   dead: false,
+          //   type: 'enemy',
+          //   dead: false,
+          //   rank: 1
+          // },
         ],
         entityForm: {
           name: '',
           type: 'enemy',
           rank: 1,
           combatType: 'light'
-        }
+        },
+        throwStatistic: null,
       }
     },
     methods: {
@@ -67,6 +69,19 @@
 
         let newEntity = {
           name: this.entityForm.name,
+          rank: this.entityForm.rank,
+          combatType: this.entityForm.combatType,
+          type: this.entityForm.type,
+          bodyStats () {
+            return (this.combatType != 'magic') ? 
+              parseInt(this.rank) * 4 :
+              parseInt(this.rank) * 2;
+          },
+          mindStats () {
+            return (this.combatType != 'magic') ?
+              parseInt(this.rank) * 2 :
+              parseInt(this.rank) * 4;
+          },
           strength: bodyStats,
           agility: bodyStats,
           intelligence: mindStats,
@@ -74,15 +89,28 @@
           health: parseInt(this.entityForm.rank) * 5,
           mana: Math.floor(mindStats / 3),
           dead: false,
-          type: this.entityForm.type,
-          combatType: this.entityForm.combatType
+          curses: {
+            strength: false,
+            agility: false,
+            intelligence: false,
+            focus: false,
+          }
         };
 
         this.entities.push(newEntity);
       },
-      increaseRank () {
+
+      drawStat (statId) {
+        this.throwStatistic = this.entity[statId];
+        this.$options.childInterface.showStatModal();
+      },
+
+      getChildInterface(childInterface) {
+        console.log(childInterface);
         
-      }
+        this.$options.childInterface = Object.assign(this.$options.childInterface ?? {}, childInterface);
+
+      },
     },
     computed: {
       // To avoid using deep watch for entity sorting purposes
@@ -101,9 +129,7 @@
     mounted() {
       this.sortEntities();
 
-      setInterval(() => {
-        console.log(this.entityForm);
-      }, 10000);
+      this.throwStatistic = this.entity.strength;
     },
     watch: {
       agilityStats: {
@@ -160,8 +186,8 @@
                   <div class="select" style="width: 100%">
                       <select style="width: 100%" @change="entityForm.type = $event.target.value">
                           <option value="enemy" :selected="entityForm.type == 'enemy'">Wróg</option>
-                          <option value="ally" :selected="entityForm.type == 'neutral'">Niezależny</option>
-                          <option value="neutral" :selected="entityForm.type == 'ally'">Przyjaciel</option>
+                          <option value="neutral" :selected="entityForm.type == 'neutral'">Niezależny</option>
+                          <option value="ally" :selected="entityForm.type == 'ally'">Przyjaciel</option>
                       </select>
                   </div>
                 </div>
@@ -211,7 +237,7 @@
     </div>
   </div>
 
-  <StatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></StatModal>
+  <GMStatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></GMStatModal>
 
-  <DamageModal :other="other" :baseHP="chosenPoints.strength.value" @interface="getChildInterface"></DamageModal>
+  <!-- <DamageModal :other="other" :baseHP="chosenPoints.strength.value" @interface="getChildInterface"></DamageModal> -->
 </template>
