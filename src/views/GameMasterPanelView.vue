@@ -154,7 +154,7 @@
     <div class="tile is-ancestor">
       <div class="tile is-parent is-12 is-vertical">
         <div class="tile is-child notification is-info">
-          <div class="tile is-parent is-12 p-0">
+          <div class="tile is-parent is-12 p-0 is-vertical">
 
             <div class="tile is-child is-12">
               <p class="title is-4 pb-4 mb-2">
@@ -172,7 +172,7 @@
               <div class="field is-grouped is-grouped-multiline">
 
                 <div class="field has-addons is-gruped mr-2">
-                  <p class="control" style="min-width: 120px;">
+                  <p class="control" style="width: 100%; min-width: 120px;">
                       <input class="input" type="text" placeholder="Nazwa postaci" @change="entityForm.name = $event.target.value">
                   </p>
                 </div>
