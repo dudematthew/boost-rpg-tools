@@ -21,38 +21,28 @@
     ],
     data() {
       return {
-        entities: [
-          // {
-          //   name: "Wróg",
-          //   strength: 12,
-          //   agility: 11,
-          //   intelligence: 10,
-          //   focus: 9,
-          //   health: 5,
-          //   mana: 1,
-          //   dead: false,
-          //   type: 'enemy',
-          //   dead: false,
-          //   rank: 1
-          // },
-        ],
+        entities: [],
         entityForm: {
           name: '',
           type: 'enemy',
           rank: 1,
           combatType: 'light'
         },
-        throwStatistic: null,
+        throwStatistic: this.chosenPoints.strength,
       }
     },
     methods: {
       sortEntities () {
         this.entities.sort((a, b) => {
-            if (a.agility < b.agility) return 1;
-            else if (a.agility > b.agility) return -1;
+            a = parseInt(a.agility);
+            b = parseInt(b.agility);
+
+            if (a < b) return 1;
+            else if (a > b) return -1;
             return 0;
           });
       },
+
       addEntity () {
 
         // Strength and Agility
@@ -60,12 +50,10 @@
           parseInt(this.entityForm.rank) * 4 :
           parseInt(this.entityForm.rank) * 2;
 
-        // Intelligence and Focus
+        // inteligence and Focus
         let mindStats = (this.entityForm.combatType != 'magic') ?
           parseInt(this.entityForm.rank) * 2 :
           parseInt(this.entityForm.rank) * 4;
-
-        console.log(this.entityForm.combatType, mindStats, bodyStats);
 
         let newEntity = {
           name: this.entityForm.name,
@@ -84,15 +72,17 @@
           },
           strength: bodyStats,
           agility: bodyStats,
-          intelligence: mindStats,
+          inteligence: mindStats,
           focus: mindStats,
           health: parseInt(this.entityForm.rank) * 5,
           mana: Math.floor(mindStats / 3),
           dead: false,
+          notes: "",
+          notesHidden: true,
           curses: {
             strength: false,
             agility: false,
-            intelligence: false,
+            inteligence: false,
             focus: false,
           }
         };
@@ -100,17 +90,26 @@
         this.entities.push(newEntity);
       },
 
-      drawStat (statId) {
-        this.throwStatistic = this.entity[statId];
+      showStatModal (stat) {
+        let chosenPoints = this.chosenPoints;
+        this.throwStatistic = {
+          ...chosenPoints[stat.id],
+          value: stat.value,
+        }
+
+        console.log("showing: ", stat, this.throwStatistic);
+
         this.$options.childInterface.showStatModal();
       },
 
       getChildInterface(childInterface) {
-        console.log(childInterface);
-        
         this.$options.childInterface = Object.assign(this.$options.childInterface ?? {}, childInterface);
-
       },
+
+      removeEntity (key) {
+        console.log("removing: ", key);
+        this.entities.splice(key, 1);
+      }
     },
     computed: {
       // To avoid using deep watch for entity sorting purposes
@@ -121,15 +120,11 @@
           returner.push(entity.agility);
         });
 
-        console.log(returner);
-
         return returner;
       }
     },
     mounted() {
       this.sortEntities();
-
-      this.throwStatistic = this.entity.strength;
     },
     watch: {
       agilityStats: {
@@ -224,18 +219,20 @@
             </div>
           </div>
         </div>
-        <Entity v-for="(entity, key) in entities" :key="key" :entity="entities[key]" @update:entity="value => entities[key] = value" />
+
+        <Entity v-for="(entity, key) in entities" :key="key" :entity="entities[key]" @update:entity="value => entities[key] = value" @remove:entity="removeEntity(key)" @showStatModal="value => showStatModal(value)" />
+          
       </div>
     </div>
   </section>
 
-  <div class="field">
+  <!-- <div class="field">
     <div class="control">
       <button class="button is-fullwidth is-large is-danger mt-3" @click="clearLocalStorage()">
         <span>Wyczyść Zapisane Dane</span>
       </button>
     </div>
-  </div>
+  </div> -->
 
   <GMStatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></GMStatModal>
 

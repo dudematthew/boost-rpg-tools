@@ -1,12 +1,10 @@
 <script>
     export default {
         name: "Entity",
-        props: {
-            entity: {
-                type: Object,
-                required: true
-            }
-        },
+        props: [
+            "entity",
+            "key"
+        ],
         data() {
             return {
                 entityStatesIcons: {
@@ -32,7 +30,7 @@
         },
         methods: {
             updateValue(key, value) {
-                console.log('UPDATING...');
+                console.log('UPDATING...', key, value);
                 // console.log(key, value, { ...this.value, [key]: value });
                 this.$emit("update:entity", {
                     ...this.entity,
@@ -44,16 +42,27 @@
                 this.entity[ability] = this.entity.curses[ability] ? parseInt(this.entity[ability]) - 4 : parseInt(this
                     .entity[ability]) + 4;
             },
-            alignStatsToRank () {
+            alignStatsToRank() {
                 this.entity.strength = this.entity.agility = this.entity.bodyStats();
-                this.entity.intelligence = this.entity.focus = this.entity.mindStats();
+                this.entity.inteligence = this.entity.focus = this.entity.mindStats();
                 this.entity.mana = Math.floor(this.entity.mindStats() / 3);
                 this.entity.health = this.entity.rank * 5;
+            },
+            drawStat(statId) {
+                let statValue = this.entity[statId];
+                console.log("drawing... ", statId, statValue)
+                this.$emit("showStatModal", {
+                    id: statId,
+                    value: statValue
+                });
+            },
+            removeEntity () {
+                this.$emit("remove:entity");
             }
         },
         mounted() {
             // console.log(this.entity.mindStats());
-        }
+        },
     }
 </script>
 
@@ -157,24 +166,24 @@
 
                     <div class="field has-addons is-gruped pr-2">
                         <div class="control">
-                            <button class="button" @click="toggleCurse('intelligence')" title="Nałóż / ulecz klątwę">
+                            <button class="button" @click="toggleCurse('inteligence')" title="Nałóż / ulecz klątwę">
                                 <span class="icon is-small">
                                     <i class="fa-solid"
-                                        :class="entity.curses.intelligence ? 'fa-arrows-up-to-line' : 'fa-arrows-down-to-line'"
-                                        :style="{'color': entity.curses.intelligence ? 'red' : 'white'}"></i>
+                                        :class="entity.curses.inteligence ? 'fa-arrows-up-to-line' : 'fa-arrows-down-to-line'"
+                                        :style="{'color': entity.curses.inteligence ? 'red' : 'white'}"></i>
                                 </span>
                             </button>
                         </div>
                         <p class="control" style="min-width: 60px;">
-                            <input class="input" type="number" placeholder="Inteligencja" :value="entity.intelligence"
+                            <input class="input" type="number" placeholder="Inteligencja" :value="entity.inteligence"
                                 @keydown.enter="$event.target.blur()"
-                                @focusout="updateValue('intelligence', $event.target.value)">
+                                @focusout="updateValue('inteligence', $event.target.value)">
                         </p>
                         <div class="control">
-                            <button class="button" @click="drawStat('intelligence')">
+                            <button class="button" @click="drawStat('inteligence')">
                                 <span class="icon is-small">
                                     <i class="fa-solid fa-brain"
-                                        :style="{'color': entity.intelligence == entity.mindStats() ? 'white' : entity.intelligence > entity.mindStats() ? '#ffd257' : '#ee1742'}"></i>
+                                        :style="{'color': entity.inteligence == entity.mindStats() ? 'white' : entity.inteligence > entity.mindStats() ? '#ffd257' : '#ee1742'}"></i>
                                 </span>
                             </button>
                         </div>
@@ -286,8 +295,7 @@
                                 @focusout="updateValue('rank', $event.target.value < 1 ? 1 : $event.target.value)">
                         </p>
                         <div class="control">
-                            <button class="button" title="Wyrównaj statystyki do Rangi"
-                                @click="alignStatsToRank()">
+                            <button class="button" title="Wyrównaj statystyki do Rangi" @click="alignStatsToRank()">
                                 <span class="icon is-small">
                                     <i class="fa-solid fa-equals"></i>
                                 </span>
@@ -303,6 +311,16 @@
                         </div>
                     </div>
                     <!--  -->
+
+                    <div class="field mr-2" style="max-width: 40px">
+                        <div class="control">
+                            <button class="button" :class="!entity.notesHidden ? 'is-dark': ''" title="Pokaż notatki" @click="updateValue('notesHidden', !entity.notesHidden)">
+                                <span class="icon is-small">
+                                    <i class="fa-regular fa-clipboard"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
 
                     <div class="field mr-2" style="max-width: 40px">
                         <div class="control">
@@ -323,7 +341,12 @@
                             </button>
                         </div>
                     </div>
-
+                    
+                </div>
+                <div class="field mr-2 is-12" v-show="!entity.notesHidden">
+                    <textarea class="textarea is-small is-fullwidth" placeholder="Notatki..."
+                        @keydown.enter="$event.target.blur()"
+                        @focusout="updateValue('notes', $event.target.value)"></textarea>
                 </div>
             </div>
         </div>

@@ -43,7 +43,7 @@
             // Emits interface to parent
             emitInterface() {
                 this.$emit("interface", {
-                    showStatModal: () => this.show()
+                    showStatModal: () => this.show(),
                 });
             }
         },
@@ -56,6 +56,7 @@
         mounted() {
             // Emits on mount
             this.emitInterface();
+            console.log("throw statistic: ", this.throwStatistic);
         }
     }
 </script>
