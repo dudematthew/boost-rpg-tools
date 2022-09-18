@@ -45,6 +45,8 @@
 
       addEntity () {
 
+        console.log(this.entityForm);
+
         // Strength and Agility
         let bodyStats = (this.entityForm.combatType != 'magic') ? 
           parseInt(this.entityForm.rank) * 4 :

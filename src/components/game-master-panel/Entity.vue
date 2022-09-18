@@ -13,7 +13,8 @@
                     hurt: 'fa-face-meh',
                     incapacitated: 'fa-face-dizzy',
                     dead: 'fa-skull'
-                }
+                },
+                confirmDelete: false,
             }
         },
         computed: {
@@ -57,6 +58,8 @@
                 });
             },
             removeEntity () {
+                
+
                 this.$emit("remove:entity");
             }
         },
@@ -101,7 +104,7 @@
                             <div class="control">
                                 <button class="button is-danger" title="Usuń postać" @click="removeEntity()">
                                     <span class="icon is-small">
-                                        <i class="fa-solid fa-trash"></i>
+                                        <i class="fa-solid" :class="confirmDelete ? ' fa-trash' : 'fa-question'"></i>
                                     </span>
                                 </button>
                             </div>
@@ -273,9 +276,9 @@
                     <div class="field mr-2" style="min-width: 120px">
                         <div class="select" style="width: 100%">
                             <select style="width: 100%" @change="updateValue('combatType', $event.target.value)">
-                                <option value="light" :selected="entity.type == 'light'">Lekki</option>
-                                <option value="heavy" :selected="entity.type == 'heavy'">Ciężki</option>
-                                <option value="magic" :selected="entity.type == 'magic'">Magiczny</option>
+                                <option value="light" :selected="entity.combatType == 'light'">Lekki</option>
+                                <option value="heavy" :selected="entity.combatType == 'heavy'">Ciężki</option>
+                                <option value="magic" :selected="entity.combatType == 'magic'">Magiczny</option>
                             </select>
                         </div>
                     </div>
