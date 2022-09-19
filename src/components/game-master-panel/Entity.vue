@@ -58,9 +58,10 @@
                 });
             },
             removeEntity () {
-                
-
                 this.$emit("remove:entity");
+            },
+            cloneEntity () {
+                this.$emit("clone:entity");
             }
         },
         mounted() {
@@ -320,6 +321,16 @@
                             <button class="button" :class="!entity.notesHidden ? 'is-dark': ''" title="Pokaż notatki" @click="updateValue('notesHidden', !entity.notesHidden)">
                                 <span class="icon is-small">
                                     <i class="fa-regular fa-clipboard"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="field mr-2" style="max-width: 40px">
+                        <div class="control">
+                            <button class="button" title="Pokaż notatki" @click="cloneEntity()">
+                                <span class="icon is-small">
+                                    <i class="fa-regular fa-clone"></i>
                                 </span>
                             </button>
                         </div>

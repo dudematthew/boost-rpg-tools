@@ -32,23 +32,23 @@
       }
     },
     methods: {
-      sortEntities () {
+      sortEntities() {
         this.entities.sort((a, b) => {
-            a = parseInt(a.agility);
-            b = parseInt(b.agility);
+          a = parseInt(a.agility);
+          b = parseInt(b.agility);
 
-            if (a < b) return 1;
-            else if (a > b) return -1;
-            return 0;
-          });
+          if (a < b) return 1;
+          else if (a > b) return -1;
+          return 0;
+        });
       },
 
-      addEntity () {
+      addEntity() {
 
         console.log(this.entityForm);
 
         // Strength and Agility
-        let bodyStats = (this.entityForm.combatType != 'magic') ? 
+        let bodyStats = (this.entityForm.combatType != 'magic') ?
           parseInt(this.entityForm.rank) * 4 :
           parseInt(this.entityForm.rank) * 2;
 
@@ -62,12 +62,12 @@
           rank: this.entityForm.rank,
           combatType: this.entityForm.combatType,
           type: this.entityForm.type,
-          bodyStats () {
-            return (this.combatType != 'magic') ? 
+          bodyStats() {
+            return (this.combatType != 'magic') ?
               parseInt(this.rank) * 4 :
               parseInt(this.rank) * 2;
           },
-          mindStats () {
+          mindStats() {
             return (this.combatType != 'magic') ?
               parseInt(this.rank) * 2 :
               parseInt(this.rank) * 4;
@@ -92,7 +92,7 @@
         this.entities.push(newEntity);
       },
 
-      showStatModal (stat) {
+      showStatModal(stat) {
         let chosenPoints = this.chosenPoints;
         this.throwStatistic = {
           ...chosenPoints[stat.id],
@@ -108,14 +108,22 @@
         this.$options.childInterface = Object.assign(this.$options.childInterface ?? {}, childInterface);
       },
 
-      removeEntity (key) {
+      removeEntity(key) {
         console.log("removing: ", key);
         this.entities.splice(key, 1);
-      }
+      },
+
+      cloneEntity(key) {
+        console.log("cloning: ", key);
+
+        let entity = this.entities[key];
+        this.entities.push(entity);
+      },
+      
     },
     computed: {
       // To avoid using deep watch for entity sorting purposes
-      agilityStats () {
+      agilityStats() {
         let returner = [];
 
         this.entities.forEach(entity => {
@@ -130,7 +138,7 @@
     },
     watch: {
       agilityStats: {
-        handler () {
+        handler() {
           this.sortEntities();
         },
       }
@@ -175,45 +183,47 @@
 
                 <div class="field has-addons is-gruped mr-2">
                   <p class="control" style="width: 100%; min-width: 120px;">
-                      <input class="input" type="text" placeholder="Nazwa postaci" @change="entityForm.name = $event.target.value" @keyup.enter="addEntity()">
+                    <input class="input" type="text" placeholder="Nazwa postaci"
+                      @change="entityForm.name = $event.target.value" @keyup.enter="addEntity()">
                   </p>
                 </div>
 
                 <div class="field mr-2" style="min-width: 120px">
                   <div class="select" style="width: 100%">
-                      <select style="width: 100%" @change="entityForm.type = $event.target.value">
-                          <option value="enemy" :selected="entityForm.type == 'enemy'">Wróg</option>
-                          <option value="neutral" :selected="entityForm.type == 'neutral'">Niezależny</option>
-                          <option value="ally" :selected="entityForm.type == 'ally'">Przyjaciel</option>
-                      </select>
+                    <select style="width: 100%" @change="entityForm.type = $event.target.value">
+                      <option value="enemy" :selected="entityForm.type == 'enemy'">Wróg</option>
+                      <option value="neutral" :selected="entityForm.type == 'neutral'">Niezależny</option>
+                      <option value="ally" :selected="entityForm.type == 'ally'">Przyjaciel</option>
+                    </select>
                   </div>
                 </div>
 
                 <div class="field mr-2" style="min-width: 120px">
                   <div class="select" style="width: 100%">
-                      <select style="width: 100%" @change="entityForm.rank = $event.target.value">
-                        <option v-for="index in 7" :key="index" :value="index" :selected="entityForm.rank == index">Ranga {{index}}</option>
-                      </select>
+                    <select style="width: 100%" @change="entityForm.rank = $event.target.value">
+                      <option v-for="index in 7" :key="index" :value="index" :selected="entityForm.rank == index">Ranga
+                        {{index}}</option>
+                    </select>
                   </div>
                 </div>
 
                 <div class="field mr-2" style="min-width: 120px">
                   <div class="select mr-3" style="width: 100%">
-                      <select style="width: 100%" @change="entityForm.combatType = $event.target.value">
-                          <option value="light" :selected="entityForm.combatType == 'light'">Lekki</option>
-                          <option value="heavy" :selected="entityForm.combatType == 'heavy'">Ciężki</option>
-                          <option value="magic" :selected="entityForm.combatType == 'magic'">Magiczny</option>
-                      </select>
+                    <select style="width: 100%" @change="entityForm.combatType = $event.target.value">
+                      <option value="light" :selected="entityForm.combatType == 'light'">Lekki</option>
+                      <option value="heavy" :selected="entityForm.combatType == 'heavy'">Ciężki</option>
+                      <option value="magic" :selected="entityForm.combatType == 'magic'">Magiczny</option>
+                    </select>
                   </div>
                 </div>
 
                 <div class="field mr-2">
                   <div class="control">
-                      <button class="button" title="Dodaj postać" @click="addEntity()">
-                          <span class="icon is-small">
-                              <i class="fa-solid fa-plus"></i>
-                          </span>
-                      </button>
+                    <button class="button" title="Dodaj postać" @click="addEntity()">
+                      <span class="icon is-small">
+                        <i class="fa-solid fa-plus"></i>
+                      </span>
+                    </button>
                   </div>
                 </div>
 
@@ -222,8 +232,11 @@
           </div>
         </div>
 
-        <Entity v-for="(entity, key) in entities" :key="key" :entity="entities[key]" @update:entity="value => entities[key] = value" @remove:entity="removeEntity(key)" @showStatModal="value => showStatModal(value)" />
-          
+        <Entity v-for="(entity, key) in entities" :key="key" :entity="entities[key]"
+          @update:entity="value => entities[key] = value" @remove:entity="removeEntity(key)"
+          @showStatModal="value => showStatModal(value)"
+          @clone:entity="cloneEntity(key)" />
+
       </div>
     </div>
   </section>
