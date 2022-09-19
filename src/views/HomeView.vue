@@ -111,7 +111,7 @@
       <p class="panel-tabs">
         <a v-for="(change, version) in systemChangelog" :key="version"
         :data-target="version" style="padding: 8px">{{version}}</a>
-        <a data-all style="padding: 8px" class="is-active">Wszystkie wersje</a>
+        <a data-all style="padding: 8px" class="is-active">Wszystkie zmiany</a>
       </p>
 
       <!-- Template is not rendered in the DOM -->
