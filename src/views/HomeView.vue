@@ -31,7 +31,7 @@
           },
           {
             text: "Dodano przyciski ułatwiające wybranie odpowiedniego modyfikatora przy rzutach.",
-            type: "add"
+            type: "feature"
           },
           {
             text: "Naprawiono niepoprawnie liczony modyfikator przy rzutach.",
