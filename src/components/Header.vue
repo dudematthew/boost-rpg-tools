@@ -41,6 +41,10 @@ export default {
           Panel Mistrza Gry
         </router-link>
 
+        <a class="navbar-item" href="https://drive.google.com/file/d/1340aLwLrg5I9FXe1ZGB9E0gRhnBYWCgh" target="_blank">
+          Pobierz Kartę Postaci
+        </a>
+
         <!-- <a class="navbar-item" href="assets/logo-single.png" target="_blank" download>
           Pobierz Kartę Postaci
         </a> -->
