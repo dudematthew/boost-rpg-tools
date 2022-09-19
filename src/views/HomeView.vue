@@ -26,6 +26,14 @@
         },
         appChangelog: [
           {
+            text: "Dodano przyciski ułatwiające wybranie odpowiedniego modyfikatora przy rzutach.",
+            type: "fix"
+          },
+          {
+            text: "Naprawiono niepoprawnie liczony modyfikator przy rzutach.",
+            type: "fix"
+          },
+          {
             text: "Poprawiono wzmiankę o licencji na stopce strony.",
             type: "typo"
           },

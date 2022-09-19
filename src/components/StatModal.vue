@@ -73,6 +73,14 @@
                 <p class="title is-4 is-spaced has-text-black">Podaj modyfikator</p>
                 <p class="subtitle is-6 has-text-black">Zsumuj wszystkie plusy i minusy</p>
                 <div class="control mb-3">
+                    <div class="field">
+                        <button class="button is-small mr-1" @click="modifier = -6">Prosty</button>
+                        <button class="button is-small mr-1" @click="modifier = -3">Łatwy</button>
+                        <button class="button is-small mr-1" @click="modifier = 3">Trudny</button>
+                        <button class="button is-small mr-1" @click="modifier = 6">Bardzo trudny</button>
+                    </div>
+                </div>
+                <div class="control mb-3">
                     <div class="field has-addons">
                         <div class="control">
                             <input class="input is-large" v-model="modifier" type="number">
