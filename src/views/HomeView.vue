@@ -7,7 +7,7 @@
     name: 'HomeView',
     data() {
       return {
-        changelog: {
+        systemChangelog: {
           '1.08': [{
             text: "Dodano wzmiankę o możliwości podnoszenia poziomu postaci.",
           }],
@@ -23,12 +23,44 @@
               text: "Teraz zamiast umierać od razu, postacie padają nieprzytomnie na dwie tury, by dopiero potem umrzeć jeśli nie zostaną uleczone.",
             },
           ],
-          // 'Aplikacja': [{
-          //     text: "Feature A",
-          //     icon: "fa-code-branch"
-          //   }
-          // ],
+        },
+        appChangelog: [
+          {
+            text: "Poprawiono wzmiankę o licencji na stopce strony.",
+            type: "typo"
+          },
+          {
+            text: "Od teraz przy zmianie strony widzimy jej początek a nie środek.",
+            type: "fix"
+          },
+          {
+            text: "Od teraz menu nagłówka zamyka się przy zmianie strony.",
+            type: "fix"
+          },
+          {
+            text: "Dodano link do karty postaci.",
+            type: "feature"
+          },
+          {
+            text: "Dodano dzienniki zmian na stronie głównej.",
+            type: "feature"
+          },
+        ]
+      }
+    },
+    methods: {
+      getIcon (type) {
+        switch (type) {
+          case "feature":
+            return "fa-plus";
+          case "fix":
+            return "fa-screwdriver-wrench";
+          case "typo":
+            return "fa-spell-check";
+          default:
+            return "fa-code-branch";
         }
+        
       }
     },
     mounted () {
@@ -72,17 +104,18 @@
     <img src="@/assets/background.jpg">
   </figure>
 
+  <!-- System changelog -->
   <section class="section">
     <nav class="panel" ref="panel">
       <p class="panel-heading">Dziennik wersji systemu</p>
       <p class="panel-tabs">
-        <a v-for="(change, version) in changelog" :key="version"
+        <a v-for="(change, version) in systemChangelog" :key="version"
         :data-target="version" style="padding: 8px">{{version}}</a>
         <a data-all style="padding: 8px" class="is-active">Wszystkie wersje</a>
       </p>
 
       <!-- Template is not rendered in the DOM -->
-      <template v-for="(change, key) in changelog" :key="key">
+      <template v-for="(change, key) in systemChangelog" :key="key">
         <div v-for="(feature, innerKey) in change" :key="innerKey" class="panel-block"
           :class="key == 1 ? 'is-active' : ''" :data-category="key">
           <span class="panel-icon">
@@ -91,6 +124,20 @@
           <span v-html="feature.text"></span>
         </div>
       </template>
+    </nav>
+  </section>
+
+  <!-- App changelog -->
+  <section class="section">
+    <nav class="panel" ref="panel">
+      <p class="panel-heading">Dziennik zmian aplikacji</p>
+      <!-- Template is not rendered in the DOM -->
+      <div v-for="(feature, key) in appChangelog" :key="key" class="panel-block">
+        <span class="panel-icon">
+          <i class="fa-solid" :class="getIcon(feature.type)" aria-hidden="true"></i>
+        </span>
+        <span v-html="feature.text"></span>
+      </div>
     </nav>
   </section>
 </template>
