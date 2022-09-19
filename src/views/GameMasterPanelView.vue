@@ -175,7 +175,7 @@
 
                 <div class="field has-addons is-gruped mr-2">
                   <p class="control" style="width: 100%; min-width: 120px;">
-                      <input class="input" type="text" placeholder="Nazwa postaci" @change="entityForm.name = $event.target.value">
+                      <input class="input" type="text" placeholder="Nazwa postaci" @change="entityForm.name = $event.target.value" @keyup.enter="addEntity()">
                   </p>
                 </div>
 
