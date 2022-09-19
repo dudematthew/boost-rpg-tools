@@ -232,7 +232,7 @@
                                 @focusout="updateValue('health', $event.target.value <= 0 ? 0 : $event.target.value)">
                             <span class="icon is-small is-right">
                                 <i class="fa-solid fa-heart"
-                                    :style="{'color': entity.health == entity.rank * 5 ? '' : entity.health > entity.rank * 5 ? '#ffd257' : '#ee1742'}"></i>
+                                    :style="{'color': entity.health == entity.rank * 5 ? 'white' : entity.health > entity.rank * 5 ? '#ffd257' : '#ee1742'}"></i>
                             </span>
                         </p>
                         <div class="control">
