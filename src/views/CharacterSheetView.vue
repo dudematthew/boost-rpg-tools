@@ -1,5 +1,5 @@
 <script>
-  import StatModal from '@/components/character-sheet/StatModal.vue'
+  import StatModal from '@/components/StatModal.vue'
   import DamageModal from '@/components/character-sheet/DamageModal.vue'
   import Select from '@/components/Select.vue'
   import SpellSelect from '@/components/character-sheet/SpellSelect.vue'

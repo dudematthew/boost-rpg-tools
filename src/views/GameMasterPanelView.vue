@@ -1,6 +1,6 @@
 <script>
   import Entity from '@/components/game-master-panel/Entity'
-  import GMStatModal from '@/components/game-master-panel/GMStatModal'
+  import StatModal from '@/components/StatModal'
 
   import ls from 'local-storage'
   import md5 from 'crypto-js/md5'
@@ -9,7 +9,7 @@
     name: 'CharacterSheetView',
     components: {
       Entity,
-      GMStatModal
+      StatModal
     },
     props: [
       'abilityPoints',
@@ -236,7 +236,7 @@
     </div>
   </div> -->
 
-  <GMStatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></GMStatModal>
+  <StatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></StatModal>
 
   <!-- <DamageModal :other="other" :baseHP="chosenPoints.strength.value" @interface="getChildInterface"></DamageModal> -->
 </template>

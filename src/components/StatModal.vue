@@ -3,7 +3,7 @@
     let randomizer = new Randomizer()
 
     export default {
-        name: 'GMStatModal',
+        name: 'StatModal',
         props: {
             throwStatistic: Object,
         },
@@ -17,13 +17,13 @@
         },
         computed: {
             target() {
-                return parseInt(this.throwStatistic.value) + parseInt(this.modifier)
+                return parseInt(this.throwStatistic.value);
             },
             resultText() {
-                return (this.result > this.target) ?
-                    `Zabrakło ci ${Math.abs(this.target - this.result)}...` :
-                    (this.result < this.target) ?
-                        `Przebiłeś wymagania o ${Math.abs(this.result - this.target)}!` :
+                return (this.result + this.modifier > this.target) ?
+                    `Zabrakło ci ${Math.abs(this.target - this.result + this.modifier)}...` :
+                    (this.result + this.modifier < this.target) ?
+                        `Przebiłeś wymagania o ${Math.abs(this.result + this.modifier - this.target)}!` :
                         "Trafiłeś idealnie!";
             }
         },
@@ -43,7 +43,7 @@
             // Emits interface to parent
             emitInterface() {
                 this.$emit("interface", {
-                    showStatModal: () => this.show(),
+                    showStatModal: () => this.show()
                 });
             }
         },
@@ -56,7 +56,6 @@
         mounted() {
             // Emits on mount
             this.emitInterface();
-            console.log("throw statistic: ", this.throwStatistic);
         }
     }
 </script>
@@ -100,10 +99,10 @@
             <section class="modal-card-body" v-if="state == 'result'">
                 <div class="media">
                     <div class="media-left">
-                        <p class="title is-large has-text-black">{{result}} / {{target}}</p>
+                        <p class="title is-large has-text-black">{{result}}{{modifier != 0 ? ` + ${modifier}` : ''}} / {{target}}</p>
                     </div>
                     <div class="media-content">
-                        <p class="title is-4 has-text-black">{{result > target ? "Nie zdane..." : "Zdane!"}}</p>
+                        <p class="title is-4 has-text-black">{{result + modifier > target ? "Nie zdane..." : "Zdane!"}}</p>
                         <p class="subtitle is-6">{{resultText}}</p>
                     </div>
                 </div>
