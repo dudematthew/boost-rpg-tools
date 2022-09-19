@@ -77,7 +77,7 @@
           inteligence: mindStats,
           focus: mindStats,
           health: parseInt(this.entityForm.rank) * 5,
-          mana: parseInt(this.entityForm.rank),
+          mana: this.entityForm.rank,
           dead: false,
           notes: "",
           notesHidden: true,
