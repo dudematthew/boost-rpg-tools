@@ -76,9 +76,9 @@
     <nav class="panel" ref="panel">
       <p class="panel-heading">Dziennik wersji systemu</p>
       <p class="panel-tabs">
-        <a v-for="(change, version, index) in changelog" :key="version" :class="index == 0 ? 'is-active' : ''"
+        <a v-for="(change, version) in changelog" :key="version"
         :data-target="version" style="padding: 8px">{{version}}</a>
-        <a data-all style="padding: 8px">Wszystkie wersje</a>
+        <a data-all style="padding: 8px" class="is-active">Wszystkie wersje</a>
       </p>
 
       <!-- Template is not rendered in the DOM -->
