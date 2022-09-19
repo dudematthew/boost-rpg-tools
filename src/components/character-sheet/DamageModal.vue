@@ -60,7 +60,7 @@
             },
 
             percentage() {
-                return (this.currentHP/this.baseHP);
+                return (this.currentHP / this.baseHP);
             },
         },
         methods: {
@@ -76,6 +76,10 @@
                 this.result = parseInt(this.damage) - parseInt(this.armor);
 
                 this.other.currentHP = parseInt(this.currentHP) - parseInt(this.result);
+
+                // HP can't come out negative
+                if (this.other.currentHP < 0)
+                    this.other.currentHP = 0;
 
                 this.state = "result";
             },
