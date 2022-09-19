@@ -26,6 +26,10 @@
         },
         appChangelog: [
           {
+            text: "Poprawiono kalkulację many wrogów w Panelu Mistrza Gry aby była równa Randze.",
+            type: "fix"
+          },
+          {
             text: "Dodano możliwość duplikowania bytów w Panelu Mistrza Gry.",
             type: "feature"
           },
