@@ -1,6 +1,20 @@
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  methods: {
+    closeNavbar () {
+      let navbarButton = this.$refs.navbarButton;
+
+      if (navbarButton.className.match(/\bis-active\b/)) {
+        navbarButton.click();
+      }
+    }
+  },
+  watch: {
+    $route (to, from) {
+      this.closeNavbar();
+    }
+  }
 }
 </script>
 
@@ -12,7 +26,7 @@ export default {
         <img src="@/assets/logo.png" width="112" height="28">
       </router-link>
 
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNavbar">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNavbar" ref="navbarButton">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
