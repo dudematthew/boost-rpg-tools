@@ -360,7 +360,7 @@
                 <div class="field mr-2 is-12" v-show="!entity.notesHidden">
                     <textarea class="textarea is-small is-fullwidth" placeholder="Notatki..."
                         @keydown.enter="$event.target.blur()"
-                        @focusout="updateValue('notes', $event.target.value)"></textarea>
+                        @focusout="updateValue('notes', $event.target.value)" :value="entity.notes"></textarea>
                 </div>
             </div>
         </div>
