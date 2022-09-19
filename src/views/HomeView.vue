@@ -27,7 +27,7 @@
         appChangelog: [
           {
             text: "Dodano możliwość duplikowania bytów w Panelu Mistrza Gry.",
-            type: "typo"
+            type: "feature"
           },
           {
             text: "Zaktualizowano treść niektórych zaklęć.",
