@@ -365,6 +365,10 @@
           </ul>
         </ul>
       </ul>
+
+      <br>
+
+      <i>Jeśli szukasz zasad w formie dokumentu, kliknij <a href="https://docs.google.com/document/d/1vedzS4KcwyEAqkGIKf77wiHPUiGRHXxVvydl5Gm8Zmw" target="_blank">tutaj</a>.</i>
     </div>
   </section>
 </template>
