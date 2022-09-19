@@ -1,5 +1,5 @@
 <script>
-  import {
+  import Bulma, {
     PanelTabs
   } from '@vizuaalog/bulmajs/src/plugins/panelTabs';
 
@@ -31,8 +31,8 @@
         }
       }
     },
-    mount () {
-      PanelTabs.apply(this.$refs.panel);
+    mounted () {
+      PanelTabs.parseDocument(document);
     }
   }
 </script>
