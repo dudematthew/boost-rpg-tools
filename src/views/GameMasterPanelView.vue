@@ -173,7 +173,7 @@
             </div>
 
             <div class="tile is-child is-12">
-              <p class="title is-5 pb-4">
+              <p class="title is-5">
                 Dodaj postać
               </p>
             </div>
