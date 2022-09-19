@@ -99,7 +99,7 @@
             <section class="modal-card-body" v-if="state == 'result'">
                 <div class="media">
                     <div class="media-left">
-                        <p class="title is-large has-text-black">{{result}}{{modifier != 0 ? ` + ${modifier}` : ''}} / {{target}}</p>
+                        <p class="title is-large has-text-black">{{result}}{{modifier != 0 ? ` ${modifier < 0 ? '-' : '+'} ${Math.abs(modifier)}` : ''}} / {{target}}</p>
                     </div>
                     <div class="media-content">
                         <p class="title is-4 has-text-black">{{result + modifier > target ? "Nie zdane..." : "Zdane!"}}</p>
