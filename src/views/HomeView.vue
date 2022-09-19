@@ -26,6 +26,10 @@
         },
         appChangelog: [
           {
+            text: "Poprawiono wyświetlanie Panelu Mistrza Gry na białym motywie.",
+            type: "fix"
+          },
+          {
             text: "Dodano przyciski ułatwiające wybranie odpowiedniego modyfikatora przy rzutach.",
             type: "fix"
           },
