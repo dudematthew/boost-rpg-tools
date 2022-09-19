@@ -1,6 +1,20 @@
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  methods: {
+    closeNavbar () {
+      let navbarButton = this.$refs.navbarButton;
+
+      if (navbarButton.className.match(/\bis-active\b/)) {
+        navbarButton.click();
+      }
+    }
+  },
+  watch: {
+    $route (to, from) {
+      this.closeNavbar();
+    }
+  }
 }
 </script>
 
@@ -12,7 +26,7 @@ export default {
         <img src="@/assets/logo.png" width="112" height="28">
       </router-link>
 
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNavbar">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNavbar" ref="navbarButton">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -40,6 +54,10 @@ export default {
         <router-link class="navbar-item" to="/game-master-panel">
           Panel Mistrza Gry
         </router-link>
+
+        <a class="navbar-item" href="https://drive.google.com/file/d/1340aLwLrg5I9FXe1ZGB9E0gRhnBYWCgh" target="_blank">
+          Pobierz Kartę Postaci
+        </a>
 
         <!-- <a class="navbar-item" href="assets/logo-single.png" target="_blank" download>
           Pobierz Kartę Postaci
