@@ -400,13 +400,13 @@
                 </div> -->
               </div>
               <div class="control mb-3">
-                <div class="select is-fullwidth is-large is-size-4 has-text-weight-medium">
+                <!-- <div class="select is-fullwidth is-large is-size-4 has-text-weight-medium"> -->
                   <!-- <SpellSelect :classList="classList" :spellList="spellList"></SpellSelect> -->
                   <!-- <VueMultiselect v-model="test" :options="['siema', 'siema', 'siema', 'siema', 'siema', 'siema', 'siema', 'siema']" multiple close-on-select="false" :clear-on-select=""></VueMultiselect> -->
                   <!-- <VueMultiselect v-model="test" :options="['siema', 'siema', 'siema', 'siema']" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
                     <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
                   </VueMultiselect> -->
-                </div>
+                <!-- </div> -->
                 <!-- <div class="select is-fullwidth is-large">
                   <select>
                     <option v-for="(background, bName) in backgroundList" :key="bName" v-on:change="update()">
