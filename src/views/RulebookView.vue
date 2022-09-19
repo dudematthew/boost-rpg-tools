@@ -7,7 +7,7 @@
 <template>
   <section class="hero is-primary">
     <div class="hero-body">
-      <p class="heading">Wersja 1.7</p>
+      <p class="heading">Wersja 1.8</p>
       <p class="title">
         BOOST
       </p>
@@ -55,6 +55,7 @@
       </ul>
       <p>Gratulacje! Twoja postać jest gotowa! Nie zapomnij o charakterze, sposobie odgrywania, wyglądzie i innych
         rzeczach o kt&oacute;rych na pewno będziesz pamiętać!</p>
+      <i>Opcjonalnie GM może zwiększać poziom twojej postaci, umożliwiając ci dodanie 3 punktów do dowolnej statystyki (maks. 18).</i>
       <h2>Przeciwności</h2>
       <p>Czasami ani Ty, ani MG nie macie pojęcia czy twojej postaci uda się zrobić niesamowitość, kt&oacute;rą właśnie
         wymyśliłeś. W takiej sytuacji wykonujesz test statystyki.</p>
