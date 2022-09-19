@@ -15,7 +15,7 @@
               text: "Zaktualizowano treść zaklęć, dodano zaklęcia Levitation, Ilusion i Polymorphy.",
             },
             {
-              text: "Teraz Mana przeciwników jest równa <i>Ranga * 2</i>.",
+              text: "Teraz Mana przeciwników jest równa Randze.",
             }
           ],
           '1.06': [

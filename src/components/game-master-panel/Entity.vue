@@ -46,7 +46,7 @@
             alignStatsToRank() {
                 this.entity.strength = this.entity.agility = this.entity.bodyStats();
                 this.entity.inteligence = this.entity.focus = this.entity.mindStats();
-                this.entity.mana = Math.floor(this.entity.mindStats() / 3);
+                this.entity.mana = this.entity.rank;
                 this.entity.health = this.entity.rank * 5;
             },
             drawStat(statId) {
@@ -258,7 +258,7 @@
                                 @click="updateValue('mana', entity.mana <= 0 ? 0 : --entity.mana)">
                                 <span class="icon is-small">
                                     <i class="fa-solid fa-wand-sparkles"
-                                        :style="{'color': entity.mana == Math.floor(this.entity.mindStats() / 3) ? '' : entity.mana > Math.floor(this.entity.mindStats() / 3) ? '#ffd257' : '#ee1742'}"></i>
+                                        :style="{'color': entity.mana == (entity.rank) ? '' : entity.mana > (enity.rank) ? '#ffd257' : '#ee1742'}"></i>
                                 </span>
                             </button>
                         </div>

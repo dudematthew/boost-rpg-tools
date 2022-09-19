@@ -82,7 +82,7 @@
           <li>Skupienie i Inteligencja r&oacute;wna Ranga * 4</li>
           <li>Siła i Zręczność r&oacute;wna Ranga * 2</li>
           <li>Wybrane zaklęcia z listy zaklęć w ilości r&oacute;wnej Randze</li>
-          <li>Mana jest r&oacute;wna Ranga * 2</li>
+          <li>Mana jest r&oacute;wna Randze</li>
         </ul>
         <li>Lekki:</li>
         <ul>
