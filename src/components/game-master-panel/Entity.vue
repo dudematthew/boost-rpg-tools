@@ -123,7 +123,7 @@
                                 <span class="icon is-small">
                                     <i class="fa-solid"
                                         :class="entity.curses.strength ? 'fa-arrows-up-to-line' : 'fa-arrows-down-to-line'"
-                                        :style="{'color': entity.curses.strength ? 'red' : 'white'}"></i>
+                                        :style="{'color': entity.curses.strength ? 'red' : ''}"></i>
                                 </span>
                             </button>
                         </div>
@@ -136,7 +136,7 @@
                             <button class="button" @click="drawStat('strength')">
                                 <span class="icon is-small">
                                     <i class="fa-solid fa-hand-fist"
-                                        :style="{'color': entity.strength == entity.bodyStats() ? 'white' : entity.strength > entity.bodyStats() ? '#ffd257' : '#ee1742'}"></i>
+                                        :style="{'color': entity.strength == entity.bodyStats() ? '' : entity.strength > entity.bodyStats() ? '#ffd257' : '#ee1742'}"></i>
                                 </span>
                             </button>
                         </div>
@@ -148,7 +148,7 @@
                                 <span class="icon is-small">
                                     <i class="fa-solid"
                                         :class="entity.curses.agility ? 'fa-arrows-up-to-line' : 'fa-arrows-down-to-line'"
-                                        :style="{'color': entity.curses.agility ? 'red' : 'white'}"></i>
+                                        :style="{'color': entity.curses.agility ? 'red' : ''}"></i>
                                 </span>
                             </button>
                         </div>
@@ -161,7 +161,7 @@
                             <button class="button" @click="drawStat('agility')">
                                 <span class="icon is-small">
                                     <i class="fa-solid fa-person-running"
-                                        :style="{'color': entity.agility == entity.bodyStats() ? 'white' : entity.agility > entity.bodyStats() ? '#ffd257' : '#ee1742'}"></i>
+                                        :style="{'color': entity.agility == entity.bodyStats() ? '' : entity.agility > entity.bodyStats() ? '#ffd257' : '#ee1742'}"></i>
                                 </span>
                             </button>
                         </div>
@@ -173,7 +173,7 @@
                                 <span class="icon is-small">
                                     <i class="fa-solid"
                                         :class="entity.curses.inteligence ? 'fa-arrows-up-to-line' : 'fa-arrows-down-to-line'"
-                                        :style="{'color': entity.curses.inteligence ? 'red' : 'white'}"></i>
+                                        :style="{'color': entity.curses.inteligence ? 'red' : ''}"></i>
                                 </span>
                             </button>
                         </div>
@@ -186,7 +186,7 @@
                             <button class="button" @click="drawStat('inteligence')">
                                 <span class="icon is-small">
                                     <i class="fa-solid fa-brain"
-                                        :style="{'color': entity.inteligence == entity.mindStats() ? 'white' : entity.inteligence > entity.mindStats() ? '#ffd257' : '#ee1742'}"></i>
+                                        :style="{'color': entity.inteligence == entity.mindStats() ? '' : entity.inteligence > entity.mindStats() ? '#ffd257' : '#ee1742'}"></i>
                                 </span>
                             </button>
                         </div>
@@ -198,7 +198,7 @@
                                 <span class="icon is-small">
                                     <i class="fa-solid"
                                         :class="entity.curses.focus ? 'fa-arrows-up-to-line' : 'fa-arrows-down-to-line'"
-                                        :style="{'color': entity.curses.focus ? 'red' : 'white'}"></i>
+                                        :style="{'color': entity.curses.focus ? 'red' : ''}"></i>
                                 </span>
                             </button>
                         </div>
@@ -211,7 +211,7 @@
                             <button class="button" @click="drawStat('focus')">
                                 <span class="icon is-small">
                                     <i class="fa-solid fa-eye"
-                                        :style="{'color': entity.focus == entity.mindStats() ? 'white' : entity.focus > entity.mindStats() ? '#ffd257' : '#ee1742'}"></i>
+                                        :style="{'color': entity.focus == entity.mindStats() ? '' : entity.focus > entity.mindStats() ? '#ffd257' : '#ee1742'}"></i>
                                 </span>
                             </button>
                         </div>
@@ -232,7 +232,7 @@
                                 @focusout="updateValue('health', $event.target.value <= 0 ? 0 : $event.target.value)">
                             <span class="icon is-small is-right">
                                 <i class="fa-solid fa-heart"
-                                    :style="{'color': entity.health == entity.rank * 5 ? 'white' : entity.health > entity.rank * 5 ? '#ffd257' : '#ee1742'}"></i>
+                                    :style="{'color': entity.health == entity.rank * 5 ? '' : entity.health > entity.rank * 5 ? '#ffd257' : '#ee1742'}"></i>
                             </span>
                         </p>
                         <div class="control">
@@ -257,7 +257,7 @@
                                 @click="updateValue('mana', entity.mana <= 0 ? 0 : --entity.mana)">
                                 <span class="icon is-small">
                                     <i class="fa-solid fa-wand-sparkles"
-                                        :style="{'color': entity.mana == Math.floor(this.entity.mindStats() / 3) ? 'white' : entity.mana > Math.floor(this.entity.mindStats() / 3) ? '#ffd257' : '#ee1742'}"></i>
+                                        :style="{'color': entity.mana == Math.floor(this.entity.mindStats() / 3) ? '' : entity.mana > Math.floor(this.entity.mindStats() / 3) ? '#ffd257' : '#ee1742'}"></i>
                                 </span>
                             </button>
                         </div>
