@@ -95,6 +95,16 @@
             active: function (val) {
                 document.querySelector("html").classList.toggle("is-clipped", val);
             },
+            // Keep damage not negative
+            damage: function (val) {
+                if (val < 0)
+                    this.damage = 0;
+            },
+            // Keep armor not negative
+            armor: function (val) {
+                if (val < 0)
+                    this.armor = 0;
+            },
             // Hide modal on router change to prevent scroll lock
             $route () {
                 this.active = false;
