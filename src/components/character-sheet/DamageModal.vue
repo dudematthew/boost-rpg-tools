@@ -90,6 +90,10 @@
         watch: {
             active: function (val) {
                 document.querySelector("html").classList.toggle("is-clipped", val);
+            },
+            // Hide modal on router change to prevent scroll lock
+            $route () {
+                this.active = false;
             }
         },
         mounted() {
