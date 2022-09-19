@@ -26,6 +26,10 @@
         },
         appChangelog: [
           {
+            text: "Poprawiono kalkulator obrażeń aby zbroja i obrażenia nie mogły być ujemne.",
+            type: "fix"
+          },
+          {
             text: "Poprawiono kalkulację many wrogów w Panelu Mistrza Gry aby była równa Randze.",
             type: "fix"
           },
