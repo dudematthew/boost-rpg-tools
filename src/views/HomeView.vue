@@ -26,6 +26,10 @@
         },
         appChangelog: [
           {
+            text: "Zaktualizowano treść niektórych zaklęć.",
+            type: "typo"
+          },
+          {
             text: "Poprawiono wyświetlanie Panelu Mistrza Gry na białym motywie.",
             type: "fix"
           },

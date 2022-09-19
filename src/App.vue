@@ -164,7 +164,7 @@
           },
           protect: {
             name: "Protect",
-            description: "Dotykasz kogoś i przez całą turę obrażenia na niego zmniejszają się o 1",
+            description: "Dotykasz kogoś i przez cztery tury obrażenia na niego zmniejszają się o 1",
             chosen: false
           },
           enchant: {
@@ -194,7 +194,7 @@
           },
           levitation: {
             name: "Levitation",
-            description: "Dotykasz kogokolwiek i od teraz może się również przemieszczać w górę albo dół",
+            description: "Dotykasz kogokolwiek i od teraz przez 6 rund może się również przemieszczać w górę albo dół",
             chosen: false
           },
           polymorphy: {
