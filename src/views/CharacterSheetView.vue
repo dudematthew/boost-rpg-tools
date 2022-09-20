@@ -433,6 +433,13 @@
                 <div class="control">
                     <button class="button is-large" @click="drawStat('strength')">
                       <span class="icon is-small">
+                        <i class="fa-solid fa-skull-crossbones"></i>
+                      </span>
+                    </button>
+                </div>
+                <div class="control">
+                    <button class="button is-large" @click="drawStat('strength')">
+                      <span class="icon is-small">
                         <i class="fa-solid fa-dice-d20"></i>
                       </span>
                     </button>

@@ -73,7 +73,8 @@
             text: "Dodano dzienniki zmian na stronie głównej.",
             type: "feature"
           },
-        ]
+        ],
+        appChangelogListSize: 7
       }
     },
     methods: {
@@ -159,13 +160,21 @@
   <section class="section">
     <nav class="panel" ref="panel">
       <p class="panel-heading">Dziennik zmian aplikacji</p>
-      <!-- Template is not rendered in the DOM -->
-      <div v-for="(feature, key) in appChangelog" :key="key" class="panel-block">
-        <span class="panel-icon">
-          <i class="fa-solid" :class="getIcon(feature.type)" aria-hidden="true"></i>
-        </span>
-        <span v-html="feature.text"></span>
-      </div>
+      <template v-for="(feature, key) in appChangelog" :key="key" >
+        <div class="panel-block" v-if="key <= appChangelogListSize - 1">
+          <span class="panel-icon">
+            <i class="fa-solid" :class="getIcon(feature.type)" aria-hidden="true"></i>
+          </span>
+          <span v-html="feature.text"></span>
+        </div>
+        <div class="panel-block" v-if="key == appChangelogListSize">
+          <span class="tag is-grey" style="cursor: pointer;" @click="appChangelogListSize += 7">
+            <span class="icon">
+              <i class="fa-solid fa-ellipsis"></i>
+            </span>
+          </span>
+        </div>
+      </template>
     </nav>
   </section>
 </template>
