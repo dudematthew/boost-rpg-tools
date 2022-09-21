@@ -430,13 +430,13 @@
                 <div class="control">
                     <input class="input is-large" type="number" placeholder="Aktualna..." v-model="chosenPoints.strength.currentValue" v-on:change="update()">
                 </div>
-                <div class="control">
+                <!-- <div class="control">
                     <button class="button is-large" @click="drawStat('strength')">
                       <span class="icon is-small">
                         <i class="fa-solid fa-skull-crossbones"></i>
                       </span>
                     </button>
-                </div>
+                </div> -->
                 <div class="control">
                     <button class="button is-large" @click="drawStat('strength')">
                       <span class="icon is-small">

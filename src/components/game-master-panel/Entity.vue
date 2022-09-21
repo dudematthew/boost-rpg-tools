@@ -91,8 +91,17 @@
                             </span>
                         </div>
                     </div>
-                    <div class="level-right" v-if="entity.dead">
-                        <div class="level-item">
+                    <div class="level-right mr-2">
+                        <div class="level-item" style="max-width: 40px">
+                            <div class="control">
+                                <button class="button" title="Pokaż notatki" @click="cloneEntity()">
+                                    <span class="icon is-small">
+                                        <i class="fa-regular fa-clone"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="level-item" v-if="entity.dead">
                             <div class="control">
                                 <button class="button" title="Ożyw postać" @click="updateValue('dead', false)">
                                     <span class="icon is-small">
@@ -101,7 +110,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="level-item">
+                        <div class="level-item" v-if="entity.dead">
                             <div class="control">
                                 <button class="button is-danger" title="Usuń postać" @click="removeEntity()">
                                     <span class="icon is-small">
@@ -293,7 +302,7 @@
                                 </span>
                             </button>
                         </div>
-                        <p class="control" style="min-width: 60px;">
+                        <p class="control" style="min-width: 30px;">
                             <input class="input" type="number" placeholder="Ranga" title="Ranga" :value="entity.rank"
                                 @keydown.enter="$event.target.blur()"
                                 @focusout="updateValue('rank', $event.target.value < 1 ? 1 : $event.target.value)">
@@ -321,16 +330,6 @@
                             <button class="button" :class="!entity.notesHidden ? 'is-dark': ''" title="Pokaż notatki" @click="updateValue('notesHidden', !entity.notesHidden)">
                                 <span class="icon is-small">
                                     <i class="fa-regular fa-clipboard"></i>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="field mr-2" style="max-width: 40px">
-                        <div class="control">
-                            <button class="button" title="Pokaż notatki" @click="cloneEntity()">
-                                <span class="icon is-small">
-                                    <i class="fa-regular fa-clone"></i>
                                 </span>
                             </button>
                         </div>
