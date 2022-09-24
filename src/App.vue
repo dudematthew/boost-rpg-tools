@@ -329,7 +329,10 @@
 
   <Header />
 
-  <router-view :abilityPoints="abilityPoints" :chosenPoints="chosenPoints" :classList="classList" :spellList="spellList" :backgroundList="backgroundList" :other="other" />
+  <div class="container">
+    <router-view :abilityPoints="abilityPoints" :chosenPoints="chosenPoints" :classList="classList" :spellList="spellList" :backgroundList="backgroundList" :other="other" />
+  </div>
+
 
   <Footer />
   

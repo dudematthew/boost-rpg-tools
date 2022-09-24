@@ -360,7 +360,7 @@
 
   <section>
     <div class="tile is-ancestor">
-      <div class="tile is-parent is-12 is-vertical">
+      <div class="tile is-parent is-vertical">
         <div class="tile is-child notification is-info">
           <div class="tile is-parent is-12">
             <div class="tile is-child is-6 p-2">
