@@ -58,7 +58,7 @@
           parseInt(this.entityForm.rank) * 4;
 
         let newEntity = {
-          name: this.entityForm.name,
+          name: this.entityForm.name == "" ? "..." : this.entityForm.name,
           rank: this.entityForm.rank,
           combatType: this.entityForm.combatType,
           type: this.entityForm.type,
