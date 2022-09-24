@@ -1,63 +1,64 @@
 <script>
     import Randomizer from '@/lib/randomizer'
+    import D6Button from '@/components/D6Button.vue'
     let randomizer = new Randomizer()
 
     export default {
-        name: 'StatModal',
-        props: {
-            throwStatistic: Object,
+    name: "StatModal",
+    props: {
+        throwStatistic: Object,
+    },
+    data() {
+        return {
+            modifier: 0,
+            result: 0,
+            active: false,
+            state: "input",
+        };
+    },
+    computed: {
+        target() {
+            return parseInt(this.throwStatistic.value);
         },
-        data() {
-            return {
-                modifier: 0,
-                result: 0,
-                active: false,
-                state: "input",
-            }
-        },
-        computed: {
-            target() {
-                return parseInt(this.throwStatistic.value);
-            },
-            resultText() {
-                return (this.result + this.modifier > this.target) ?
-                    `Zabrakło ci ${Math.abs(this.target - this.result + this.modifier)}...` :
-                    (this.result + this.modifier < this.target) ?
-                        `Przebiłeś wymagania o ${Math.abs(this.result + this.modifier - this.target)}!` :
-                        "Trafiłeś idealnie!";
-            }
-        },
-        methods: {
-            // Reset data and show the modal
-            show() {
-                this.result = 0;
-                this.modifier = 0;
-                this.state = "input";
-                this.active = true;
-            },
-            async draw() {
-                this.result = parseInt(await randomizer.getRandomNumber(1, 20));
-
-                this.state = "result";
-            },
-            // Emits interface to parent
-            emitInterface() {
-                this.$emit("interface", {
-                    showStatModal: () => this.show()
-                });
-            }
-        },
-        watch: {
-            active: function (val) {
-                document.querySelector("html").classList.toggle("is-clipped", val);
-                console.log(val);
-            }
-        },
-        mounted() {
-            // Emits on mount
-            this.emitInterface();
+        resultText() {
+            return (this.result + this.modifier > this.target) ?
+                `Zabrakło ci ${Math.abs(this.target - this.result + this.modifier)}...` :
+                (this.result + this.modifier < this.target) ?
+                    `Przebiłeś wymagania o ${Math.abs(this.result + this.modifier - this.target)}!` :
+                    "Trafiłeś idealnie!";
         }
-    }
+    },
+    methods: {
+        // Reset data and show the modal
+        show() {
+            this.result = 0;
+            this.modifier = 0;
+            this.state = "input";
+            this.active = true;
+        },
+        async draw() {
+            this.result = parseInt(await randomizer.getRandomNumber(1, 20));
+            this.state = "result";
+        },
+        // Emits interface to parent
+        emitInterface() {
+            this.$emit("interface", {
+                showStatModal: () => this.show()
+            });
+        }
+    },
+    watch: {
+        active: function (val) {
+            document.querySelector("html").classList.toggle("is-clipped", val);
+            console.log(val);
+        }
+    },
+    mounted() {
+        // Emits on mount
+        this.emitInterface();
+    },
+    components: { D6Button }
+}
 </script>
 
 <template>
@@ -122,6 +123,7 @@
             <footer class="modal-card-foot" v-if="state == 'result'">
                 <button class="button is-success" @click="active = false">OK</button>
                 <button class="button" @click="show()">Jeszcze raz!</button>
+                <D6Button>Szybki atak</D6Button>
             </footer>
         </div>
     </div>
