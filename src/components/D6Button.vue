@@ -64,9 +64,9 @@
 
 <template>
     <button class="button" @click="roll()">
-    <span v-if="hasSlot"><slot></slot></span>
-      <span class="icon is-small" :class="{'shake': shake}">
-        <i class="fa-solid" :class="currentIcon"></i>
-      </span>
+        <span v-if="hasSlot"><slot></slot></span>
+        <span class="icon is-small" :class="{'shake': shake}">
+            <i class="fa-solid" :class="currentIcon"></i>
+        </span>
     </button>
 </template>
