@@ -26,6 +26,26 @@
         },
         appChangelog: [
           {
+            text: "Dodano rzuty kością w Panelu Mistrza Gry.",
+            type: "feature"
+          },
+          {
+            text: "Dodano wzmiankę o sposobie generowania liczb losowych na stopce strony a także o możliwości utworzenia forka na githubie.",
+            type: "typo"
+          },
+          {
+            text: "Dodano przycisk 'Szybki Atak' widoczny po rzucie na statystykę.",
+            type: "feature"
+          },
+          {
+            text: "Dodano przyciski ustawiające modyfikator przy rzucie na statystykę zależnie od trudności.",
+            type: "feature"
+          },
+          {
+            text: "Poprawiono generowanie liczb losowych uniemożliwiając przeciążenie API.",
+            type: "fix"
+          },
+          {
             text: "Poprawiono kalkulator obrażeń aby zbroja i obrażenia nie mogły być ujemne.",
             type: "fix"
           },

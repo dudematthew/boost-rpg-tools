@@ -1,7 +1,7 @@
 <script>
   import Header from './components/Header.vue'
   import Footer from './components/Footer.vue'
-
+  
   export default {
     components: {
       Header,
@@ -385,6 +385,10 @@
     flex-grow: unset !important;
     flex-shrink: unset !important;
     flex: 1 1 0 !important;
+  }
+
+  .default .field {
+    flex: unset !important;
   }
 
   .shake {

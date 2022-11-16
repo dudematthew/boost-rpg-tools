@@ -21,7 +21,6 @@ export default class Randomizer {
         this.randomNumberSet = [];
         this.requestPending = false;
         this.currentlyReffiling = false;
-        console.log('constructed');
     }
 
     /**

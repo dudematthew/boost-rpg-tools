@@ -2,18 +2,21 @@
   import Entity from '@/components/game-master-panel/Entity'
   import StatModal from '@/components/StatModal'
   import D6Button from '@/components/D6Button.vue'
+  import Randomizer from '@/lib/randomizer'
 
   import ls from 'local-storage'
   import md5 from 'crypto-js/md5'
 
+  let randomizer = new Randomizer();
+
   export default {
     name: 'CharacterSheetView',
     components: {
-    Entity,
-    D6Button,
-    StatModal,
-    D6Button
-},
+      Entity,
+      D6Button,
+      StatModal,
+      D6Button
+    },
     props: [
       'abilityPoints',
       'classList',
@@ -33,6 +36,9 @@
         },
         throwStatistic: this.chosenPoints.strength,
         showD20Additions: false,
+        throwD20Result: 0,
+        throwD20Modifier: 0,
+        shakeD20: false,
       }
     },
     methods: {
@@ -45,6 +51,18 @@
           else if (a > b) return -1;
           return 0;
         });
+      },
+
+      async throwD20() {
+        let randomNumber = await randomizer.getRandomNumber(1, 20);
+        this.shakeD20 = true;
+
+        setTimeout(() => {
+          
+          this.throwD20Result = parseInt(randomNumber) + parseInt(this.throwD20Modifier);
+          this.shakeD20 = false;
+        }, 500);
+
       },
 
       addEntity() {
@@ -183,7 +201,7 @@
             </div>
   
             <div class="tile is-child is-12">
-              <div class="field is-grouped is-grouped-multiline">
+              <div class="field is-grouped is-grouped-multiline default">
             
                 <div class="field has-addons is-gruped mr-2">
                   <div class="control">
@@ -194,32 +212,32 @@
                     </button>
                   </div>
                   <div class="control" v-if="showD20Additions">
-                    <button class="button">
+                    <button class="button" @click="throwD20Modifier++">
                       <span class="icon is-small">
                         <i class="fa-solid fa-arrow-up"></i>
                       </span>
                     </button>
                   </div>
                   <div class="control" v-if="showD20Additions">
-                    <button class="button">
+                    <button class="button" @click="throwD20Modifier--">
                       <span class="icon is-small">
                         <i class="fa-solid fa-arrow-down"></i>
                       </span>
                     </button>
                   </div>
                   <div class="control" style="min-width: 60px" v-if="showD20Additions">
-                    <input class="input" type="number" placeholder="Modyfikator..." v-model="chosenPoints.agility.currentValue"
+                    <input class="input" type="number" placeholder="Modyfikator..." v-model="throwD20Modifier"
                       v-on:change="update()">
                   </div>
                   <div class="control">
-                    <button class="button">
+                    <button class="button" @click="throwD20();">
                       <span class="icon is-small">
-                        <i class="fa-solid fa-dice-d20"></i>
+                        <i class="fa-solid fa-dice-d20" :class="{'shake': shakeD20}"></i>
                       </span>
                     </button>
                   </div>
                   <div class="control" style="min-width: 60px">
-                    <input class="input" type="number" placeholder="Wynik..." v-model="chosenPoints.agility.currentValue"
+                    <input class="input" placeholder="Wynik..." v-model="throwD20Result"
                       v-on:change="update()" disabled>
                   </div>
                 </div>
