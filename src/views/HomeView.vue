@@ -26,6 +26,10 @@
         },
         appChangelog: [
           {
+            text: "Dodano notatki w Panelu Mistrza Gry.",
+            type: "feature"
+          },
+          {
             text: "Dodano rzuty kością w Panelu Mistrza Gry.",
             type: "feature"
           },

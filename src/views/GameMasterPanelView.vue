@@ -39,6 +39,7 @@
         throwD20Result: 0,
         throwD20Modifier: 0,
         shakeD20: false,
+        notes: [""],
       }
     },
     methods: {
@@ -250,7 +251,31 @@
                 
               </div>
             </div>
+
+            <div class="field is-child is-12 is-grouped">
+              <p class="title is-5">
+                Notatki
+              </p>
+              <button class="button is-success" style="margin-left: 15px; margin-top: -6px" @click="notes.push('')">
+                <span class="icon is-small is-danger">
+                  <i class="fas fa-plus"></i>
+                </span>
+              </button>
+            </div>
+
+            <div class="tile is-child is-12">
+              <div class="field is-grouped mb-2" v-for="(note, key) in notes" :key="key">
+                <input type="text" class="input is-fullwidth" rows="1" placeholder="Notatka..." v-bind="note">
+                <button class="button is-danger" @click="(notes.length > 1) ? notes.splice(key, 1) : 0">
+                  <span class="icon is-small">
+                    <i class="fas fa-trash"></i>
+                  </span>
+                </button>
+              </div>
+            </div>
           </div>
+
+
           <div class="tile is-parent is-12 p-0 is-vertical">
   
             <div class="tile is-child is-12">
