@@ -136,6 +136,11 @@
         this.entities.splice(key, 1);
       },
 
+      removeNote(key) {
+        this.notes.splice(key, 1);
+        console.log("---", key, this.notes);
+      },
+
       cloneEntity(key) {
         console.log("cloning: ", key);
 
@@ -265,8 +270,8 @@
 
             <div class="tile is-child is-12">
               <div class="field is-grouped mb-2" v-for="(note, key) in notes" :key="key">
-                <input type="text" class="input is-fullwidth" rows="1" placeholder="Notatka..." v-bind="note">
-                <button class="button is-danger" @click="(notes.length > 1) ? notes.splice(key, 1) : 0">
+                <input type="text" class="input is-fullwidth" rows="1" placeholder="Notatka..." v-model="notes[key]">
+                <button class="button is-danger" @click="removeNote(key)" v-if="key > 0">
                   <span class="icon is-small">
                     <i class="fas fa-trash"></i>
                   </span>
