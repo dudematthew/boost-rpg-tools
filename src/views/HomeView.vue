@@ -40,6 +40,10 @@
         },
         appChangelog: [
           {
+            text: "Dodano rzuty kośćmi K3 i K2 w Panelu Mistrza Gry.",
+            type: "feature"
+          },
+          {
             text: "Dodano statystykę Boosterów do E-Karty Postaci.",
             type: "feature"
           },
