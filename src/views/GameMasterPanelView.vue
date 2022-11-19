@@ -38,7 +38,11 @@
         showD20Additions: false,
         throwD20Result: 0,
         throwD20Modifier: 0,
+        throwD3Result: 0,
+        throwD2Result: 0,
         shakeD20: false,
+        shakeD3: false,
+        shakeD2: false,
         notes: [""],
       }
     },
@@ -54,16 +58,45 @@
         });
       },
 
-      async throwD20() {
-        let randomNumber = await randomizer.getRandomNumber(1, 20);
-        this.shakeD20 = true;
+      /**
+       * Throw given "dice"
+       */
+      async throwDX(dice) {
+        let randomNumber = await randomizer.getRandomNumber(1, dice);
+        let diceThrow = () => {};
 
-        setTimeout(() => {
-          
-          this.throwD20Result = parseInt(randomNumber) + parseInt(this.throwD20Modifier);
-          this.shakeD20 = false;
-        }, 500);
+        switch (dice) {
+          case 2:
+            this.shakeD2 = true;
+            diceThrow = () => {
+              this.throwD2Result = randomNumber;
 
+              this.shakeD2 = false;
+            };
+            break;
+
+          case 3:
+            this.shakeD3 = true;
+            diceThrow = () => {
+              this.throwD3Result = randomNumber;
+
+              this.shakeD3 = false;
+            };
+            break;
+            
+          case 20:
+            this.shakeD20 = true;
+            diceThrow = () => {
+              this.throwD20Result = parseInt(randomNumber) + parseInt(this.throwD20Modifier);
+              this.shakeD20 = false;
+            };
+            break;
+        
+          default:
+            break;
+        }
+
+        setTimeout(diceThrow, 500);
       },
 
       addEntity() {
@@ -147,7 +180,7 @@
         let entity = this.entities[key];
         this.entities.push(entity);
       },
-      
+
     },
     computed: {
       // To avoid using deep watch for entity sorting purposes
@@ -193,67 +226,91 @@
       <div class="tile is-parent is-12 is-vertical">
         <div class="tile is-child notification is-info">
           <div class="tile is-parent is-12 p-0 pb-5 mb-5 is-vertical">
-  
+
             <div class="tile is-child is-12">
               <p class="title is-4 mb-2">
                 Narzędzia
               </p>
             </div>
-  
+
             <div class="tile is-child is-12">
               <p class="title is-5">
                 Rzuty kością
               </p>
             </div>
-  
+
             <div class="tile is-child is-12">
-              <div class="field is-grouped is-grouped-multiline default">
-            
+              <div class="field is-grouped is-grouped-multiline default mb-2">
+
                 <div class="field has-addons is-gruped mr-2">
                   <div class="control">
-                    <button class="button" @click="showD20Additions = !showD20Additions">
+                    <button class="button" title="Przełącz modyfikator K20" @click="showD20Additions = !showD20Additions; throwD20Modifier = 0;">
                       <span class="icon is-small">
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                       </span>
                     </button>
                   </div>
                   <div class="control" v-if="showD20Additions">
-                    <button class="button" @click="throwD20Modifier++">
+                    <button class="button" @click="throwD20Modifier++" title="Zwiększ modyfikator">
                       <span class="icon is-small">
                         <i class="fa-solid fa-arrow-up"></i>
                       </span>
                     </button>
                   </div>
                   <div class="control" v-if="showD20Additions">
-                    <button class="button" @click="throwD20Modifier--">
+                    <button class="button" @click="throwD20Modifier--" title="Zmniejsz modyfikator">
                       <span class="icon is-small">
                         <i class="fa-solid fa-arrow-down"></i>
                       </span>
                     </button>
                   </div>
                   <div class="control" style="min-width: 60px" v-if="showD20Additions">
-                    <input class="input" type="number" placeholder="Modyfikator..." v-model="throwD20Modifier"
-                      v-on:change="update()">
+                    <input class="input" type="number" placeholder="Modyfikator..." v-model="throwD20Modifier" title="Modyfikator K20">
                   </div>
                   <div class="control">
-                    <button class="button" @click="throwD20();">
+                    <button class="button" @click="throwDX(20);" title="Rzuć na K20">
                       <span class="icon is-small">
                         <i class="fa-solid fa-dice-d20" :class="{'shake': shakeD20}"></i>
                       </span>
                     </button>
                   </div>
                   <div class="control" style="min-width: 60px">
-                    <input class="input" placeholder="Wynik..." v-model="throwD20Result"
-                      v-on:change="update()" disabled>
+                    <input class="input" placeholder="Wynik..." v-model="throwD20Result" disabled>
                   </div>
                 </div>
-            
+
                 <div class="field mr-2">
                   <div class="control">
-                    <D6Button></D6Button>
+                    <D6Button title="Rzuć na K6"></D6Button>
                   </div>
                 </div>
-                
+
+                <div class="field has-addons is-gruped mr-2">
+                  <div class="control">
+                    <button class="button" @click="throwDX(3);" title="Rzuć na K3">
+                      <span class="icon is-small">
+                        <i class="fa-solid fa-cubes" :class="{'shake': shakeD3}"></i>
+                      </span>
+                    </button>
+                  </div>
+                  <div class="control" style="min-width: 60px">
+                    <input class="input" placeholder="Wynik..." v-model="throwD3Result" disabled>
+                  </div>
+                </div>
+
+                <div class="field has-addons is-gruped mr-2">
+                  <div class="control">
+                    <button class="button" @click="throwDX(2);" title="Rzuć na K2">
+                      <span class="icon is-small">
+                        <i class="fa-solid fa-circle-half-stroke" :class="{'shake': shakeD2}"></i>
+                      </span>
+                    </button>
+                  </div>
+                  <div class="control" style="min-width: 60px">
+                    <input class="input" placeholder="Wynik..." v-model="throwD2Result" disabled>
+                  </div>
+                </div>
+
               </div>
             </div>
 
@@ -282,29 +339,29 @@
 
 
           <div class="tile is-parent is-12 p-0 is-vertical">
-  
+
             <div class="tile is-child is-12">
               <p class="title is-4 mb-2">
                 Organizator Walki
               </p>
             </div>
-  
+
             <div class="tile is-child is-12">
               <p class="title is-5">
                 Dodaj postać
               </p>
             </div>
-  
+
             <div class="tile is-child is-12">
               <div class="field is-grouped is-grouped-multiline">
-  
+
                 <div class="field has-addons is-gruped mr-2">
                   <p class="control" style="width: 100%; min-width: 120px;">
                     <input class="input" type="text" placeholder="Nazwa postaci"
                       @change="entityForm.name = $event.target.value" @keyup.enter="addEntity()">
                   </p>
                 </div>
-  
+
                 <div class="field mr-2" style="min-width: 120px">
                   <div class="select" style="width: 100%">
                     <select style="width: 100%" @change="entityForm.type = $event.target.value">
@@ -314,7 +371,7 @@
                     </select>
                   </div>
                 </div>
-  
+
                 <div class="field mr-2" style="min-width: 120px">
                   <div class="select" style="width: 100%">
                     <select style="width: 100%" @change="entityForm.rank = $event.target.value">
@@ -323,7 +380,7 @@
                     </select>
                   </div>
                 </div>
-  
+
                 <div class="field mr-2" style="min-width: 120px">
                   <div class="select mr-3" style="width: 100%">
                     <select style="width: 100%" @change="entityForm.combatType = $event.target.value">
@@ -333,7 +390,7 @@
                     </select>
                   </div>
                 </div>
-  
+
                 <div class="field mr-2">
                   <div class="control">
                     <button class="button" title="Dodaj postać" @click="addEntity()">
@@ -343,7 +400,7 @@
                     </button>
                   </div>
                 </div>
-  
+
               </div>
             </div>
           </div>
@@ -351,8 +408,7 @@
 
         <Entity v-for="(entity, key) in entities" :key="key" :entity="entities[key]"
           @update:entity="value => entities[key] = value" @remove:entity="removeEntity(key)"
-          @showStatModal="value => showStatModal(value)"
-          @clone:entity="cloneEntity(key)" />
+          @showStatModal="value => showStatModal(value)" @clone:entity="cloneEntity(key)" />
 
       </div>
     </div>
