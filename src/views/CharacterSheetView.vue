@@ -29,6 +29,7 @@
     data() {
       return {
         passedCharacter: null,
+        memoryCharacterList: {},
         throwStatistic: this.chosenPoints.strength, // default
         mounted: false,
         test: null,
@@ -106,7 +107,8 @@
         if (typeof character !== 'object') {
           console.error("Provided character is not an object");
           return;
-        }
+        } else
+          console.log("Installing from object: ", character);
 
         // Unpack all character attributes to memory
         for (let attribute in character) {
@@ -173,6 +175,8 @@
 
         charactersList[id] = character;
 
+        this.memoryCharacterList = charactersList;
+
         let stringifiedList = JSON.stringify(charactersList);
 
         ls.set('characterList', stringifiedList);
@@ -188,6 +192,10 @@
         } catch (e) {
           console.log("Nie załadowano listy:", data, e);
         }
+
+        // Update memory character list with newest
+        this.memoryCharacterList = returner;
+        console.log("Memory character list: ", this.memoryCharacterList);
 
         return returner;
       },
@@ -219,6 +227,13 @@
         }
 
         return null;
+      },
+
+      chooseCharacter (characterId) {
+        this.memoryCharacterList = this.loadCharactersList();
+        let characterObject = this.memoryCharacterList[characterId];
+        console.log("Choosing: ", characterObject);
+        this.setupCharacter(characterObject);
       },
 
       loadCurrentCharacter() {
@@ -439,6 +454,26 @@
   </section>
 
   <section>
+    <div class="field mb-4" v-if="Object.keys(memoryCharacterList).length > 1">
+      <!-- <div class="field">
+        <button class="button is-fullwidth is-medium has-background-black has-text-white is-warning mt-3" @click="clearLocalStorage()">
+          <span>Zarządzaj Zapisanymi Bohaterami</span>
+        </button>
+        <button class="button is-fullwidth is-medium has-background-black has-text-white is-warning mt-3" @click="clearLocalStorage()">
+          <span>Zarządzaj Zapisanymi Bohaterami</span>
+        </button>
+      </div> -->
+      <div class="control">
+        <div class="select is-medium is-fullwidth mt-3" style="min-width: 50%">
+          <select style="width: 100%" @change="chooseCharacter($event.target.value)">
+            <template v-for="(character, key) in memoryCharacterList" :key="key">
+              <option :value="key" :selected="key == this.other.id">{{character.other.name}} [{{key.slice(0, 6)}}]</option>
+            </template>
+          </select>
+        </div>
+      </div>
+    </div>
+
     <div class="tile is-ancestor">
       <div class="tile is-parent is-vertical">
         <div class="tile is-child notification is-info">
