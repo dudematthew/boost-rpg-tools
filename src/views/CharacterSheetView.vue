@@ -394,7 +394,7 @@
               <label class="label is-medium is-size-3">Klasa</label>
               <div class="control mb-3">
                 <div class="select is-fullwidth is-large is-size-4 has-text-weight-medium">
-                  <Select :data="classList" label="name" switchAttrib="chosen"></Select>
+                  <Select :data="classList" label="name" switchAttrib="chosen" v-on:change="update()"></Select>
                 </div>
               </div>
             </div>
@@ -402,7 +402,7 @@
               <label class="label is-medium is-size-3">Tło fabularne</label>
               <div class="control mb-3">
                 <div class="select is-fullwidth is-large is-size-4 has-text-weight-medium">
-                  <Select :data="backgroundList" label="name" switchAttrib="chosen"></Select>
+                  <Select :data="backgroundList" label="name" switchAttrib="chosen" v-on:change="update()"></Select>
                 </div>
                 <!-- <div class="select is-fullwidth is-large">
                   <select>
@@ -413,7 +413,7 @@
                 </div> -->
               </div>
               <div class="control mb-3">
-                <SpellSelect :spellList="spellList" :availableSpells="availableSpells" :spellAmount="spellAmount"></SpellSelect>
+                <SpellSelect :spellList="spellList" :availableSpells="availableSpells" :spellAmount="spellAmount" @change="update()"></SpellSelect>
                 <!-- <div class="select is-fullwidth is-large">
                   <select>
                     <option v-for="(background, bName) in backgroundList" :key="bName" v-on:change="update()">

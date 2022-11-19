@@ -41,7 +41,7 @@
 
                 this.updateSelectOptions();
 
-                console.log(this.spellList);
+                this.$emit('change');
             },
 
             // Get option HTML element by spell id
@@ -68,7 +68,6 @@
 
             // Check if current class can have given spell
             spellAvailable(spellId) {
-                console.log(this.spellListLength);
                 return this.availableSpells.includes(spellId);
             },
 
@@ -89,6 +88,12 @@
                 return chosenSpellsAmount > this.spellAmount;
             },
 
+            clearSpellChoices () {
+                for (let spell of this.spellList) {
+                    spell.chosen = false;
+                }
+            },
+
             /**
              * Update selection based on data
              * Unselect spells if character can't
@@ -96,9 +101,11 @@
              */
             updateSelectOptions() {
                 if (this.hasTooMuch()) {
-                    if (!!this.lastAddedSpell) {
-                        console.log("LOG: ", this.getOptionBySpellId(this.lastAddedSpell), this.lastAddedSpell);
+                    if (this.lastAddedSpell != null) {
                         this.getOptionBySpellId(this.lastAddedSpell).selected = false;
+                    } else {
+                        this.clearSpellChoices();
+                        console.log("Cleared spell choices");
                     }
                 }
             },
@@ -123,17 +130,14 @@
             }
         },
 
-        mounted() {
-            console.log("SpellSelect: ", this.spellList, this.availableSpells);
-        }
     }
 </script>
 
 <template>
     <div class="field is-grouped" tabindex="1" @focusout="expanded = false" v-if="availableSpells.length != 0">
         <div class="control select-control" @click="expanded = true">
-            <div class="select is-multiple is-fullwidth is-large" ref="select">
-                <select @change="onSelectChange($event)" :size="expanded ? spellListLength : 1" style="overflow: hidden"
+            <div class="select is-multiple is-fullwidth is-large" ref="select" >
+                <select @change="onSelectChange($event)" :size="expanded ? spellListLength : 1" style="overflow: hidden" @click.shift.prevent
                     multiple>
                     <template v-for="(spell, spellId) in spellList" :key="spellId">
                         <option :selected="spell.chosen" :value="spellId" v-if="spellAvailable(spellId)"
