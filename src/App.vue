@@ -286,6 +286,18 @@
             hidden: true,
             chosen: false,
           },
+          hunter: {
+            name: "Łowca",
+            description: "Polujesz na różne istoty. Twoje hobby? A może sposób na przetrwanie? Zastawianie sideł, wiedza o tropieniu i opowiadanie jak to sam uszyłeś ten futrzany płaszcz to twoje ulubione zajęcia.",
+            inventory: [
+              "Sidła",
+              "Futrzany płaszcz",
+              "Medalion z kości",
+              "2 srebrne monety",
+            ],
+            hidden: true,
+            chosen: false,
+          },
           sailor: {
             name: "Żeglarz",
             description: "Morze to twój dom. Jeśli kiedykolwiek ktoś do ciebie przysiądzie to albo dostanie łyk rumu albo przegraną w kości. Twój statek niekoniecznie jest przy tobie fizycznie ale na pewno można go znaleźć w twoim sercu.",
@@ -305,6 +317,18 @@
               "Twój ulubiony fartuch",
               "Antałek bimbru",
               "8 srebrnych monet",
+            ],
+            hidden: true,
+            chosen: false,
+          },
+          traveler: {
+            name: "Podróżnik",
+            description: "Uciekłeś z domu raczkując. Zwiedzasz świat od kiedy pamiętasz. Znasz się na każdym środku transportu, widziałeś wiele rzeczy spoza tej krainy i możesz znać kilkoro ludzi.",
+            inventory: [
+              "Plecak",
+              "Wierzchowiec",
+              "5 srebrnych monet",
+              "Kapelusz podróżnika",
             ],
             hidden: true,
             chosen: false,

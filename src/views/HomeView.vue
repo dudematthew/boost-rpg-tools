@@ -40,6 +40,10 @@
         },
         appChangelog: [
           {
+            text: "Zaktualizowano listę teł fabularnych.",
+            type: "feature"
+          },
+          {
             text: "Dodano rzuty kośćmi K3 i K2 w Panelu Mistrza Gry.",
             type: "feature"
           },

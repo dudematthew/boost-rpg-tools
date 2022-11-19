@@ -7,7 +7,7 @@
 <template>
   <section class="hero is-primary">
     <div class="hero-body">
-      <p class="heading">Wersja 1.8</p>
+      <p class="heading">Wersja 1.9</p>
       <p class="title">
         BOOST
       </p>
@@ -352,7 +352,7 @@
         <li>Łowca</li>
         <ul>
           <li>Polujesz na r&oacute;żne istoty. Twoje hobby? A może spos&oacute;b na przetrwanie? Zastawianie sideł,
-            wiedza o tropieniu i opowiadaniu jak to sam uszyłeś ten futrzany płaszcz to twoje ulubione zajęcia.</li>
+            wiedza o tropieniu i opowiadanie jak to sam uszyłeś ten futrzany płaszcz to twoje ulubione zajęcia.</li>
           <li>Ekwipunek:</li>
           <ul>
             <li>Sidła</li>
@@ -410,6 +410,10 @@
           </ul>
         </ul>
       </ul>
+      
+      <br>
+
+      <i>Jeśli szukasz zasad w formie dokumentu, kliknij <a href="https://docs.google.com/document/d/1vedzS4KcwyEAqkGIKf77wiHPUiGRHXxVvydl5Gm8Zmw" target="_blank">tutaj</a>.</i>
     </div>
   </section>
 </template>
