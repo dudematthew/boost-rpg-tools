@@ -23,15 +23,17 @@
       <ul>
         <li>Siła - Określa jak mocno bije rzeczy i ile podniesie</li>
         <li>Zręczność - Określa jak dobrze unika bicia i jak szybko biega</li>
-        <li>Inteligencja - Określa jak szybko i klawo wymyśli rzeczy</li>
+        <li>Inteligencja - Określa jak dobrze rozumie co się dookoła dzieje</li>
         <li>Skupienie - Określa ile uwagi może przeznaczyć na daną rzecz</li>
         <li>Żywotność - Określa ile razy trzeba uderzyć, żeby umarła</li>
         <li>Mana - Określa jak dużo razy może rzucić zaklęcie bez ziewania</li>
+        <li>Boostery - Określa ile razy możesz się <em>boostować</em></li>
       </ul>
       <p>Na start posiadasz 6, 9, 12, 15 punkt&oacute;w, kt&oacute;re musisz rozdzielić między Siłę, Zręczność,
         Inteligencję i Skupienie.</p>
       <p>Żywotność jest r&oacute;wna statystyce Siła.</p>
       <p>Mana r&oacute;wna jest statystyce Skupienia / 3.</p>
+      <p>Boostery są r&oacute;wne statystyce Inteligencji / 3.</p>
       <p>Następnie wybierz jedną z klas i zapisz sobie odpowiednie modyfikacje.</p>
       <p>Klasa składa się z trzech modyfikacji:</p>
       <ul>
@@ -55,7 +57,8 @@
       </ul>
       <p>Gratulacje! Twoja postać jest gotowa! Nie zapomnij o charakterze, sposobie odgrywania, wyglądzie i innych
         rzeczach o kt&oacute;rych na pewno będziesz pamiętać!</p>
-      <i>Opcjonalnie GM może zwiększać poziom twojej postaci, umożliwiając ci dodanie 3 punktów do dowolnej statystyki (maks. 18).</i>
+      <p><em>Opcjonalnie GM może zwiększać poziom twojej postaci, umożliwiając ci dodanie 3 punkt&oacute;w do dowolnej
+          statystyki (maks. 18).</em></p>
       <h2>Przeciwności</h2>
       <p>Czasami ani Ty, ani MG nie macie pojęcia czy twojej postaci uda się zrobić niesamowitość, kt&oacute;rą właśnie
         wymyśliłeś. W takiej sytuacji wykonujesz test statystyki.</p>
@@ -65,11 +68,27 @@
       <p>Modyfikatory mogą być dodatnie i ujemne. MG ustala jaki modyfikator towarzyszy danemu testowi w zależności od
         trudności zadania:</p>
       <ul>
-        <li>-6 - Proste</li>
-        <li>-3 - Łatwe</li>
-        <li>0 - Normalne</li>
-        <li>+3 - Trudne</li>
-        <li>+6 - Bardzo trudne</li>
+        <li>-6 - Proste (uważaj żeby się nie potknąć)</li>
+        <li>-3 - Łatwe (każdy zrobi to raczej bez problemu)</li>
+        <li>0 - Normalne (musisz się postarać)</li>
+        <li>+3 - Trudne (nie każdemu może się to udać)</li>
+        <li>+6 - Bardzo trudne (wymaga wielkiego wysiłku albo szczęścia)</li>
+      </ul>
+      <h2>Boostowanie</h2>
+      <p>Niekt&oacute;rzy bohaterowie dostrzegają skr&oacute;ty w materii tego świata. Niepojęte akrobacje, podnoszenie
+        ogromnych ciężar&oacute;w, rzucanie czarami gdy nie ma się już many, przebiegnięcie dystansu pomiędzy dwiema
+        wioskami czy łamanie podstawowych zasad gry to rzeczy, kt&oacute;re można wykonać <em>boostując </em>się.&nbsp;
+      </p>
+      <p>Boostowanie poświęca jeden Booster. Bohater napełnia się wtedy energią kt&oacute;rą łamie zasady świata.
+        Boostery regenerują się jeśli się prześpisz.</p>
+      <p>Jeśli test nie jest trudniejszy niż <em>Bardzo trudny</em>, bohater automatycznie go zdaje. MG może też
+        pozwolić na dowolne ustępstwa w zasadach dla gracza i niesamowite opisy jeśli uważa że to nie za dużo.</p>
+      <p>Wszystkie testy powyżej <em>Bardzo trudnego</em> rzucane są wtedy z poniższymi modyfikatorami:</p>
+      <ul>
+        <li>-3 - Nadzwyczajne (niejeden hazardzista m&oacute;głby pogratulować)</li>
+        <li>+0 - Nieprawdopodobne (raczej nie ma żadnych szans że ktoś m&oacute;głby to zrobić)</li>
+        <li>+3 - Niepojęte (nie można sobie wyobrazić jak miałoby się to udać)</li>
+        <li>+6 - Niemożliwe (to się nie może udać - po prostu nie da się tego zrobić)</li>
       </ul>
       <h2>Tworzenie przeciwnika</h2>
       <p>Przeciwnicy z kt&oacute;rymi przyjdzie wam walczyć nie są tak skomplikowani jak wy. Mają dosłownie jeden
@@ -131,20 +150,21 @@
         zaklęcie spala twoją jedną Manę. Mana regeneruje się jeśli się prześpisz.</p>
       <ul>
         <li>Heal - leczy 1k3 Żywotności</li>
-        <li>Blast - magiczny pocisk o obrażeniach 1k3</li>
+        <li>Blast - magiczny pocisk ignorujący pancerz o obrażeniach 1k3</li>
         <li>Protect - dotykasz kogokolwiek i przez 4 tury obrażenia na niego zmniejszają się o 1</li>
-        <li>Enchant - dotykasz przedmiot i wybierasz czy przez 6 rund zadaje o 1 większe obrażenia czy daje o 2 większe
-          szanse trafienia</li>
-        <li>Curse - rzucasz na przeciwnika i zmniejszasz mu dwie statystyki o 4 (Musisz zdać na Skupienie) na 4 rundy
-        </li>
-        <li>Bless - dotykasz kogokolwiek i zwiększasz mu daną statystykę o 4 przy jego następnym rzucie</li>
-        <li>Ilusion - tworzysz hologram kt&oacute;ry może się ruszać w prosty spos&oacute;b o maksymalnej wielkości 2m3
-        </li>
+        <li>Enchant - dotykasz przedmiot i wybierasz czy przez 6 rund zadaje o 1 większe obrażenia czy daje modyfikator
+          +2 do trafienia</li>
+        <li>Curse - rzucasz na przeciwnika i zmniejszasz mu dwie statystyki o 4 lub na bohatera i zmniejszasz mu
+          statystykę o 3 (Musi nie zdać na Skupienie) na 4 rundy</li>
+        <li>Bless - dotykasz kogokolwiek i zwiększasz mu daną statystykę o 3 przy jego następnym rzucie</li>
+        <li>Ilusion - tworzysz hologram kt&oacute;ry może się poruszać w prosty spos&oacute;b o maksymalnej wielkości
+          2m3</li>
         <li>Telekinesis - przenosisz nieduży przedmiot siłą umysłu, możesz też się z kimś siłować np. wyrywając mu
           ulubioną buławę</li>
-        <li>Levitation - dotykasz kogokolwiek i od teraz przez 6 rund może r&oacute;wnież samotnie przemieszczać się w
+        <li>Levitation - dotykasz kogokolwiek i od teraz przez 3 rundy może r&oacute;wnież samotnie przemieszczać się w
           g&oacute;rę albo d&oacute;ł</li>
-        <li>Polymorphy - zmieniasz się w nie większe od ciebie stworzenie, MG decyduje co ci to daje</li>
+        <li>Polymorphy - zmieniasz się w stworzenie, kt&oacute;re nie jest dużo większe od ciebie a MG decyduje co ci to
+          daje</li>
       </ul>
       <h2>Klasy</h2>
       <p>Poniżej opisane klasy do wyboru do koloru:</p>
@@ -239,7 +259,7 @@
           <li>Specjalna zasada: Strzelec zadaje dodatkowe 2 obrażenia bronią dystansową</li>
         </ul>
       </ul>
-      <p><br /><br /></p>
+      <h2><br /><br /></h2>
       <h2>Tła fabularne</h2>
       <p>Zanim twoja postać wyruszyła na przygodę, powinna była czymś się zajmować. Chyba że preferujesz nudę. Możesz
         przerzucić kość i wybrać lepszy wynik, gdy wykonujesz czynność związaną z twoim zawodem.</p>
@@ -268,6 +288,18 @@
             <li>Wybrane narzędzia artystyczne</li>
             <li>2 srebrne monety</li>
             <li>Torba</li>
+          </ul>
+        </ul>
+        <li>Podr&oacute;żnik</li>
+        <ul>
+          <li>Uciekłeś z domu raczkując. Zwiedzasz świat od kiedy pamiętasz. Znasz się na każdym środku transportu,
+            widziałeś wiele rzeczy spoza tej krainy i możesz znać kilkoro ludzi.</li>
+          <li>Ekwipunek:</li>
+          <ul>
+            <li>Plecak</li>
+            <li>Wierzchowiec</li>
+            <li>5 srebrnych monet</li>
+            <li>Kapelusz podr&oacute;żnika</li>
           </ul>
         </ul>
         <li>Kucharz</li>
@@ -315,6 +347,18 @@
             <li>4 srebrne monety</li>
             <li>Łopata</li>
             <li>Sadzonka wybranej rośliny</li>
+          </ul>
+        </ul>
+        <li>Łowca</li>
+        <ul>
+          <li>Polujesz na r&oacute;żne istoty. Twoje hobby? A może spos&oacute;b na przetrwanie? Zastawianie sideł,
+            wiedza o tropieniu i opowiadaniu jak to sam uszyłeś ten futrzany płaszcz to twoje ulubione zajęcia.</li>
+          <li>Ekwipunek:</li>
+          <ul>
+            <li>Sidła</li>
+            <li>Futrzany płaszcz</li>
+            <li>Medalion z kości</li>
+            <li>2 srebrne monety</li>
           </ul>
         </ul>
         <li>Złomiarz</li>
@@ -366,10 +410,6 @@
           </ul>
         </ul>
       </ul>
-
-      <br>
-
-      <i>Jeśli szukasz zasad w formie dokumentu, kliknij <a href="https://docs.google.com/document/d/1vedzS4KcwyEAqkGIKf77wiHPUiGRHXxVvydl5Gm8Zmw" target="_blank">tutaj</a>.</i>
     </div>
   </section>
 </template>

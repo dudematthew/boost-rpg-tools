@@ -344,6 +344,7 @@
       // Set stats starting value based on other stats
       this.other.currentHP = this.chosenPoints.strength.value;
       this.other.currentMP = this.chosenPoints.focus.value / 3;
+      this.other.currentBst = this.chosenPoints.inteligence.value / 3;
 
       this.correctClassChoice();
       this.correctBackgroundChoice();
@@ -552,6 +553,28 @@
                     <button class="button is-large" @click="if (other.currentMP > 0) other.currentMP--;">
                       <span class="icon is-small">
                         <i class="fa-solid fa-wand-sparkles"></i>
+                      </span>
+                    </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="tile is-parent is-12">
+            <div class="tile is-child is-4 p-2">
+
+              <label class="label is-medium is-size-3 has-text-black">Boostery</label>
+              <div class="field has-addons">
+                <div class="control">
+                    <input class="input is-large" type="number" placeholder="Bazowe..." :value="Math.floor(chosenPoints.inteligence.value / 3)" disabled>
+                </div>
+                <div class="control">
+                    <input class="input is-large" type="number" placeholder="Aktualne..." v-model="other.currentBst" v-on:change="update()">
+                </div>
+                <div class="control">
+                    <button class="button is-large" @click="if (other.currentBst > 0) other.currentBst--;">
+                      <span class="icon is-small">
+                        <i class="fa-solid fa-plug-circle-bolt"></i>
                       </span>
                     </button>
                 </div>

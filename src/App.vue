@@ -34,11 +34,12 @@
             currentValue: null,
             name: "Skupienie",
             nameGenitive: "Skupienie"
-          }
+          },
         },
         other: {
           currentHP: 0,
           currentMP: 0,
+          currentBst: 0,
           name: "",
           level: 1,
         },

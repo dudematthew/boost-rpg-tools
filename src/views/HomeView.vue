@@ -8,6 +8,20 @@
     data() {
       return {
         systemChangelog: {
+          '1.09': [
+            {
+              text: "Poprawiono opis działania zaklęcia <i>Curse</i>.",
+            },
+            {
+              text: "Dodano opisy trudności zadania dla łatwiejszego wyczucia.",
+            },
+            {
+              text: "Dodano Boostery równe jednej trzeciej inteligencji pozwalające na <b>boostowanie</b>.",
+            },
+            {
+              text: "Dodano nowe tła fabularne - Podróżnik i Łowca.",
+            },
+          ],
           '1.08': [{
             text: "Dodano wzmiankę o możliwości podnoszenia poziomu postaci.",
           }],

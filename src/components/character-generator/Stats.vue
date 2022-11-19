@@ -14,6 +14,9 @@
             },
             manaPoint () {
                 return this.chosenPoints.focus.value != null ? this.chosenPoints.focus.value / 3 : "";
+            },
+            boosterPoint () {
+                return this.chosenPoints.inteligence.value != null ? this.chosenPoints.inteligence.value / 3 : "";
             }
         },
         methods: {
@@ -70,6 +73,15 @@
 
         <div class="control" style="width: 50%">
             <input class="input is-size-4 is-size-6-mobile" type="text" :value="manaPoint" disabled>
+        </div>
+    </div>
+    <div class="field has-addons is-full">
+        <div class="control" style="width: 50%">
+            <input class="input is-size-4 is-size-6-mobile" type="text" value="Boostery" disabled>
+        </div>
+
+        <div class="control" style="width: 50%">
+            <input class="input is-size-4 is-size-6-mobile" type="text" :value="boosterPoint" disabled>
         </div>
     </div>
 </template>
