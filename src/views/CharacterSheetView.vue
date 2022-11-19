@@ -3,9 +3,12 @@
   import DamageModal from '@/components/character-sheet/DamageModal.vue'
   import Select from '@/components/Select.vue'
   import SpellSelect from '@/components/character-sheet/SpellSelect.vue'
-
+  
+  import Randomizer from '@/lib/randomizer'
   import ls from 'local-storage'
   import md5 from 'crypto-js/md5'
+
+  let randomizer = new Randomizer();
 
   export default {
     name: 'CharacterSheetView',
@@ -28,10 +31,73 @@
         passedCharacter: null,
         throwStatistic: this.chosenPoints.strength, // default
         mounted: false,
-        test: null
+        test: null,
+        throwModifier: 0,
+        shakeD20: false,
+        shakeD6: false,
+        shakeD3: false,
+        shakeD2: false
       }
     },
     methods: {
+      async throwDX(dice) {
+        console.log("Odpalam rzut...");
+        let randomNumber = await randomizer.getRandomNumber(1, dice);
+        let diceThrow = () => {};
+
+        switch (dice) {
+          case 2:
+            this.shakeD2 = true;
+            diceThrow = () => {
+              this.shakeD2 = false;
+            };
+          break;
+
+          case 3:
+            this.shakeD3 = true;
+            diceThrow = () => {
+              this.shakeD3 = false;
+            };
+          break;
+
+          case 6:
+            this.shakeD6 = true;
+            diceThrow = () => {
+              this.shakeD6 = false;
+            };
+          break;
+
+          case 20:
+            this.shakeD20 = true;
+            diceThrow = () => {
+              this.shakeD20 = false;
+            };
+          break;
+        
+          default:
+            break;
+        }
+
+        setTimeout(() => {
+          let throwResult = parseInt(randomNumber) + parseInt(this.throwModifier);
+          let modifierText = (this.throwModifier == 0) ? '' : (this.throwModifier > 0) ? `+${this.throwModifier}` : `${this.throwModifier}`;
+          this.other.throws = `[🎲] Rzut K${dice}${modifierText}: ${throwResult}\n` + this.other.throws.trim();
+          diceThrow();
+          this.cutThrows();
+          this.update();
+        }, 500);
+      },
+
+      cutThrows () {
+        let tempThrows = this.other.throws.split('\n');
+
+        tempThrows = tempThrows.slice(0, 20);
+
+        tempThrows = tempThrows.join('\n');
+
+        this.other.throws = tempThrows;
+      },
+
       /**
        * Loads Character from an object to the
        * memory
@@ -66,7 +132,7 @@
         } catch (error) {
           this.other.inventory = "";
         }
-        
+
         if (this.other.inventory == "")
           this.addInventory();
 
@@ -76,8 +142,8 @@
        * also set id of current character if doesn't
        * exist
        */
-      getStringifiedCurrentCharacter () {
-        
+      getStringifiedCurrentCharacter() {
+
         let character = this.getCurrentCharacter();
 
         this.setupId();
@@ -102,7 +168,7 @@
        *  Save character object to Local Storage 
        *  under it's id
        */
-      saveCharacterToList (character, id) {
+      saveCharacterToList(character, id) {
         let charactersList = this.loadCharactersList();
 
         charactersList[id] = character;
@@ -112,7 +178,7 @@
         ls.set('characterList', stringifiedList);
       },
 
-      loadCharactersList () {
+      loadCharactersList() {
         let data = ls.get('characterList');
         let returner = {};
 
@@ -126,7 +192,7 @@
         return returner;
       },
 
-      saveCurrentCharacterToList () {
+      saveCurrentCharacterToList() {
         console.log("Updating character and saving to list...");
         let character = this.getCurrentCharacter();
         this.setupId();
@@ -136,15 +202,15 @@
         this.saveCurrentCharacterId(id);
       },
 
-      loadCurrentCharacterId () {
+      loadCurrentCharacterId() {
         return ls.get('currentCharacterId') ?? null;
       },
 
-      saveCurrentCharacterId (id) {
+      saveCurrentCharacterId(id) {
         ls.set('currentCharacterId', id);
       },
 
-      loadCharacter (id) {
+      loadCharacter(id) {
         let characters = this.loadCharactersList();
 
         for (let cId in characters) {
@@ -155,12 +221,12 @@
         return null;
       },
 
-      loadCurrentCharacter () {
+      loadCurrentCharacter() {
         let id = this.loadCurrentCharacterId();
         return (!id) ? null : this.loadCharacter(id);
       },
 
-      drawStat (statId) {
+      drawStat(statId) {
         this.throwStatistic = this.chosenPoints[statId];
         this.$options.childInterface.showStatModal();
       },
@@ -171,7 +237,7 @@
 
       getChildInterface(childInterface) {
         console.log(childInterface);
-        
+
         this.$options.childInterface = Object.assign(this.$options.childInterface ?? {}, childInterface);
 
         console.log("childInterface: ", this.$options.childInterface);
@@ -179,7 +245,7 @@
         // this.$options.childInterface = childInterface;
       },
 
-      addInventory () {
+      addInventory() {
         this.correctClassChoice();
         this.correctBackgroundChoice();
 
@@ -190,7 +256,7 @@
         });
       },
 
-      addSkills () {
+      addSkills() {
         this.correctClassChoice();
         this.correctBackgroundChoice();
 
@@ -214,16 +280,16 @@
         this.other[formType] = this.other[formType].trim();
       },
 
-      setupId () {
+      setupId() {
         this.other.id = this.other.id ?? this.generateId(this.getCurrentCharacter);
       },
 
-      generateId (object) {
+      generateId(object) {
         return md5(JSON.stringify(object) + Math.random()).toString();
       },
 
       // If no class is chosen, default to warrior
-      correctClassChoice () {
+      correctClassChoice() {
         console.log("Wybrana klasa: ", this.chosenClass);
         if (!this.chosenClass) {
           this.classList.warrior.chosen = true;
@@ -231,13 +297,13 @@
       },
 
       // Remove characterList from Local Storage
-      clearLocalStorage () {
+      clearLocalStorage() {
         ls.remove('characterList');
         console.log("Usunięto! Pamięć: ", ls.get('characterList'));
       },
 
       // If no background is chosen, default to craftsman
-      correctBackgroundChoice () {
+      correctBackgroundChoice() {
         if (!this.chosenBackground) {
           this.backgroundList.craftsman.chosen = true;
         }
@@ -254,7 +320,7 @@
         this.correctClassChoice();
       },
 
-      update () {
+      update() {
         if (this.mounted) {
           this.saveCurrentCharacterToList();
         }
@@ -270,14 +336,14 @@
         return null;
       },
 
-      availableSpells () {
+      availableSpells() {
         if (!!this.chosenClass)
           return this.chosenClass.availableSpells;
         else
           return [];
       },
 
-      spellAmount () {
+      spellAmount() {
         if (!!this.chosenClass)
           return this.chosenClass.spellAmount;
         else
@@ -291,7 +357,7 @@
         }
       },
 
-      classListArray () {
+      classListArray() {
         let newVal = this.classList;
 
         for (let cId in this.classList) {
@@ -352,7 +418,7 @@
       this.mounted = true;
     },
     watch: {
-      test (val) {
+      test(val) {
         console.log(val);
       }
     }
@@ -414,7 +480,8 @@
                 </div> -->
               </div>
               <div class="control mb-3">
-                <SpellSelect :spellList="spellList" :availableSpells="availableSpells" :spellAmount="spellAmount" @change="update()"></SpellSelect>
+                <SpellSelect :spellList="spellList" :availableSpells="availableSpells" :spellAmount="spellAmount"
+                  @change="update()"></SpellSelect>
                 <!-- <div class="select is-fullwidth is-large">
                   <select>
                     <option v-for="(background, bName) in backgroundList" :key="bName" v-on:change="update()">
@@ -433,10 +500,12 @@
               <label class="label is-medium is-size-3 has-text-black">Siła</label>
               <div class="field has-addons">
                 <div class="control">
-                    <input class="input is-large" type="number" placeholder="Bazowa..." v-model="chosenPoints.strength.value" v-on:change="update()">
+                  <input class="input is-large" type="number" placeholder="Bazowa..."
+                    v-model="chosenPoints.strength.value" v-on:change="update()">
                 </div>
                 <div class="control">
-                    <input class="input is-large" type="number" placeholder="Aktualna..." v-model="chosenPoints.strength.currentValue" v-on:change="update()">
+                  <input class="input is-large" type="number" placeholder="Aktualna..."
+                    v-model="chosenPoints.strength.currentValue" v-on:change="update()">
                 </div>
                 <!-- <div class="control">
                     <button class="button is-large" @click="drawStat('strength')">
@@ -446,11 +515,11 @@
                     </button>
                 </div> -->
                 <div class="control">
-                    <button class="button is-large" @click="drawStat('strength')">
-                      <span class="icon is-small">
-                        <i class="fa-solid fa-dice-d20"></i>
-                      </span>
-                    </button>
+                  <button class="button is-large" @click="drawStat('strength')">
+                    <span class="icon is-small">
+                      <i class="fa-solid fa-dice-d20"></i>
+                    </span>
+                  </button>
                 </div>
               </div>
 
@@ -460,20 +529,22 @@
               <label class="label is-medium is-size-3 has-text-black">Zręczność</label>
               <div class="field has-addons">
                 <div class="control">
-                    <input class="input is-large" type="number" placeholder="Bazowa..." v-model="chosenPoints.agility.value" v-on:change="update()">
+                  <input class="input is-large" type="number" placeholder="Bazowa..."
+                    v-model="chosenPoints.agility.value" v-on:change="update()">
                 </div>
                 <div class="control">
-                    <input class="input is-large" type="number" placeholder="Aktualna..." v-model="chosenPoints.agility.currentValue" v-on:change="update()">
+                  <input class="input is-large" type="number" placeholder="Aktualna..."
+                    v-model="chosenPoints.agility.currentValue" v-on:change="update()">
                 </div>
                 <div class="control">
-                    <button class="button is-large" @click="drawStat('agility')">
-                      <span class="icon is-small">
-                        <i class="fa-solid fa-dice-d20"></i>
-                      </span>
-                    </button>
+                  <button class="button is-large" @click="drawStat('agility')">
+                    <span class="icon is-small">
+                      <i class="fa-solid fa-dice-d20"></i>
+                    </span>
+                  </button>
                 </div>
               </div>
-              
+
 
             </div>
             <div class="tile is-child is-4 p-2">
@@ -481,17 +552,19 @@
               <label class="label is-medium is-size-3 has-text-black">Inteligencja</label>
               <div class="field has-addons">
                 <div class="control">
-                    <input class="input is-large" type="number" placeholder="Bazowa..." v-model="chosenPoints.inteligence.value" v-on:change="update()">
+                  <input class="input is-large" type="number" placeholder="Bazowa..."
+                    v-model="chosenPoints.inteligence.value" v-on:change="update()">
                 </div>
                 <div class="control">
-                    <input class="input is-large" type="number" placeholder="Aktualna..." v-model="chosenPoints.inteligence.currentValue" v-on:change="update()">
+                  <input class="input is-large" type="number" placeholder="Aktualna..."
+                    v-model="chosenPoints.inteligence.currentValue" v-on:change="update()">
                 </div>
                 <div class="control">
-                    <button class="button is-large" @click="drawStat('inteligence')">
-                      <span class="icon is-small">
-                        <i class="fa-solid fa-dice-d20"></i>
-                      </span>
-                    </button>
+                  <button class="button is-large" @click="drawStat('inteligence')">
+                    <span class="icon is-small">
+                      <i class="fa-solid fa-dice-d20"></i>
+                    </span>
+                  </button>
                 </div>
               </div>
 
@@ -503,17 +576,19 @@
               <label class="label is-medium is-size-3 has-text-black">Skupienie</label>
               <div class="field has-addons">
                 <div class="control">
-                    <input class="input is-large" type="number" placeholder="Bazowa..." v-model="chosenPoints.focus.value" v-on:change="update()">
+                  <input class="input is-large" type="number" placeholder="Bazowa..." v-model="chosenPoints.focus.value"
+                    v-on:change="update()">
                 </div>
                 <div class="control">
-                    <input class="input is-large" type="number" placeholder="Aktualna..." v-model="chosenPoints.focus.currentValue" v-on:change="update()">
+                  <input class="input is-large" type="number" placeholder="Aktualna..."
+                    v-model="chosenPoints.focus.currentValue" v-on:change="update()">
                 </div>
                 <div class="control">
-                    <button class="button is-large" @click="drawStat('focus')">
-                      <span class="icon is-small">
-                        <i class="fa-solid fa-dice-d20"></i>
-                      </span>
-                    </button>
+                  <button class="button is-large" @click="drawStat('focus')">
+                    <span class="icon is-small">
+                      <i class="fa-solid fa-dice-d20"></i>
+                    </span>
+                  </button>
                 </div>
               </div>
 
@@ -523,20 +598,22 @@
               <label class="label is-medium is-size-3 has-text-black">Żywotność</label>
               <div class="field has-addons">
                 <div class="control">
-                    <input class="input is-large" type="number" placeholder="Bazowa..." :value="chosenPoints.strength.value" disabled>
+                  <input class="input is-large" type="number" placeholder="Bazowa..."
+                    :value="chosenPoints.strength.value" disabled>
                 </div>
                 <div class="control">
-                    <input class="input is-large" type="number" placeholder="Aktualna..." v-model="other.currentHP" v-on:change="update()">
+                  <input class="input is-large" type="number" placeholder="Aktualna..." v-model="other.currentHP"
+                    v-on:change="update()">
                 </div>
                 <div class="control">
-                    <button class="button is-large" @click="harm()">
-                      <span class="icon is-small">
-                        <i class="fa-solid fa-heart-crack"></i>
-                      </span>
-                    </button>
+                  <button class="button is-large" @click="harm()">
+                    <span class="icon is-small">
+                      <i class="fa-solid fa-heart-crack"></i>
+                    </span>
+                  </button>
                 </div>
               </div>
-              
+
 
             </div>
             <div class="tile is-child is-4 p-2">
@@ -544,17 +621,19 @@
               <label class="label is-medium is-size-3 has-text-black">Mana</label>
               <div class="field has-addons">
                 <div class="control">
-                    <input class="input is-large" type="number" placeholder="Bazowa..." :value="Math.floor(chosenPoints.focus.value / 3)" disabled>
+                  <input class="input is-large" type="number" placeholder="Bazowa..."
+                    :value="Math.floor(chosenPoints.focus.value / 3)" disabled>
                 </div>
                 <div class="control">
-                    <input class="input is-large" type="number" placeholder="Aktualna..." v-model="other.currentMP" v-on:change="update()">
+                  <input class="input is-large" type="number" placeholder="Aktualna..." v-model="other.currentMP"
+                    v-on:change="update()">
                 </div>
                 <div class="control">
-                    <button class="button is-large" @click="if (other.currentMP > 0) other.currentMP--;">
-                      <span class="icon is-small">
-                        <i class="fa-solid fa-wand-sparkles"></i>
-                      </span>
-                    </button>
+                  <button class="button is-large" @click="if (other.currentMP > 0) other.currentMP--;">
+                    <span class="icon is-small">
+                      <i class="fa-solid fa-wand-sparkles"></i>
+                    </span>
+                  </button>
                 </div>
               </div>
 
@@ -566,17 +645,19 @@
               <label class="label is-medium is-size-3 has-text-black">Boostery</label>
               <div class="field has-addons">
                 <div class="control">
-                    <input class="input is-large" type="number" placeholder="Bazowe..." :value="Math.floor(chosenPoints.inteligence.value / 3)" disabled>
+                  <input class="input is-large" type="number" placeholder="Bazowe..."
+                    :value="Math.floor(chosenPoints.inteligence.value / 3)" disabled>
                 </div>
                 <div class="control">
-                    <input class="input is-large" type="number" placeholder="Aktualne..." v-model="other.currentBst" v-on:change="update()">
+                  <input class="input is-large" type="number" placeholder="Aktualne..." v-model="other.currentBst"
+                    v-on:change="update()">
                 </div>
                 <div class="control">
-                    <button class="button is-large" @click="if (other.currentBst > 0) other.currentBst--;">
-                      <span class="icon is-small">
-                        <i class="fa-solid fa-plug-circle-bolt"></i>
-                      </span>
-                    </button>
+                  <button class="button is-large" @click="if (other.currentBst > 0) other.currentBst--;">
+                    <span class="icon is-small">
+                      <i class="fa-solid fa-plug-circle-bolt"></i>
+                    </span>
+                  </button>
                 </div>
               </div>
 
@@ -588,45 +669,47 @@
             <div class="tile is-child is-6 p-2">
               <label class="label is-medium is-size-3">Umiejętności</label>
               <div class="control">
-                <textarea class="textarea is-medium is-fullwidth" placeholder="Umiejętności..." v-model="other.skills" v-on:change="update()"></textarea>
+                <textarea class="textarea is-medium is-fullwidth" placeholder="Umiejętności..." v-model="other.skills"
+                  v-on:change="update()"></textarea>
               </div>
               <div class="field has-addons">
-                  <div class="control" style="width: 50%">
-                      <a class="button is-fullwidth" title="Dodaj punkt" @click="addDot('skills')">
-                          <span class="icon is-small">
-                            <i class="fa-solid fa-circle"></i>
-                          </span>
-                      </a>
-                  </div>
-                  <div class="control" style="width: 50%">
-                      <a class="button is-fullwidth" title="Uzupełnij automatycznie" @click="addSkills()">
-                          <span class="icon is-small">
-                            <i class="fa-solid fa-file-arrow-down"></i>
-                          </span>
-                      </a>
-                  </div>
+                <div class="control" style="width: 50%">
+                  <a class="button is-fullwidth" title="Dodaj punkt" @click="addDot('skills')">
+                    <span class="icon is-small">
+                      <i class="fa-solid fa-circle"></i>
+                    </span>
+                  </a>
+                </div>
+                <div class="control" style="width: 50%">
+                  <a class="button is-fullwidth" title="Uzupełnij automatycznie" @click="addSkills()">
+                    <span class="icon is-small">
+                      <i class="fa-solid fa-file-arrow-down"></i>
+                    </span>
+                  </a>
+                </div>
               </div>
             </div>
             <div class="tile is-child is-6 p-2">
               <label class="label is-medium is-size-3">Ekwipunek</label>
               <div class="control">
-                <textarea class="textarea is-medium is-fullwidth" placeholder="Ekwipunek..." v-model="other.inventory" v-on:change="update()"></textarea>
+                <textarea class="textarea is-medium is-fullwidth" placeholder="Ekwipunek..." v-model="other.inventory"
+                  v-on:change="update()"></textarea>
               </div>
               <div class="field has-addons">
-                  <div class="control" style="width: 50%">
-                      <a class="button is-fullwidth" title="Dodaj punkt" @click="addDot('inventory')">
-                          <span class="icon is-small">
-                            <i class="fa-solid fa-circle"></i>
-                          </span>
-                      </a>
-                  </div>
-                  <div class="control" style="width: 50%">
-                      <a class="button is-fullwidth" title="Uzupełnij automatycznie" @click="addInventory()">
-                          <span class="icon is-small">
-                            <i class="fa-solid fa-file-arrow-down"></i>
-                          </span>
-                      </a>
-                  </div>
+                <div class="control" style="width: 50%">
+                  <a class="button is-fullwidth" title="Dodaj punkt" @click="addDot('inventory')">
+                    <span class="icon is-small">
+                      <i class="fa-solid fa-circle"></i>
+                    </span>
+                  </a>
+                </div>
+                <div class="control" style="width: 50%">
+                  <a class="button is-fullwidth" title="Uzupełnij automatycznie" @click="addInventory()">
+                    <span class="icon is-small">
+                      <i class="fa-solid fa-file-arrow-down"></i>
+                    </span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -634,24 +717,87 @@
             <div class="tile is-child is-6 p-2">
               <label class="label is-medium is-size-3">Notatki</label>
               <div class="control">
-                <textarea class="textarea is-medium is-fullwidth" placeholder="Notatki..." v-model="other.notes" v-on:change="update()"></textarea>
+                <textarea class="textarea is-medium is-fullwidth" placeholder="Notatki..." v-model="other.notes"
+                  v-on:change="update()" style="min-height: 168px"></textarea>
               </div>
               <div class="field">
-                  <div class="control" style="width: 100%">
-                      <a class="button is-fullwidth" title="Dodaj punkt" @click="addDot('notes')">
-                          <span class="icon is-small">
-                            <i class="fa-solid fa-circle"></i>
-                          </span>
-                      </a>
-                  </div>
+                <div class="control" style="width: 100%">
+                  <a class="button is-fullwidth" title="Dodaj punkt" @click="addDot('notes')">
+                    <span class="icon is-small">
+                      <i class="fa-solid fa-circle"></i>
+                    </span>
+                  </a>
+                </div>
               </div>
             </div>
-            <!-- <div class="tile is-child is-6 p-2">
-              <label class="label is-medium is-size-3">Portret postaci</label>
-              <div class="control mb-3">
-                <textarea class="textarea is-medium is-fullwidth" placeholder="Umiejętności..."></textarea>
+            <div class="tile is-child is-6 p-2">
+              <label class="label is-medium is-size-3">Rzuty Kością</label>
+              <div class="tile is-child is-12">
+                <div class="field is-grouped is-grouped-multiline default mb-2">
+
+                  <div class="field has-addons is-gruped mr-2">
+                    <div class="control">
+                      <button class="button" @click="throwModifier++" title="Zwiększ modyfikator">
+                        <span class="icon is-small">
+                          <i class="fa-solid fa-arrow-up"></i>
+                        </span>
+                      </button>
+                    </div>
+                    <div class="control">
+                      <button class="button" @click="throwModifier--" title="Zmniejsz modyfikator">
+                        <span class="icon is-small">
+                          <i class="fa-solid fa-arrow-down"></i>
+                        </span>
+                      </button>
+                    </div>
+                    <div class="control">
+                      <button class="button" @click="throwModifier = 0" title="Wyczyść modyfikator">
+                        <span class="icon is-small">
+                          <i class="fa-solid fa-broom"></i>
+                        </span>
+                      </button>
+                    </div>
+                    <div class="control" style="min-width: 60px">
+                      <input class="input" type="number" placeholder="Modyfikator..." v-model="throwModifier"
+                        title="Modyfikator K20">
+                    </div>
+                    <div class="control">
+                      <button class="button" @click="throwDX(20);" title="Rzuć na K20">
+                        <span class="icon is-small">
+                          <i class="fa-solid fa-dice-d20" :class="{'shake': shakeD20}"></i>
+                        </span>
+                      </button>
+                    </div>
+                    <div class="control">
+                      <button class="button" @click="throwDX(6);" title="Rzuć na K6">
+                        <span class="icon is-small">
+                          <i class="fa-solid fa-dice-d6" :class="{'shake': shakeD6}"></i>
+                        </span>
+                      </button>
+                    </div>
+                    <div class="control">
+                      <button class="button" @click="throwDX(3);" title="Rzuć na K3">
+                        <span class="icon is-small">
+                          <i class="fa-solid fa-cubes" :class="{'shake': shakeD3}"></i>
+                        </span>
+                      </button>
+                    </div>
+                    <div class="control">
+                      <button class="button" @click="throwDX(2);" title="Rzuć na K2">
+                        <span class="icon is-small">
+                          <i class="fa-solid fa-circle-half-stroke" :class="{'shake': shakeD2}"></i>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
               </div>
-            </div> -->
+              <div class="control">
+                <textarea class="textarea is-medium is-fullwidth" placeholder="Notatki..." v-model="other.throws"
+                  v-on:change="update()" disabled></textarea>
+              </div>
+            </div>
           </div>
         </div>
       </div>

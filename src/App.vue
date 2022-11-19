@@ -40,6 +40,7 @@
           currentHP: 0,
           currentMP: 0,
           currentBst: 0,
+          throws: "",
           name: "",
           level: 1,
         },
