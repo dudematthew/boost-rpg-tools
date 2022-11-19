@@ -40,6 +40,10 @@
         },
         appChangelog: [
           {
+            text: "Dodano statystykę Boosterów do E-Karty Postaci.",
+            type: "feature"
+          },
+          {
             text: "Dodano notatki w Panelu Mistrza Gry.",
             type: "feature"
           },
