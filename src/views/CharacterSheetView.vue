@@ -556,14 +556,8 @@
 
   <section>
     <div class="field mb-5">
-      <div class="field">
-        <button class="button is-fullwidth is-medium has-background-black has-text-white is-warning mt-3"
-          @click="showSavedCharacters()">
-          <span>Zarządzaj Zapisanymi Bohaterami</span>
-        </button>
-      </div>
       <div class="control" v-if="Object.keys(memoryCharacterList).length > 1">
-        <div class="select is-medium is-fullwidth" style="min-width: 50%">
+        <div class="select is-medium is-info is-fullwidth pl-2 pr-2" style="min-width: 50%">
           <select style="width: 100%" @change="chooseCharacter($event.target.value)">
             <template v-for="(character, key) in memoryCharacterList" :key="key">
               <option :value="key" :selected="key == this.other.id">{{character.other.name}} [{{key.slice(0, 6)}}]
@@ -892,10 +886,12 @@
                         </span>
                       </button>
                     </div>
-                    <div class="control" style="min-width: 60px">
+                    <div class="control" style="min-width: 60px; max-width: 90px">
                       <input class="input" type="number" placeholder="Modyfikator..." v-model="throwModifier"
                         title="Modyfikator K20">
                     </div>
+                  </div>
+                  <div class="field has-addons is-gruped mr-2">
                     <div class="control">
                       <button class="button" @click="throwDX(20);" title="Rzuć na K20">
                         <span class="icon is-small">
@@ -940,9 +936,10 @@
   </section>
 
   <div class="field">
-    <div class="control">
-      <button class="button is-fullwidth is-large is-danger mt-3" @click="clearLocalStorage()">
-        <span>Wyczyść Zapisane Dane</span>
+    <div class="field">
+      <button class="button is-fullwidth is-medium has-background-black has-text-white is-warning mt-3"
+        @click="showSavedCharacters()">
+        <span>Zarządzaj Zapisanymi Bohaterami</span>
       </button>
     </div>
   </div>
