@@ -395,7 +395,8 @@
   // @import 'bulma/sass/form/input-textarea.sass';
   // @import 'bulma/sass/form/tools.sass';
   @import 'bulma';
-
+  
+  @import '@creativebulma/bulma-divider';
   @import 'bulma-prefers-dark';
   @import '@fortawesome/fontawesome-free/css/all.css';
 

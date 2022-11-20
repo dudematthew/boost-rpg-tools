@@ -1,9 +1,11 @@
 <script>
   import StatModal from '@/components/StatModal.vue'
   import DamageModal from '@/components/character-sheet/DamageModal.vue'
+  import CharacterManagerModal from '@/components/character-sheet/CharacterManagerModal.vue'
   import Select from '@/components/Select.vue'
   import SpellSelect from '@/components/character-sheet/SpellSelect.vue'
-  
+  import names from '@/assets/names.json'
+
   import Randomizer from '@/lib/randomizer'
   import ls from 'local-storage'
   import md5 from 'crypto-js/md5'
@@ -15,6 +17,7 @@
     components: {
       StatModal,
       DamageModal,
+      CharacterManagerModal,
       Select,
       SpellSelect
     },
@@ -52,36 +55,37 @@
             diceThrow = () => {
               this.shakeD2 = false;
             };
-          break;
+            break;
 
           case 3:
             this.shakeD3 = true;
             diceThrow = () => {
               this.shakeD3 = false;
             };
-          break;
+            break;
 
           case 6:
             this.shakeD6 = true;
             diceThrow = () => {
               this.shakeD6 = false;
             };
-          break;
+            break;
 
           case 20:
             this.shakeD20 = true;
             diceThrow = () => {
               this.shakeD20 = false;
             };
-          break;
-        
+            break;
+
           default:
             break;
         }
 
         setTimeout(() => {
           let throwResult = parseInt(randomNumber) + parseInt(this.throwModifier);
-          let modifierText = (this.throwModifier == 0) ? '' : (this.throwModifier > 0) ? `+${this.throwModifier}` : `${this.throwModifier}`;
+          let modifierText = (this.throwModifier == 0) ? '' : (this.throwModifier > 0) ?
+            `+${this.throwModifier}` : `${this.throwModifier}`;
           this.other.throws = `[🎲] Rzut K${dice}${modifierText}: ${throwResult}\n` + this.other.throws.trim();
           diceThrow();
           this.cutThrows();
@@ -89,7 +93,7 @@
         }, 500);
       },
 
-      cutThrows () {
+      cutThrows() {
         let tempThrows = this.other.throws.split('\n');
 
         tempThrows = tempThrows.slice(0, 20);
@@ -139,6 +143,67 @@
           this.addInventory();
 
       },
+
+      /**
+       * Remove Character 
+       */
+      deleteCharacter(characterId) {
+        console.log("Removing ", characterId);
+
+        let charactersList = this.loadCharactersList();
+
+        delete charactersList[characterId];
+
+        this.memoryCharacterList = charactersList;
+
+        if (this.other.id == characterId) {
+          console.log("Usunięto aktualnie wybraną postać");
+          this.cleanInputs();
+        }
+
+        let stringifiedList = JSON.stringify(charactersList);
+
+        ls.set('characterList', stringifiedList);
+      },
+
+      deleteAllCharacters() {
+        for (let characterId in this.memoryCharacterList) {
+          this.deleteCharacter(characterId);
+        }
+      },
+
+      /**
+       * Creates new character with random name
+       * and saves it 
+       */
+      newCharacter() {
+        this.cleanInputs();
+        this.other.name = this.generateRandomFantasyName();
+        let newId = this.generateId(this.getCurrentCharacter());
+
+        this.other.id = newId;
+        console.log("Generated id: ", newId);
+        this.saveCurrentCharacterToList();
+
+        this.memoryCharacterList = this.loadCharactersList();
+      },
+
+      generateRandomFantasyName () {
+        return names[Math.floor(Math.random()*names.length)];
+      },
+
+      duplicateCharacter(characterId) {
+        let characters = this.loadCharactersList();
+
+        let characterToSave = characters[characterId];
+
+        characterToSave.other.id = this.generateId(characterToSave);
+
+        this.saveCharacterToList(characterToSave, characterToSave.other.id);
+
+        this.memoryCharacterList = this.loadCharactersList();
+      },
+
       /**
        * Get stringified current character but
        * also set id of current character if doesn't
@@ -153,6 +218,40 @@
         character.other.id = this.other.id;
 
         return JSON.stringify(character);
+      },
+
+      // Set all inputs except name to empty
+      cleanInputs () {
+        for (let pointId in this.chosenPoints) {
+          let point = this.chosenPoints[pointId];
+
+          point.value = 0;
+          point.currentValue = 0;
+        }
+
+        this.other.throws = "";
+        this.other.level = 1;
+        this.other.notes = "";
+        this.other.skills = "";
+        this.other.inventory = "";
+
+        for (let cClassId in this.classList) {
+          let cClass = this.classList[cClassId];
+
+          cClass.chosen = false;
+        }
+
+        for (let spellId in this.spellList) {
+          let spell = this.spellList[spellId];
+
+          spell.chosen = false;
+        }
+
+        for (let backgroundId in this.backgroundList) {
+          let background = this.backgroundList[backgroundId];
+
+          background.chosen = false;
+        }
       },
 
       // Get current character attributes bundled to object
@@ -229,10 +328,10 @@
         return null;
       },
 
-      chooseCharacter (characterId) {
+      chooseCharacter(characterId) {
         this.memoryCharacterList = this.loadCharactersList();
         let characterObject = this.memoryCharacterList[characterId];
-        console.log("Choosing: ", characterObject);
+        console.log("Choosing: ", characterObject, characterId);
         this.setupCharacter(characterObject);
       },
 
@@ -248,6 +347,10 @@
 
       harm() {
         this.$options.childInterface.showDamageModal();
+      },
+
+      showSavedCharacters() {
+        this.$options.childInterface.showCharacterManagerModal();
       },
 
       getChildInterface(childInterface) {
@@ -300,6 +403,7 @@
       },
 
       generateId(object) {
+        console.log("???", object);
         return md5(JSON.stringify(object) + Math.random()).toString();
       },
 
@@ -433,9 +537,6 @@
       this.mounted = true;
     },
     watch: {
-      test(val) {
-        console.log(val);
-      }
     }
   }
 </script>
@@ -454,20 +555,19 @@
   </section>
 
   <section>
-    <div class="field mb-4" v-if="Object.keys(memoryCharacterList).length > 1">
-      <!-- <div class="field">
-        <button class="button is-fullwidth is-medium has-background-black has-text-white is-warning mt-3" @click="clearLocalStorage()">
+    <div class="field mb-5">
+      <div class="field">
+        <button class="button is-fullwidth is-medium has-background-black has-text-white is-warning mt-3"
+          @click="showSavedCharacters()">
           <span>Zarządzaj Zapisanymi Bohaterami</span>
         </button>
-        <button class="button is-fullwidth is-medium has-background-black has-text-white is-warning mt-3" @click="clearLocalStorage()">
-          <span>Zarządzaj Zapisanymi Bohaterami</span>
-        </button>
-      </div> -->
-      <div class="control">
-        <div class="select is-medium is-fullwidth mt-3" style="min-width: 50%">
+      </div>
+      <div class="control" v-if="Object.keys(memoryCharacterList).length > 1">
+        <div class="select is-medium is-fullwidth" style="min-width: 50%">
           <select style="width: 100%" @change="chooseCharacter($event.target.value)">
             <template v-for="(character, key) in memoryCharacterList" :key="key">
-              <option :value="key" :selected="key == this.other.id">{{character.other.name}} [{{key.slice(0, 6)}}]</option>
+              <option :value="key" :selected="key == this.other.id">{{character.other.name}} [{{key.slice(0, 6)}}]
+              </option>
             </template>
           </select>
         </div>
@@ -481,7 +581,7 @@
             <div class="tile is-child is-6 p-2">
               <label class="label is-medium is-size-3">Imię postaci</label>
               <div class="control mb-3">
-                <input class="input is-large" type="text" v-model="other.name" v-on:change="update()">
+                <input class="input is-large" type="text" v-model="other.name" v-on:change="update()" placeholder="Nadaj imię by zacząć...">
               </div>
             </div>
             <div class="tile is-child is-6 p-2">
@@ -500,8 +600,8 @@
                 </div>
               </div>
               <div class="control mb-3">
-                <SpellSelect :spellList="spellList" title="Lista zaklęć postaci" :availableSpells="availableSpells" :spellAmount="spellAmount"
-                  @change="update()"></SpellSelect>
+                <SpellSelect :spellList="spellList" title="Lista zaklęć postaci" :availableSpells="availableSpells"
+                  :spellAmount="spellAmount" @change="update()"></SpellSelect>
                 <!-- <div class="select is-fullwidth is-large">
                   <select>
                     <option v-for="(background, bName) in backgroundList" :key="bName" v-on:change="update()">
@@ -850,4 +950,8 @@
   <StatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></StatModal>
 
   <DamageModal :other="other" :baseHP="chosenPoints.strength.value" @interface="getChildInterface"></DamageModal>
+
+  <CharacterManagerModal :other="other" :memoryCharacterList="memoryCharacterList" @interface="getChildInterface"
+    @chooseCharacter="chooseCharacter" @deleteCharacter="deleteCharacter" @deleteAllCharacters="deleteAllCharacters"
+    @newCharacter="newCharacter" @duplicateCharacter="duplicateCharacter"></CharacterManagerModal>
 </template>
