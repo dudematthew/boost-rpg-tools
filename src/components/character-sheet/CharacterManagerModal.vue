@@ -93,7 +93,8 @@
                                 <div class="control ml-1">
                                     <button class="button is-success" title="Załaduj postać" @click="$emit('chooseCharacter', key)" :disabled="other.id == key">
                                         <span class="icon is-small">
-                                            <i class="fa-solid fa-download"></i>
+                                            <i class="fa-solid fa-square-check" v-if="other.id == key"></i>
+                                            <i class="fa-solid fa-square" v-if="other.id != key"></i>
                                         </span>
                                     </button>
                                 </div>

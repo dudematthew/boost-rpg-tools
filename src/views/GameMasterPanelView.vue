@@ -3,6 +3,7 @@
   import StatModal from '@/components/StatModal'
   import D6Button from '@/components/D6Button.vue'
   import Randomizer from '@/lib/randomizer'
+  import names from '@/assets/names.json'
 
   import ls from 'local-storage'
   import md5 from 'crypto-js/md5'
@@ -33,6 +34,9 @@
           type: 'enemy',
           rank: 1,
           combatType: 'light'
+        },
+        groupActionForm: {
+          type: 'all',
         },
         throwStatistic: this.chosenPoints.strength,
         showD20Additions: false,
@@ -83,7 +87,7 @@
               this.shakeD3 = false;
             };
             break;
-            
+
           case 20:
             this.shakeD20 = true;
             diceThrow = () => {
@@ -91,7 +95,7 @@
               this.shakeD20 = false;
             };
             break;
-        
+
           default:
             break;
         }
@@ -114,7 +118,7 @@
           parseInt(this.entityForm.rank) * 4;
 
         let newEntity = {
-          name: this.entityForm.name == "" ? "..." : this.entityForm.name,
+          name: this.entityForm.name == "" ? this.getRandomFantasyName() : this.entityForm.name,
           rank: this.entityForm.rank,
           combatType: this.entityForm.combatType,
           type: this.entityForm.type,
@@ -148,6 +152,42 @@
         this.entities.push(newEntity);
       },
 
+      /**
+       * Perform action on group of entities
+       */
+      groupAction(action) {
+        this.entities.forEach((entity, key) => {
+          console.log("Group action. Currently ", entity, this.groupActionForm.type);
+
+          let entitiesToRemove = [];
+
+          if (this.groupActionForm.type != 'all' && this.groupActionForm.type != entity.type)
+            return;
+
+          actions:
+          switch (action) {
+            case "kill":
+              entity.dead = true;
+              break actions;
+
+            case "revive":
+              entity.dead = false;
+              break actions;
+
+            case "delete":
+              entitiesToRemove.push(key);
+              break actions;
+          }
+
+          console.log("Entities to remove: ", entitiesToRemove);
+          entitiesToRemove.forEach(innerKey => {
+            this.removeEntity(innerKey);
+          });
+
+        });
+
+      },
+
       showStatModal(stat) {
         let chosenPoints = this.chosenPoints;
         this.throwStatistic = {
@@ -165,8 +205,9 @@
       },
 
       removeEntity(key) {
-        console.log("removing: ", key);
+        console.log(`Before removing entity ${key}: `, this.entities);
         this.entities.splice(key, 1);
+        console.log(`After removing entity ${key}: `, this.entities);
       },
 
       removeNote(key) {
@@ -179,6 +220,10 @@
 
         let entity = this.entities[key];
         this.entities.push(entity);
+      },
+
+      getRandomFantasyName() {
+        return names[Math.floor(Math.random() * names.length)];
       },
 
     },
@@ -244,7 +289,8 @@
 
                 <div class="field has-addons is-gruped mr-2">
                   <div class="control">
-                    <button class="button" title="Przełącz modyfikator K20" @click="showD20Additions = !showD20Additions; throwD20Modifier = 0;">
+                    <button class="button" title="Przełącz modyfikator K20"
+                      @click="showD20Additions = !showD20Additions; throwD20Modifier = 0;">
                       <span class="icon is-small">
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                       </span>
@@ -265,7 +311,8 @@
                     </button>
                   </div>
                   <div class="control" style="min-width: 60px" v-if="showD20Additions">
-                    <input class="input" type="number" placeholder="Modyfikator..." v-model="throwD20Modifier" title="Modyfikator K20">
+                    <input class="input" type="number" placeholder="Modyfikator..." v-model="throwD20Modifier"
+                      title="Modyfikator K20">
                   </div>
                   <div class="control">
                     <button class="button" @click="throwDX(20);" title="Rzuć na K20">
@@ -402,6 +449,77 @@
                 </div>
 
               </div>
+            </div>
+
+            <div class="tile is-child is-12">
+              <p class="title is-5">
+                Akcje grupowe
+              </p>
+            </div>
+
+            <div class="tile is-child is-12">
+              <div class="field default is-grouped is-grouped-multiline">
+
+                <div class="field mr-2" style="min-width: 200px">
+                  <div class="select" style="width: 100%">
+                    <select style="width: 100%" @change="groupActionForm.type = $event.target.value">
+                      <option value="enemy" :selected="groupActionForm.type == 'all'">Wszyscy</option>
+                      <option value="enemy" :selected="groupActionForm.type == 'enemy'">Wróg</option>
+                      <option value="neutral" :selected="groupActionForm.type == 'neutral'">Niezależny</option>
+                      <option value="ally" :selected="groupActionForm.type == 'ally'">Przyjaciel</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="field mr-2">
+                  <div class="control">
+                    <button class="button" title="Dodaj postać" @click="groupAction('kill')">
+                      <span class="icon is-small">
+                        <i class="fa-solid fa-skull"></i>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div class="field mr-2">
+                  <div class="control">
+                    <button class="button" title="Dodaj postać" @click="groupAction('revive')">
+                      <span class="icon is-small">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div class="field mr-2">
+                  <div class="control">
+                    <button class="button is-danger" title="Dodaj postać" @click="groupAction('delete')">
+                      <span class="icon is-small">
+                        <i class="fa-solid fa-trash"></i>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="entities.length <= 0" class="mb-5 is-centered has-text-centered">
+          <div class="columns is-centered mt-3 is-fullwidth">
+            <div class="column is-one-third-desktop is-one-third-tablet is-one-third-mobile is-offset-4-mobile">
+              <figure class="image is-5by4 is-fullwidth has-ratio" style="height: auto">
+                <img src="@/assets/entity-placeholder-image.png">
+              </figure>
+            </div>
+          </div>
+          <div class="columns is-centered mt-3 mb-0">
+            <div class="column">
+              <p class="title is-size-4">Nic tu nie ma!</p>
+            </div>
+          </div>
+          <div class="columns is-centered mb-3">
+            <div class="column">
+              <p class="subtitle is-size-5">Na razie...</p>
             </div>
           </div>
         </div>

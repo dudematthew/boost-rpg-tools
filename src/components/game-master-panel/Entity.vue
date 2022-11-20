@@ -3,7 +3,6 @@
         name: "Entity",
         props: [
             "entity",
-            "key"
         ],
         data() {
             return {
@@ -28,6 +27,10 @@
                 else if (this.entity.health >= this.entity.rank * 5) return this.entityStatesIcons.boosted;
                 else return this.entityStatesIcons.hurt;
             },
+
+            key () {
+                return this.$.vnode.key;
+            }
         },
         methods: {
             updateValue(key, value) {
@@ -88,6 +91,7 @@
                                     contenteditable>
                                     {{entity.name}}
                                 </p>
+                                <p>&nbsp; Key: {{$.vnode.key}}</p>
                             </span>
                         </div>
                     </div>

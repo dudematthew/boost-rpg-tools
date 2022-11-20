@@ -178,7 +178,7 @@
        */
       newCharacter() {
         this.cleanInputs();
-        this.other.name = this.generateRandomFantasyName();
+        this.other.name = this.getRandomFantasyName();
         let newId = this.generateId(this.getCurrentCharacter());
 
         this.other.id = newId;
@@ -188,8 +188,8 @@
         this.memoryCharacterList = this.loadCharactersList();
       },
 
-      generateRandomFantasyName () {
-        return names[Math.floor(Math.random()*names.length)];
+      getRandomFantasyName() {
+        return names[Math.floor(Math.random() * names.length)];
       },
 
       duplicateCharacter(characterId) {
@@ -221,7 +221,7 @@
       },
 
       // Set all inputs except name to empty
-      cleanInputs () {
+      cleanInputs() {
         for (let pointId in this.chosenPoints) {
           let point = this.chosenPoints[pointId];
 
@@ -372,6 +372,8 @@
           this.other.inventory = this.other.inventory.trim();
           this.other.inventory += `\n• ${item}`;
         });
+
+        this.update();
       },
 
       addSkills() {
@@ -390,12 +392,16 @@
         }
 
         this.other.skills = this.other.skills.trim();
+        
+        this.update();
       },
 
       addDot(formType) {
         this.other[formType] = this.other[formType] ?? "";
         this.other[formType] = this.other[formType].trim() + '\n• ';
         this.other[formType] = this.other[formType].trim();
+
+        this.update();
       },
 
       setupId() {
@@ -536,8 +542,7 @@
 
       this.mounted = true;
     },
-    watch: {
-    }
+    watch: {}
   }
 </script>
 
@@ -575,7 +580,8 @@
             <div class="tile is-child is-6 p-2">
               <label class="label is-medium is-size-3">Imię postaci</label>
               <div class="control mb-3">
-                <input class="input is-large" type="text" v-model="other.name" v-on:change="update()" placeholder="Nadaj imię by zacząć...">
+                <input class="input is-large" type="text" v-model="other.name" v-on:change="update()"
+                  placeholder="Nadaj imię by zacząć...">
               </div>
             </div>
             <div class="tile is-child is-6 p-2">
@@ -799,7 +805,7 @@
               <label class="label is-medium is-size-3">Umiejętności</label>
               <div class="control">
                 <textarea class="textarea is-medium is-fullwidth" placeholder="Umiejętności..." v-model="other.skills"
-                  v-on:change="update()"></textarea>
+                  v-on:change="update()" style="min-height: 172px"></textarea>
               </div>
               <div class="field has-addons">
                 <div class="control" style="width: 50%">
@@ -822,7 +828,7 @@
               <label class="label is-medium is-size-3">Ekwipunek</label>
               <div class="control">
                 <textarea class="textarea is-medium is-fullwidth" placeholder="Ekwipunek..." v-model="other.inventory"
-                  v-on:change="update()"></textarea>
+                  v-on:change="update()" style="min-height: 172px"></textarea>
               </div>
               <div class="field has-addons">
                 <div class="control" style="width: 50%">
@@ -847,7 +853,7 @@
               <label class="label is-medium is-size-3">Notatki</label>
               <div class="control">
                 <textarea class="textarea is-medium is-fullwidth" placeholder="Notatki..." v-model="other.notes"
-                  v-on:change="update()" style="min-height: 168px"></textarea>
+                  v-on:change="update()" style="min-height: 172px"></textarea>
               </div>
               <div class="field">
                 <div class="control" style="width: 100%">
@@ -862,7 +868,7 @@
             <div class="tile is-child is-6 p-2">
               <label class="label is-medium is-size-3">Rzuty Kością</label>
               <div class="tile is-child is-12">
-                <div class="field is-grouped is-grouped-multiline default mb-2">
+                <div class="field is-grouped is-grouped-multiline default mb-0">
 
                   <div class="field has-addons is-gruped mr-2">
                     <div class="control">
@@ -891,6 +897,7 @@
                         title="Modyfikator K20">
                     </div>
                   </div>
+
                   <div class="field has-addons is-gruped mr-2">
                     <div class="control">
                       <button class="button" @click="throwDX(20);" title="Rzuć na K20">

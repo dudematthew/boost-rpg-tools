@@ -40,7 +40,15 @@
         },
         appChangelog: [
           {
-            text: "Zaktualizowano listę teł fabularnych.",
+            text: "Dodano menu zapisanych postaci na E-Karcie Postaci.",
+            type: "feature"
+          },
+          {
+            text: "Dodano rzuty kośćmi na E-Karcie Postaci.",
+            type: "feature"
+          },
+          {
+            text: "Zaktualizowano dane o tłach fabularnych.",
             type: "feature"
           },
           {
