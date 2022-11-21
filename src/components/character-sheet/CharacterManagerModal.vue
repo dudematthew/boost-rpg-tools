@@ -58,7 +58,7 @@
 
 <template>
     <div class="modal" :class="{'is-active': active}">
-        <div class="modal-background"></div>
+        <div class="modal-background" @click="active = false"></div>
 
         <div class="modal-content">
             <header class="modal-card-head">
@@ -66,14 +66,19 @@
                 <button class="delete" @click="active = false"></button>
             </header>
             <section class="modal-card-body" style="max-height: 500px; overflow-y: auto">
-                <div v-if="Object.keys(memoryCharacterList).length <= 0">
-                    <div class="columns is-centered mt-3">
-                        <figure class="image is-128x128" style="width: 30%">
+                
+                <div v-if="Object.keys(memoryCharacterList).length <= 0" class="mb-5 is-centered has-text-centered">
+                    <div class="columns is-centered mt-3 is-fullwidth">
+                        <div class="column is-one-third-desktop is-one-third-tablet is-one-third-mobile is-offset-4-mobile">
+                        <figure class="image is-5by4 is-fullwidth has-ratio" style="height: auto">
                             <img src="@/assets/placeholder-image.png">
                         </figure>
+                        </div>
                     </div>
-                    <div class="columns is-centered mt-3 mb-3">
-                        <p class="subtitle">Nic tu nie ma...</p>
+                    <div class="columns is-centered mb-0">
+                        <div class="column">
+                            <p class="subtitle">Nic tu nie ma...</p>
+                        </div>
                     </div>
                 </div>
                 <template v-for="(character, key) in memoryCharacterList" :key="key">
@@ -93,8 +98,7 @@
                                 <div class="control ml-1">
                                     <button class="button is-success" title="Załaduj postać" @click="$emit('chooseCharacter', key)" :disabled="other.id == key">
                                         <span class="icon is-small">
-                                            <i class="fa-solid fa-square-check" v-if="other.id == key"></i>
-                                            <i class="fa-solid fa-square" v-if="other.id != key"></i>
+                                            <i class="fa-solid fa-upload"></i>
                                         </span>
                                     </button>
                                 </div>

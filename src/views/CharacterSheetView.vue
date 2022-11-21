@@ -542,7 +542,20 @@
 
       this.mounted = true;
     },
-    watch: {}
+
+    watch: {
+      other: {
+        handler (other) {
+          other.currentHP = parseInt(other.currentHP);
+          other.currentMP = parseInt(other.currentMP);
+          other.currentBst = parseInt(other.currentBst);
+          other.level = parseInt(other.level);
+
+          return other;
+        },
+        deep: true
+      }
+    }
   }
 </script>
 
@@ -868,7 +881,7 @@
             <div class="tile is-child is-6 p-2">
               <label class="label is-medium is-size-3">Rzuty Kością</label>
               <div class="tile is-child is-12">
-                <div class="field is-grouped is-grouped-multiline default mb-0">
+                <div class="field is-grouped is-grouped-multiline default" style="margin-bottom: -12px">
 
                   <div class="field has-addons is-gruped mr-2">
                     <div class="control">
@@ -894,7 +907,7 @@
                     </div>
                     <div class="control" style="min-width: 60px; max-width: 90px">
                       <input class="input" type="number" placeholder="Modyfikator..." v-model="throwModifier"
-                        title="Modyfikator K20">
+                        title="Modyfikator">
                     </div>
                   </div>
 
@@ -931,7 +944,7 @@
 
                 </div>
               </div>
-              <div class="control">
+              <div class="control mt-3">
                 <textarea class="textarea is-medium is-fullwidth" placeholder="Notatki..." v-model="other.throws"
                   v-on:change="update()" disabled></textarea>
               </div>
