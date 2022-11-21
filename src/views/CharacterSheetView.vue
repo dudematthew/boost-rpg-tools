@@ -893,9 +893,9 @@
             <div class="tile is-child is-6 p-2">
               <label class="label is-medium is-size-3">Rzuty Kością</label>
               <div class="tile is-child is-12">
-                <div class="field is-grouped is-grouped-multiline default" style="margin-bottom: -12px">
+                <div class="field is-grouped is-grouped-multiline default mb-1">
 
-                  <div class="field has-addons is-gruped mr-2">
+                  <div class="field has-addons is-gruped mr-2 mb-1">
                     <div class="control">
                       <button class="button" @click="throwModifier++" title="Zwiększ modyfikator">
                         <span class="icon is-small">
@@ -956,7 +956,7 @@
 
                 </div>
               </div>
-              <div class="control mt-3">
+              <div class="control mt-2">
                 <textarea class="textarea is-medium is-fullwidth" placeholder="Notatki..." v-model="other.throws"
                   v-on:change="update()" disabled></textarea>
               </div>
