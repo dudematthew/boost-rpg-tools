@@ -544,6 +544,7 @@
     },
 
     watch: {
+      // Keep proper 'other' values an integer
       other: {
         handler (other) {
           other.currentHP = parseInt(other.currentHP);
@@ -554,7 +555,18 @@
           return other;
         },
         deep: true
-      }
+      },
+      // Keep proper 'chosenPoints' values an integer
+      chosenPoints: {
+        handler (points) {
+          for (let pointKey in points) {
+            points[pointKey].currentValue = parseInt(points[pointKey].currentValue);
+          }
+
+          return points;
+        },
+        deep: true
+      },
     }
   }
 </script>
