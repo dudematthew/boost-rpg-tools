@@ -123,7 +123,25 @@
                     <div class="is-divider" data-content="OR"></div>
                 </template>
             </section>
-            <footer class="modal-card-foot">
+            <footer class="modal-card-foot is-hidden-tablet-only is-hidden-desktop-only is-hidden-fullhd-only">
+                <router-link to="/generator" class="button is-success" @click="active = false">
+                    <span class="icon is-small">
+                        <i class="fa-solid fa-file-signature"></i>
+                    </span>
+                </router-link>
+                <button class="button is-success" @click="$emit('newCharacter');">
+                    <span class="icon is-small">
+                        <i class="fa-solid fa-file"></i>
+                    </span>
+                </button>
+                <button class="button is-danger" @click="$emit('deleteAllCharacters'); active = false;">
+                    <span>Usuń wszystko</span>
+                    <span class="icon is-small">
+                        <i class="fa-solid fa-trash"></i>
+                    </span>
+                </button>
+            </footer>
+            <footer class="modal-card-foot is-hidden-mobile">
                 <router-link to="/generator" class="button is-success" @click="active = false">
                     <span>Nowa postać</span>
                     <span class="icon is-small">

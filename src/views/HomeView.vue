@@ -40,6 +40,14 @@
         },
         appChangelog: [
           {
+            text: "Dodano potwierdzenie przy usuwaniu w kilku miejscach.",
+            type: "feature"
+          },
+          {
+            text: "Poprawiono wyświetlanie na telefonach.",
+            type: "fix"
+          },
+          {
             text: "Dodano menu zapisanych postaci na E-Karcie Postaci.",
             type: "feature"
           },
