@@ -1,9 +1,10 @@
 <script>
   import Entity from '@/components/game-master-panel/Entity'
   import StatModal from '@/components/StatModal'
-  import D6Button from '@/components/D6Button.vue'
+  import D6Button from '@/components/D6Button'
   import Randomizer from '@/lib/randomizer'
   import names from '@/assets/names.json'
+  import AutoConfirmButton from '@/components/AutoConfirmButton'
 
   import ls from 'local-storage'
   import md5 from 'crypto-js/md5'
@@ -16,7 +17,8 @@
       Entity,
       D6Button,
       StatModal,
-      D6Button
+      D6Button,
+      AutoConfirmButton
     },
     props: [
       'abilityPoints',
@@ -60,6 +62,10 @@
           else if (a > b) return -1;
           return 0;
         });
+      },
+
+      log(log) {
+        console.log(log);
       },
 
       /**
@@ -483,7 +489,7 @@
 
                 <div class="field mr-2">
                   <div class="control">
-                    <button class="button" title="Dodaj postać" @click="groupAction('kill')">
+                    <button class="button" title="Zabij postacie" @click="groupAction('kill')">
                       <span class="icon is-small">
                         <i class="fa-solid fa-skull"></i>
                       </span>
@@ -492,7 +498,7 @@
                 </div>
                 <div class="field mr-2">
                   <div class="control">
-                    <button class="button" title="Dodaj postać" @click="groupAction('revive')">
+                    <button class="button" title="Wskrześ postacie" @click="groupAction('revive')">
                       <span class="icon is-small">
                         <i class="fa-solid fa-heart-pulse"></i>
                       </span>
@@ -501,11 +507,12 @@
                 </div>
                 <div class="field mr-2">
                   <div class="control">
-                    <button class="button is-danger" title="Dodaj postać" @click="groupAction('delete')">
+                    <AutoConfirmButton title="Usuń postacie" :onlyIcon="true" class="is-danger" icon="fa-trash" @confirmClick="groupAction('delete')"></AutoConfirmButton>
+                    <!-- <button class="button is-danger" title="Dodaj postać" @click="groupAction('delete')">
                       <span class="icon is-small">
                         <i class="fa-solid fa-trash"></i>
                       </span>
-                    </button>
+                    </button> -->
                   </div>
                 </div>
 
