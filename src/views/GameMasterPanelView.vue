@@ -156,13 +156,18 @@
        * Perform action on group of entities
        */
       groupAction(action) {
-        this.entities.forEach((entity, key) => {
-          console.log("Group action. Currently ", entity, this.groupActionForm.type);
+        console.log("Group ", action);
+        
+        let entitiesToRemove = [];
+        for (const key in this.entities) {
+          let entity = this.entities[key];
 
-          let entitiesToRemove = [];
+          console.log("Currently checking entity nr. ", key, entity);
 
-          if (this.groupActionForm.type != 'all' && this.groupActionForm.type != entity.type)
-            return;
+          if (this.groupActionForm.type != 'all' && this.groupActionForm.type != entity.type) {
+            console.log("Not all and not correct type");
+            continue;
+          }
 
           actions:
           switch (action) {
@@ -178,14 +183,19 @@
               entitiesToRemove.push(key);
               break actions;
           }
+        };
 
-          console.log("Entities to remove: ", entitiesToRemove);
-          entitiesToRemove.forEach(innerKey => {
-            this.removeEntity(innerKey);
-          });
+        if (action != 'delete')
+          return;
+        
+        // Reverse array to make it remove from right
+        // to left
+        entitiesToRemove = entitiesToRemove.reverse();
 
+        entitiesToRemove.forEach(innerKey => {
+          console.log("Inner key:", innerKey);
+          this.removeEntity(innerKey);
         });
-
       },
 
       showStatModal(stat) {

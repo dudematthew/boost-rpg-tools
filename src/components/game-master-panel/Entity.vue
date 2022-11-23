@@ -91,7 +91,6 @@
                                     contenteditable>
                                     {{entity.name}}
                                 </p>
-                                <p>&nbsp; Key: {{$.vnode.key}}</p>
                             </span>
                         </div>
                     </div>
