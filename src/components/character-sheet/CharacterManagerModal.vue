@@ -1,6 +1,11 @@
 <script>
+    import AutoConfirmButton from '@/components/AutoConfirmButton'
+
     export default {
         name: 'CharacterManagerModal',
+        components: {
+            AutoConfirmButton
+        },
         props: [
             'memoryCharacterList',
             'baseHP',
@@ -110,11 +115,7 @@
                                     </button>
                                 </div>
                                 <div class="control ml-1">
-                                    <button class="button is-danger" title="Usuń postać" @click="$emit('deleteCharacter', key)">
-                                        <span class="icon is-small">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </span>
-                                    </button>
+                                    <AutoConfirmButton title="Usuń postać" :onlyIcon="true" class="is-danger" icon="fa-trash" @confirmClick="$emit('deleteCharacter', key)"></AutoConfirmButton>
                                 </div>
                             </div>
                         </div>
