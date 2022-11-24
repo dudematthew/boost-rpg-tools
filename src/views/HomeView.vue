@@ -40,6 +40,10 @@
         },
         appChangelog: [
           {
+            text: "Zmieniono wybór zaklęć na E-Karcie Postaci z formy listy na przyciski.",
+            type: "fix"
+          },
+          {
             text: "Dodano dodatkowe przyciski na dole Panelu Mistrza Gry",
             type: "feature"
           },

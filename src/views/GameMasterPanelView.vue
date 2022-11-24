@@ -5,9 +5,9 @@
   import Randomizer from '@/lib/randomizer'
   import names from '@/assets/names.json'
   import AutoConfirmButton from '@/components/AutoConfirmButton'
+  import SpellSelectModal from '@/components/game-master-panel/SpellSelectModal'
 
   import ls from 'local-storage'
-  import md5 from 'crypto-js/md5'
 
   let randomizer = new Randomizer();
 
@@ -18,7 +18,8 @@
       D6Button,
       StatModal,
       D6Button,
-      AutoConfirmButton
+      AutoConfirmButton,
+      SpellSelectModal
     },
     props: [
       'abilityPoints',
@@ -35,11 +36,13 @@
           name: '',
           type: 'enemy',
           rank: 1,
-          combatType: 'light'
+          combatType: 'light',
+          spells: [],
         },
         groupActionForm: {
           type: 'all',
         },
+        currentSpellsKey: null,
         throwStatistic: this.chosenPoints.strength,
         showD20Additions: false,
         throwD20Result: 0,
@@ -136,7 +139,8 @@
             agility: false,
             inteligence: false,
             focus: false,
-          }
+          },
+          spells: this.entityForm.spells,
         };
 
         this.entities.push(newEntity);
@@ -193,6 +197,12 @@
         this.$options.childInterface.showStatModal();
       },
 
+      showSpellSelectModal (key) {
+        this.currentSpellsKey = key;
+
+        this.$options.childInterface.showSpellModal();
+      },
+
       getChildInterface(childInterface) {
         this.$options.childInterface = Object.assign(this.$options.childInterface ?? {}, childInterface);
       },
@@ -212,6 +222,17 @@
 
       getRandomFantasyName() {
         return names[Math.floor(Math.random() * names.length)];
+      },
+
+      setSpells (spells) {
+        if (!!this.currentSpellsKey) {
+          console.log("Setting spell:", this.currentSpellsKey, spells);
+          this.entities[this.currentSpellsKey].spells = spells;
+        }
+        else
+          this.entityForm.spells = spells;
+
+        this.update();
       },
 
       getCurrentPanelObject() {
@@ -306,6 +327,22 @@
         });
 
         return returner;
+      },
+      /**
+       * Current value used by @SpellSelectModal
+       */
+      currentSpells () {
+        console.log(this.currentSpellsKey);
+        if (this.currentSpellsKey != null)
+          return this.entities[this.currentSpellsKey].spells;
+        else
+          return this.entityForm.spells;
+      },
+      currentRank () {
+        if (this.currentSpellsKey != null)
+          return this.entities[this.currentSpellsKey].rank;
+        else
+          return this.entityForm.rank;
       },
       watchChanger() {
         return this.entities +
@@ -528,6 +565,15 @@
                   </div>
                 </div>
 
+                <div class="field mr-2" style="min-width: 80px" v-if="entityForm.combatType == 'magic'">
+                  <button class="button" style="width: 100%" @click="currentSpellsKey = null; showSpellSelectModal()">
+                    <span>{{entityForm.spells?.length}}/{{entityForm.rank}}</span>
+                    <span class="icon is-small is-right">
+                        <i class="fa-solid fa-hat-wizard"></i>
+                    </span>
+                  </button>
+                </div>
+
                 <div class="field mr-2">
                   <div class="control">
                     <button class="button" title="Dodaj postać" @click="addEntity()">
@@ -611,9 +657,9 @@
           </div>
         </div>
 
-        <Entity v-for="(entity, key) in entities" :key="key" :entity="entities[key]"
-          @update:entity="value => entities[key] = value" @remove:entity="removeEntity(key)"
-          @showStatModal="value => showStatModal(value)" @clone:entity="cloneEntity(key)" />
+        <Entity v-for="(entity, key) in entities" :key="key" :entity="entities[key]" :spellList="spellList"
+          @update:entity="value => entities[key] = value" @change="update()" @remove:entity="removeEntity(key)"
+          @showStatModal="value => showStatModal(value)" @showSpellModal="showSpellSelectModal(key)" @clone:entity="cloneEntity(key)" />
 
         <div class="tile is-parent is-12 is-vertical notification is-info mb-5">
           <div class="tile is-child is-12">
@@ -633,7 +679,7 @@
                   </button>
                 </div>
                 <div class="level-item">
-                  <button class="button is-fullwidth is-warning" @click="clearPanelSave()">
+                  <button class="button is-fullwidth is-warning" @click="clearPanelSave(); $router.go($router.currentRoute)">
                     <span>Wyczyść zapisane dane</span>
                   </button>
                 </div>
@@ -647,6 +693,8 @@
   </section>
 
   <StatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></StatModal>
+
+  <SpellSelectModal :spells="currentSpells" :spellList="spellList" :title="`Wybierz zaklęcia (${currentSpells?.length}/${currentRank})`" @change="setSpells(spells);" @interface="getChildInterface"></SpellSelectModal>
 
   <!-- <DamageModal :other="other" :baseHP="chosenPoints.strength.value" @interface="getChildInterface"></DamageModal> -->
 </template>

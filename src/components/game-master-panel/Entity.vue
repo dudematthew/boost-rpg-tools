@@ -60,6 +60,9 @@
                     value: statValue
                 });
             },
+            showSpellSelectModal () {
+                this.$emit("showSpellModal");
+            },
             removeEntity () {
                 this.$emit("remove:entity");
             },
@@ -304,6 +307,15 @@
                                 <option value="magic" :selected="entity.combatType == 'magic'">Magiczny</option>
                             </select>
                         </div>
+                    </div>
+
+                    <div class="field mr-2">
+                        <button class="button" style="width: 100%" @click="showSpellSelectModal()">
+                            <span>{{entity.spells?.length}}/{{entity.rank}}</span>
+                            <span class="icon is-small is-right">
+                                <i class="fa-solid fa-hat-wizard"></i>
+                            </span>
+                        </button>
                     </div>
 
                     <!-- Rank -->
