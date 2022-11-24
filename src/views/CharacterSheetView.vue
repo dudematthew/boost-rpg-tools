@@ -416,7 +416,7 @@
       // If no class is chosen, default to warrior
       correctClassChoice() {
         console.log("Wybrana klasa: ", this.chosenClass);
-        if (!this.chosenClass) {
+        if (this.chosenClass == null) {
           this.classList.warrior.chosen = true;
         }
       },
@@ -429,7 +429,7 @@
 
       // If no background is chosen, default to craftsman
       correctBackgroundChoice() {
-        if (!this.chosenBackground) {
+        if (this.chosenBackground == null) {
           this.backgroundList.craftsman.chosen = true;
         }
       },
