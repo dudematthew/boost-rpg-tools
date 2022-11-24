@@ -40,7 +40,15 @@
         },
         appChangelog: [
           {
-            text: "Dodano dodatkowe przyciski na dole Panelu Mistrza Gry",
+            text: "Dodano wybór zaklęć dla bytów w Panelu Mistrza Gry.",
+            type: "fix"
+          },
+          {
+            text: "Zmieniono wybór zaklęć na E-Karcie Postaci z formy listy na przyciski.",
+            type: "fix"
+          },
+          {
+            text: "Dodano dodatkowe przyciski w dolnej części Panelu Mistrza Gry",
             type: "feature"
           },
           {

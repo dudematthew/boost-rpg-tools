@@ -5,9 +5,9 @@
   import Randomizer from '@/lib/randomizer'
   import names from '@/assets/names.json'
   import AutoConfirmButton from '@/components/AutoConfirmButton'
+  import SpellSelectModal from '@/components/game-master-panel/SpellSelectModal'
 
   import ls from 'local-storage'
-  import md5 from 'crypto-js/md5'
 
   let randomizer = new Randomizer();
 
@@ -18,7 +18,8 @@
       D6Button,
       StatModal,
       D6Button,
-      AutoConfirmButton
+      AutoConfirmButton,
+      SpellSelectModal
     },
     props: [
       'abilityPoints',
@@ -35,11 +36,13 @@
           name: '',
           type: 'enemy',
           rank: 1,
-          combatType: 'light'
+          combatType: 'light',
+          spells: [],
         },
         groupActionForm: {
           type: 'all',
         },
+        currentSpellsKey: null,
         throwStatistic: this.chosenPoints.strength,
         showD20Additions: false,
         throwD20Result: 0,
@@ -136,7 +139,8 @@
             agility: false,
             inteligence: false,
             focus: false,
-          }
+          },
+          spells: Object.assign([], this.entityForm.spells),
         };
 
         this.entities.push(newEntity);
@@ -193,6 +197,10 @@
         this.$options.childInterface.showStatModal();
       },
 
+      showSpellSelectModal () {
+        this.$options.childInterface.showSpellModal();
+      },
+
       getChildInterface(childInterface) {
         this.$options.childInterface = Object.assign(this.$options.childInterface ?? {}, childInterface);
       },
@@ -212,6 +220,17 @@
 
       getRandomFantasyName() {
         return names[Math.floor(Math.random() * names.length)];
+      },
+
+      setSpells (spells) {
+        if (!!this.currentSpellsKey) {
+          console.log("Setting spell:", this.currentSpellsKey, spells);
+          this.entities[this.currentSpellsKey].spells = spells;
+        }
+        else
+          this.entityForm.spells = spells;
+
+        this.update();
       },
 
       getCurrentPanelObject() {
@@ -307,6 +326,21 @@
 
         return returner;
       },
+      /**
+       * Current value used by @SpellSelectModal
+       */
+      currentSpells () {
+        if (this.currentSpellsKey != null)
+          return this.entities[this.currentSpellsKey].spells;
+        else
+          return [];
+      },
+      currentRank () {
+        if (this.currentSpellsKey != null)
+          return this.entities[this.currentSpellsKey].rank;
+        else
+          return 1;
+      },
       watchChanger() {
         return this.entities +
           this.entityForm +
@@ -346,7 +380,6 @@
 
   <section class="hero is-primary mb-5" ref="tool">
     <div class="hero-body">
-      <p class="heading">BETA</p>
       <p class="title">
         Panel Mistrza Gry
       </p>
@@ -400,7 +433,7 @@
                       </span>
                     </button>
                   </div>
-                  <div class="control" style="min-width: 60px" v-if="showD20Additions">
+                  <div class="control" style="min-width: 40px; max-width: 80px" v-if="showD20Additions">
                     <input class="input" type="number" placeholder="Modyfikator..." v-model="throwD20Modifier"
                       title="Modyfikator K20">
                   </div>
@@ -411,7 +444,7 @@
                       </span>
                     </button>
                   </div>
-                  <div class="control" style="min-width: 60px">
+                  <div class="control" style="min-width: 40px; max-width: 80px">
                     <input class="input" placeholder="Wynik..." v-model="throwD20Result" disabled>
                   </div>
                 </div>
@@ -430,7 +463,7 @@
                       </span>
                     </button>
                   </div>
-                  <div class="control" style="min-width: 60px">
+                  <div class="control" style="min-width: 40px; max-width: 80px">
                     <input class="input" placeholder="Wynik..." v-model="throwD3Result" disabled>
                   </div>
                 </div>
@@ -443,7 +476,7 @@
                       </span>
                     </button>
                   </div>
-                  <div class="control" style="min-width: 60px">
+                  <div class="control" style="min-width: 40px; max-width: 80px">
                     <input class="input" placeholder="Wynik..." v-model="throwD2Result" disabled>
                   </div>
                 </div>
@@ -526,6 +559,15 @@
                       <option value="magic" :selected="entityForm.combatType == 'magic'">Magiczny</option>
                     </select>
                   </div>
+                </div>
+
+                <div class="field mr-2" style="min-width: 80px" v-if="entityForm.combatType == 'magic'">
+                  <button class="button" style="width: 100%" @click="currentSpellsKey = null; showSpellSelectModal()">
+                    <span>{{entityForm.spells?.length}}/{{entityForm.rank}}</span>
+                    <span class="icon is-small is-right">
+                        <i class="fa-solid fa-hat-wizard"></i>
+                    </span>
+                  </button>
                 </div>
 
                 <div class="field mr-2">
@@ -611,9 +653,9 @@
           </div>
         </div>
 
-        <Entity v-for="(entity, key) in entities" :key="key" :entity="entities[key]"
-          @update:entity="value => entities[key] = value" @remove:entity="removeEntity(key)"
-          @showStatModal="value => showStatModal(value)" @clone:entity="cloneEntity(key)" />
+        <Entity v-for="(entity, key) in entities" :key="key" :entity="entities[key]" :spellList="spellList"
+          @update:entity="value => entities[key] = value" @change="update()" @remove:entity="removeEntity(key)"
+          @showStatModal="value => showStatModal(value)" @showSpellModal="showSpellSelectModal(key)" @clone:entity="cloneEntity(key)" />
 
         <div class="tile is-parent is-12 is-vertical notification is-info mb-5">
           <div class="tile is-child is-12">
@@ -633,9 +675,11 @@
                   </button>
                 </div>
                 <div class="level-item">
-                  <button class="button is-fullwidth is-warning" @click="clearPanelSave()">
+                  <AutoConfirmButton title="Wyczyść zapisane dane" style="width: 100%" class="is-warning"
+                      @confirmClick="clearPanelSave(); $router.go($router.currentRoute)">Wyczyść zapisane dane</AutoConfirmButton>
+                  <!-- <button class="button is-fullwidth is-warning" @click="clearPanelSave(); $router.go($router.currentRoute)">
                     <span>Wyczyść zapisane dane</span>
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </nav>
@@ -647,6 +691,8 @@
   </section>
 
   <StatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></StatModal>
+
+  <SpellSelectModal :spells="entityForm.spells" :spellList="spellList" :title="`Wybierz zaklęcia (${entityForm.spells?.length}/${entityForm.rank})`" @change="update();" @interface="getChildInterface"></SpellSelectModal>
 
   <!-- <DamageModal :other="other" :baseHP="chosenPoints.strength.value" @interface="getChildInterface"></DamageModal> -->
 </template>
