@@ -435,14 +435,16 @@
       },
 
       // Fired when user chooses class from select
-      selectClass(value) {
-        for (let cId in this.classList) {
-          this.classList[cId].chosen = false;
-        }
-
-        this.classList[value.id].chosen = true;
-
+      onClassSelect() {
         this.correctClassChoice();
+        this.clearSpellChoices();
+      },
+
+      clearSpellChoices () {
+        console.log("Clearing spells choices");
+        for (let key in this.spellList) {
+            this.spellList[key].chosen = false;
+        }
       },
 
       update() {
@@ -621,12 +623,16 @@
               <label class="label is-medium is-size-3">Klasa</label>
               <div class="control mb-3">
                 <div class="select is-fullwidth is-large is-size-4 has-text-weight-medium">
-                  <Select :data="classList" label="name" switchAttrib="chosen" v-on:change="update()"></Select>
+                  <Select :data="classList" label="name" switchAttrib="chosen" v-on:change="update(); onClassSelect();"></Select>
                 </div>
               </div>
+            </div>
+            <div class="tile is-child is-6 p-2">
+              <label class="label is-medium is-size-3">Tło fabularne</label>
               <div class="control mb-3">
-                <SpellSelect :spellList="spellList" title="Lista zaklęć postaci" :availableSpells="availableSpells"
-                  :spellAmount="spellAmount" @change="update()"></SpellSelect>
+                <div class="select is-fullwidth is-large is-size-4 has-text-weight-medium">
+                  <Select :data="backgroundList" label="name" switchAttrib="chosen" v-on:change="update();"></Select>
+                </div>
                 <!-- <div class="select is-fullwidth is-large">
                   <select>
                     <option v-for="(background, bName) in backgroundList" :key="bName" v-on:change="update()">
@@ -636,20 +642,12 @@
                 </div> -->
               </div>
             </div>
-            <div class="tile is-child is-6 p-2">
-              <label class="label is-medium is-size-3">Tło fabularne</label>
-              <div class="control mb-3">
-                <div class="select is-fullwidth is-large is-size-4 has-text-weight-medium">
-                  <Select :data="backgroundList" label="name" switchAttrib="chosen" v-on:change="update()"></Select>
-                </div>
-                <!-- <div class="select is-fullwidth is-large">
-                  <select>
-                    <option v-for="(background, bName) in backgroundList" :key="bName" v-on:change="update()">
-                      {{background.name}}
-                    </option>
-                  </select>
-                </div> -->
-              </div>
+          </div>
+          <div class="tile is-parent is-12" v-if="availableSpells.length != 0">
+            <div class="tile is-child is-12 p-2">
+              <label class="label is-medium is-size-3">Zaklęcia</label>
+              <SpellSelect :spellList="spellList" :availableSpells="availableSpells"
+                :spellAmount="spellAmount" @change="update()"></SpellSelect>
             </div>
           </div>
         </div>
@@ -667,13 +665,6 @@
                   <input class="input is-large" type="number" placeholder="Aktualna..."
                     v-model="chosenPoints.strength.currentValue" v-on:change="update()">
                 </div>
-                <!-- <div class="control">
-                    <button class="button is-large" @click="drawStat('strength')">
-                      <span class="icon is-small">
-                        <i class="fa-solid fa-skull-crossbones"></i>
-                      </span>
-                    </button>
-                </div> -->
                 <div class="control">
                   <button class="button is-large" @click="drawStat('strength')">
                     <span class="icon is-small">

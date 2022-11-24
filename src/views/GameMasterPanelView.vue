@@ -64,10 +64,6 @@
         });
       },
 
-      log(log) {
-        console.log(log);
-      },
-
       /**
        * Throw given "dice"
        */
@@ -111,8 +107,6 @@
 
       addEntity() {
 
-        console.log(this.entityForm);
-
         // Strength and Agility
         let bodyStats = (this.entityForm.combatType != 'magic') ?
           parseInt(this.entityForm.rank) * 4 :
@@ -128,16 +122,6 @@
           rank: this.entityForm.rank,
           combatType: this.entityForm.combatType,
           type: this.entityForm.type,
-          bodyStats() {
-            return (this.combatType != 'magic') ?
-              parseInt(this.rank) * 4 :
-              parseInt(this.rank) * 2;
-          },
-          mindStats() {
-            return (this.combatType != 'magic') ?
-              parseInt(this.rank) * 2 :
-              parseInt(this.rank) * 4;
-          },
           strength: bodyStats,
           agility: bodyStats,
           inteligence: mindStats,
@@ -163,43 +147,38 @@
        */
       groupAction(action) {
         console.log("Group ", action);
-        
+
         let entitiesToRemove = [];
         for (const key in this.entities) {
           let entity = this.entities[key];
 
-          console.log("Currently checking entity nr. ", key, entity);
-
-          if (this.groupActionForm.type != 'all' && this.groupActionForm.type != entity.type) {
-            console.log("Not all and not correct type");
+          if (this.groupActionForm.type != 'all' && this.groupActionForm.type != entity.type)
             continue;
-          }
 
           actions:
-          switch (action) {
-            case "kill":
-              entity.dead = true;
-              break actions;
+            switch (action) {
+              case "kill":
+                entity.dead = true;
+                break actions;
 
-            case "revive":
-              entity.dead = false;
-              break actions;
+              case "revive":
+                entity.dead = false;
+                break actions;
 
-            case "delete":
-              entitiesToRemove.push(key);
-              break actions;
-          }
+              case "delete":
+                entitiesToRemove.push(key);
+                break actions;
+            }
         };
 
         if (action != 'delete')
           return;
-        
+
         // Reverse array to make it remove from right
         // to left
         entitiesToRemove = entitiesToRemove.reverse();
 
         entitiesToRemove.forEach(innerKey => {
-          console.log("Inner key:", innerKey);
           this.removeEntity(innerKey);
         });
       },
@@ -211,8 +190,6 @@
           value: stat.value,
         }
 
-        console.log("showing: ", stat, this.throwStatistic);
-
         this.$options.childInterface.showStatModal();
       },
 
@@ -221,19 +198,14 @@
       },
 
       removeEntity(key) {
-        console.log(`Before removing entity ${key}: `, this.entities);
         this.entities.splice(key, 1);
-        console.log(`After removing entity ${key}: `, this.entities);
       },
 
       removeNote(key) {
         this.notes.splice(key, 1);
-        console.log("---", key, this.notes);
       },
 
       cloneEntity(key) {
-        console.log("cloning: ", key);
-
         let entity = this.entities[key];
         this.entities.push(entity);
       },
@@ -241,6 +213,87 @@
       getRandomFantasyName() {
         return names[Math.floor(Math.random() * names.length)];
       },
+
+      getCurrentPanelObject() {
+        let panelObject = {};
+
+        panelObject.entities = this.entities;
+        panelObject.entityForm = this.entityForm;
+        panelObject.groupActionForm = this.groupActionForm;
+        panelObject.throwStatistic = this.throwStatistic;
+        panelObject.throwD20Result = this.throwD20Result;
+        panelObject.throwD20Modifier = this.throwD20Modifier;
+        panelObject.throwD6Result = this.throwD6Result;
+        panelObject.throwD3Result = this.throwD3Result;
+        panelObject.throwD2Result = this.throwD2Result;
+        panelObject.notes = this.notes;
+
+        return panelObject;
+      },
+
+      installPanelObject(panelObject) {
+        this.entities = panelObject.entities ?? this.entities;
+        this.entityForm = panelObject.entityForm ?? this.entityForm;
+        this.groupActionForm = panelObject.groupActionForm ?? this.groupActionForm;
+        this.throwStatistic = panelObject.throwStatistic ?? this.throwStatistic;
+        this.throwD20Result = panelObject.throwD20Result ?? this.throwD20Result;
+        this.throwD20Modifier = panelObject.throwD20Modifier ?? this.throwD20Modifier;
+        this.throwD6Result = panelObject.throwD6Result ?? this.throwD6Result;
+        this.throwD3Result = panelObject.throwD3Result ?? this.throwD3Result;
+        this.throwD2Result = panelObject.throwD2Result ?? this.throwD2Result;
+        this.notes = panelObject.notes ?? this.notes;
+      },
+
+      installPanelObjectFromMemory() {
+        this.installPanelObject(this.getSavedPanelObject());
+      },
+
+      update() {
+        this.savePanelObject(this.getCurrentPanelObject());
+        console.log("Updating saved panel data...", this.getCurrentPanelObject());
+      },
+
+      savePanelObject(panelObject) {
+        let stringifiedPanelObject = JSON.stringify(panelObject);
+
+        ls.set('gameMasterPanel', stringifiedPanelObject);
+      },
+
+      clearPanelSave() {
+        ls.remove('gameMasterPanel');
+      },
+
+      getSavedPanelObject() {
+        let data = ls.get('gameMasterPanel');
+        let returner = {};
+
+        try {
+          returner = JSON.parse(data) ?? {};
+          console.log("Pobrano panel: ", returner);
+        } catch (e) {
+          console.log("Nie załadowano panelu:", data, e);
+        }
+
+        for (let key in returner.entities) {
+          let entity = returner.entities[key];
+        }
+
+        return returner;
+      },
+
+      savePanel() {
+        this.savePanelObject(this.getCurrentPanelObject());
+      },
+
+      scrollToTop() {
+        let scrollElement = this.$refs.tool;
+
+        scrollElement.scrollIntoView({
+          alignToTop: true,
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
 
     },
     computed: {
@@ -253,9 +306,25 @@
         });
 
         return returner;
+      },
+      watchChanger() {
+        return this.entities +
+          this.entityForm +
+          this.groupActionFor +
+          this.throwStatistic +
+          this.showD20Additions +
+          this.throwD20Result +
+          this.throwD20Modifier +
+          this.throwD3Result +
+          this.throwD2Result +
+          this.shakeD20 +
+          this.shakeD3 +
+          this.shakeD2 +
+          this.notes;
       }
     },
     mounted() {
+      this.installPanelObjectFromMemory();
       this.sortEntities();
     },
     watch: {
@@ -263,6 +332,11 @@
         handler() {
           this.sortEntities();
         },
+      },
+      watchChanger: {
+        handler() {
+          this.update();
+        }
       }
     }
   }
@@ -270,7 +344,7 @@
 
 <template>
 
-  <section class="hero is-primary mb-5">
+  <section class="hero is-primary mb-5" ref="tool">
     <div class="hero-body">
       <p class="heading">BETA</p>
       <p class="title">
@@ -507,12 +581,8 @@
                 </div>
                 <div class="field mr-2">
                   <div class="control">
-                    <AutoConfirmButton title="Usuń postacie" :onlyIcon="true" class="is-danger" icon="fa-trash" @confirmClick="groupAction('delete')"></AutoConfirmButton>
-                    <!-- <button class="button is-danger" title="Dodaj postać" @click="groupAction('delete')">
-                      <span class="icon is-small">
-                        <i class="fa-solid fa-trash"></i>
-                      </span>
-                    </button> -->
+                    <AutoConfirmButton title="Usuń postacie" :onlyIcon="true" class="is-danger" icon="fa-trash"
+                      @confirmClick="groupAction('delete')"></AutoConfirmButton>
                   </div>
                 </div>
 
@@ -545,17 +615,36 @@
           @update:entity="value => entities[key] = value" @remove:entity="removeEntity(key)"
           @showStatModal="value => showStatModal(value)" @clone:entity="cloneEntity(key)" />
 
+        <div class="tile is-parent is-12 is-vertical notification is-info mb-5">
+          <div class="tile is-child is-12">
+            <nav class="level">
+              <!-- Left side -->
+              <div class="level-left">
+                <div class="level-item">
+                  <p class="is-family-monospace">Liczba postaci: {{entities.length}}</p>
+                </div>
+              </div>
+
+              <!-- Right side -->
+              <div class="level-right">
+                <div class="level-item">
+                  <button class="button is-fullwidth is-white" @click="scrollToTop();">
+                    <span>Powrót na górę</span>
+                  </button>
+                </div>
+                <div class="level-item">
+                  <button class="button is-fullwidth is-warning" @click="clearPanelSave()">
+                    <span>Wyczyść zapisane dane</span>
+                  </button>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
-
-  <!-- <div class="field">
-    <div class="control">
-      <button class="button is-fullwidth is-large is-danger mt-3" @click="clearLocalStorage()">
-        <span>Wyczyść Zapisane Dane</span>
-      </button>
-    </div>
-  </div> -->
 
   <StatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></StatModal>
 

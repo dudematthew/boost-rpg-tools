@@ -47,8 +47,8 @@
                     .entity[ability]) + 4;
             },
             alignStatsToRank() {
-                this.entity.strength = this.entity.agility = this.entity.bodyStats();
-                this.entity.inteligence = this.entity.focus = this.entity.mindStats();
+                this.entity.strength = this.entity.agility = this.bodyStats();
+                this.entity.inteligence = this.entity.focus = this.mindStats();
                 this.entity.mana = this.entity.rank;
                 this.entity.health = this.entity.rank * 5;
             },
@@ -65,10 +65,20 @@
             },
             cloneEntity () {
                 this.$emit("clone:entity");
-            }
+            },
+            bodyStats () {
+                return (this.entity.combatType != 'magic') ?
+                    parseInt(this.entity.rank) * 4 :
+                    parseInt(this.entity.rank) * 2;
+            },
+            mindStats () {
+                return (this.entity.combatType != 'magic') ?
+                    parseInt(this.entity.rank) * 2 :
+                    parseInt(this.entity.rank) * 4;
+            },
         },
         mounted() {
-            // console.log(this.entity.mindStats());
+            // console.log(this.mindStats());
         },
     }
 </script>
@@ -149,7 +159,7 @@
                             <button class="button" @click="drawStat('strength')">
                                 <span class="icon is-small">
                                     <i class="fa-solid fa-hand-fist"
-                                        :style="{'color': entity.strength == entity.bodyStats() ? '' : entity.strength > entity.bodyStats() ? '#ffd257' : '#ee1742'}"></i>
+                                        :style="{'color': entity.strength == bodyStats() ? '' : entity.strength > bodyStats() ? '#ffd257' : '#ee1742'}"></i>
                                 </span>
                             </button>
                         </div>
@@ -174,7 +184,7 @@
                             <button class="button" @click="drawStat('agility')">
                                 <span class="icon is-small">
                                     <i class="fa-solid fa-person-running"
-                                        :style="{'color': entity.agility == entity.bodyStats() ? '' : entity.agility > entity.bodyStats() ? '#ffd257' : '#ee1742'}"></i>
+                                        :style="{'color': entity.agility == bodyStats() ? '' : entity.agility > bodyStats() ? '#ffd257' : '#ee1742'}"></i>
                                 </span>
                             </button>
                         </div>
@@ -199,7 +209,7 @@
                             <button class="button" @click="drawStat('inteligence')">
                                 <span class="icon is-small">
                                     <i class="fa-solid fa-brain"
-                                        :style="{'color': entity.inteligence == entity.mindStats() ? '' : entity.inteligence > entity.mindStats() ? '#ffd257' : '#ee1742'}"></i>
+                                        :style="{'color': entity.inteligence == mindStats() ? '' : entity.inteligence > mindStats() ? '#ffd257' : '#ee1742'}"></i>
                                 </span>
                             </button>
                         </div>
@@ -224,7 +234,7 @@
                             <button class="button" @click="drawStat('focus')">
                                 <span class="icon is-small">
                                     <i class="fa-solid fa-eye"
-                                        :style="{'color': entity.focus == entity.mindStats() ? '' : entity.focus > entity.mindStats() ? '#ffd257' : '#ee1742'}"></i>
+                                        :style="{'color': entity.focus == mindStats() ? '' : entity.focus > mindStats() ? '#ffd257' : '#ee1742'}"></i>
                                 </span>
                             </button>
                         </div>

@@ -40,6 +40,14 @@
         },
         appChangelog: [
           {
+            text: "Dodano dodatkowe przyciski na dole Panelu Mistrza Gry",
+            type: "feature"
+          },
+          {
+            text: "Dodano zapisywanie stanu Panelu Mistrza Gry w pamięci.",
+            type: "feature"
+          },
+          {
             text: "Dodano potwierdzenie przy usuwaniu w kilku miejscach.",
             type: "feature"
           },
