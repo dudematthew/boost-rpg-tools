@@ -52,7 +52,11 @@
             type: "feature"
           },
           {
-            text: "Poprawiono wyświetlanie na telefonach.",
+            text: "Dodano grupowe akcje w Panelu Mistrza Gry.",
+            type: "feature"
+          },
+          {
+            text: "Poprawiono wyświetlanie na telefonach w dużej części aplikacji.",
             type: "fix"
           },
           {
