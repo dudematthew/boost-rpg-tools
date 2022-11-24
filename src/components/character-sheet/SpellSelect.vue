@@ -79,11 +79,13 @@
 
 <template>
     <div class="field is-grouped is-grouped-multiline is-flex" style="width: 100%" v-if="availableSpells.length != 0">
-        <p class="control" style="max-width: 35%; flex: 1;" v-for="(spell, spellId) in spellList" :key="spellId">
-            <button class="button is-expanded" style="width: 100%" :class="{'is-success': spell.chosen}" @click="switchSpell(spellId, $this); $emit('change')" v-if="spellAvailable(spellId)">
-                {{spell.name}}
-            </button>
-        </p>
+        <template v-for="(spell, spellId) in spellList" :key="spellId">
+            <p class="control is-flex-grow-1" style="max-width: 35%; flex: 1 1 auto;" v-if="spellAvailable(spellId)">
+                <button class="button is-expanded" style="width: 100%" :class="{'is-success': spell.chosen}" @click="switchSpell(spellId, $this); $emit('change')" v-if="spellAvailable(spellId)">
+                    {{spell.name}}
+                </button>
+            </p>
+        </template>
     </div>
 </template>
 
