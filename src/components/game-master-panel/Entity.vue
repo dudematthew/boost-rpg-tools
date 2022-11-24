@@ -1,9 +1,15 @@
 <script>
+    import SpellSelectModal from '@/components/game-master-panel/SpellSelectModal'
+
     export default {
         name: "Entity",
         props: [
             "entity",
+            "spellList"
         ],
+        components: {
+            SpellSelectModal,
+        },
         data() {
             return {
                 entityStatesIcons: {
@@ -13,7 +19,6 @@
                     incapacitated: 'fa-face-dizzy',
                     dead: 'fa-skull'
                 },
-                confirmDelete: false,
             }
         },
         computed: {
@@ -61,7 +66,7 @@
                 });
             },
             showSpellSelectModal () {
-                this.$emit("showSpellModal");
+                this.$options.childInterface.showSpellModal1();
             },
             removeEntity () {
                 this.$emit("remove:entity");
@@ -78,6 +83,9 @@
                 return (this.entity.combatType != 'magic') ?
                     parseInt(this.entity.rank) * 2 :
                     parseInt(this.entity.rank) * 4;
+            },
+            getChildInterface(childInterface) {
+                this.$options.childInterface = Object.assign(this.$options.childInterface ?? {}, childInterface);
             },
         },
         mounted() {
@@ -130,7 +138,7 @@
                             <div class="control">
                                 <button class="button is-danger" title="Usuń postać" @click="removeEntity()">
                                     <span class="icon is-small">
-                                        <i class="fa-solid" :class="confirmDelete ? ' fa-trash' : 'fa-question'"></i>
+                                        <i class="fa-solid fa-trash"></i>
                                     </span>
                                 </button>
                             </div>
@@ -309,9 +317,9 @@
                         </div>
                     </div>
 
-                    <div class="field mr-2">
+                    <div class="field mr-2" v-if="entity.combatType == 'magic'">
                         <button class="button" style="width: 100%" @click="showSpellSelectModal()">
-                            <span>{{entity.spells?.length}}/{{entity.rank}}</span>
+                            <span>{{entity.spells.length ?? 1}}/{{entity.rank}}</span>
                             <span class="icon is-small is-right">
                                 <i class="fa-solid fa-hat-wizard"></i>
                             </span>
@@ -327,7 +335,7 @@
                                 </span>
                             </button>
                         </div>
-                        <p class="control" style="min-width: 30px;">
+                        <p class="control" style="min-width: 60px;">
                             <input class="input" type="number" placeholder="Ranga" title="Ranga" :value="entity.rank"
                                 @keydown.enter="$event.target.blur()"
                                 @focusout="updateValue('rank', $event.target.value < 1 ? 1 : $event.target.value)">
@@ -387,6 +395,8 @@
                         @focusout="updateValue('notes', $event.target.value)" :value="entity.notes"></textarea>
                 </div>
             </div>
+
+            <SpellSelectModal :spells="entity.spells" :spellList="spellList" childLevel="1" :title="`Wybierz zaklęcia (${entity.spells?.length}/${entity.rank})`" @change="$emit('change');" @interface="getChildInterface"></SpellSelectModal>
         </div>
     </div>
 </template>

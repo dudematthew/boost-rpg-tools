@@ -200,7 +200,7 @@
       showSpellSelectModal (key) {
         this.currentSpellsKey = key;
 
-        this.$options.childInterface.showSpellModal();
+        this.$options.childInterface.showSpellModal0();
       },
 
       getChildInterface(childInterface) {
@@ -332,17 +332,16 @@
        * Current value used by @SpellSelectModal
        */
       currentSpells () {
-        console.log(this.currentSpellsKey);
         if (this.currentSpellsKey != null)
           return this.entities[this.currentSpellsKey].spells;
         else
-          return this.entityForm.spells;
+          return [];
       },
       currentRank () {
         if (this.currentSpellsKey != null)
           return this.entities[this.currentSpellsKey].rank;
         else
-          return this.entityForm.rank;
+          return 1;
       },
       watchChanger() {
         return this.entities +
@@ -679,9 +678,11 @@
                   </button>
                 </div>
                 <div class="level-item">
-                  <button class="button is-fullwidth is-warning" @click="clearPanelSave(); $router.go($router.currentRoute)">
+                  <AutoConfirmButton title="Wyczyść zapisane dane" style="width: 100%" class="is-warning"
+                      @confirmClick="clearPanelSave(); $router.go($router.currentRoute)">Wyczyść zapisane dane</AutoConfirmButton>
+                  <!-- <button class="button is-fullwidth is-warning" @click="clearPanelSave(); $router.go($router.currentRoute)">
                     <span>Wyczyść zapisane dane</span>
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </nav>
@@ -694,7 +695,7 @@
 
   <StatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></StatModal>
 
-  <SpellSelectModal :spells="currentSpells" :spellList="spellList" :title="`Wybierz zaklęcia (${currentSpells?.length}/${currentRank})`" @change="setSpells(spells);" @interface="getChildInterface"></SpellSelectModal>
+  <SpellSelectModal :spells="entityForm.spells" :spellList="spellList" :title="`Wybierz zaklęcia (${entityForm.spells?.length}/${entityForm.rank})`" childLevel="0" @change="update();" @interface="getChildInterface"></SpellSelectModal>
 
   <!-- <DamageModal :other="other" :baseHP="chosenPoints.strength.value" @interface="getChildInterface"></DamageModal> -->
 </template>
