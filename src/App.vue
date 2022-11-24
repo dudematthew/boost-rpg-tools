@@ -106,7 +106,7 @@
             spellAmount: 6,
             availableSpells: ["heal", "blast", "protect", "enchant", "curse", "bless", "ilusion", "telekinesis", "levitation", "polymorphy"],
             inventory: [
-              "Laska maga (+1 do Skupienia)",
+              "Laska maga (+1 do Many)",
               "Toga",
             ],
             ability: "Mag posiada 6 zaklęć do wyboru na start",
