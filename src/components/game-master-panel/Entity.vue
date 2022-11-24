@@ -17,7 +17,7 @@
                     full: 'fa-face-smile',
                     hurt: 'fa-face-meh',
                     incapacitated: 'fa-face-dizzy',
-                    dead: 'fa-skull'
+                    dead: 'fa-skull',
                 },
             }
         },
@@ -66,7 +66,7 @@
                 });
             },
             showSpellSelectModal () {
-                this.$options.childInterface.showSpellModal1();
+                this.showSpellModal();
             },
             removeEntity () {
                 this.$emit("remove:entity");
@@ -84,8 +84,8 @@
                     parseInt(this.entity.rank) * 2 :
                     parseInt(this.entity.rank) * 4;
             },
-            getChildInterface(childInterface) {
-                this.$options.childInterface = Object.assign(this.$options.childInterface ?? {}, childInterface);
+            setCustomChildInterface(childInterface) {
+                this.showSpellModal = childInterface.showSpellModal;
             },
         },
         mounted() {
@@ -396,7 +396,7 @@
                 </div>
             </div>
 
-            <SpellSelectModal :spells="entity.spells" :spellList="spellList" childLevel="1" :title="`Wybierz zaklęcia (${entity.spells?.length}/${entity.rank})`" @change="$emit('change');" @interface="getChildInterface"></SpellSelectModal>
+            <SpellSelectModal :spells="entity.spells" :spellList="spellList" :title="`Wybierz zaklęcia (${entity.spells?.length}/${entity.rank})`" @change="$emit('change');" @interface="setCustomChildInterface"></SpellSelectModal>
         </div>
     </div>
 </template>

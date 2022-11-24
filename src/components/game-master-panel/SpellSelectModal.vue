@@ -5,7 +5,7 @@
         spellList: Object,
         spells: Array,
         title: String,
-        childLevel: Number,
+        type: String,
     },
     data() {
         return {
@@ -19,9 +19,9 @@
         },
         // Emits interface to parent
         emitInterface() {
-            let interfaceObject = {};
-            interfaceObject['showSpellModal' + this.childLevel] = () => this.show();
-            this.$emit("interface", interfaceObject);
+            this.$emit("interface", {
+                showSpellModal: () => this.show()
+            });
         },
         isChosen (spellId) {
             if (this.spells?.includes(spellId))
