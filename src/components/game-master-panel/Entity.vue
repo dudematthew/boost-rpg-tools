@@ -118,7 +118,7 @@
                     <div class="level-right mr-2">
                         <div class="level-item" style="max-width: 40px">
                             <div class="control">
-                                <button class="button" title="Pokaż notatki" @click="cloneEntity()">
+                                <button class="button" title="Duplikuj byt" @click="cloneEntity()">
                                     <span class="icon is-small">
                                         <i class="fa-regular fa-clone"></i>
                                     </span>
