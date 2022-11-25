@@ -176,12 +176,12 @@
           },
           curse: {
             name: "Curse",
-            description: "Rzucasz na przeciwnika i zmniejszasz mu dwie statystyki o 4 (Musisz zdać na Skupienie) na 4 rundy",
+            description: "Rzucasz na przeciwnika i zmniejszasz mu dwie statystyki o 4 lub na bohatera i zmniejszasz mu statystykę o 3 (Musi nie zdać na Skupienie) na 4 rundy",
             chosen: false
           },
           bless: {
             name: "Bless",
-            description: "Dotykasz kogoś i zwiększasz mu daną statystykę o 4 przy jego następnym rzucie",
+            description: "Dotykasz kogoś i zwiększasz mu daną statystykę o 3 przy jego następnym rzucie",
             chosen: false
           },
           ilusion: {

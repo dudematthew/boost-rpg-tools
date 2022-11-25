@@ -75,9 +75,9 @@
                 <div v-if="Object.keys(memoryCharacterList).length <= 0" class="mb-5 is-centered has-text-centered">
                     <div class="columns is-centered mt-3 is-fullwidth">
                         <div class="column is-one-third-desktop is-one-third-tablet is-one-third-mobile is-offset-4-mobile">
-                        <figure class="image is-5by4 is-fullwidth has-ratio" style="height: auto">
-                            <img src="@/assets/placeholder-image.png">
-                        </figure>
+                            <figure class="image is-5by4 is-fullwidth has-ratio" style="height: auto">
+                                <img src="@/assets/placeholder-image.png">
+                            </figure>
                         </div>
                     </div>
                     <div class="columns is-centered mb-0">
