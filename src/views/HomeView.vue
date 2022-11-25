@@ -1,5 +1,5 @@
 <script>
-  import Bulma, {
+  import {
     PanelTabs
   } from '@vizuaalog/bulmajs/src/plugins/panelTabs';
 

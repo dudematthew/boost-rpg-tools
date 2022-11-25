@@ -39,7 +39,7 @@
                 }, this.waitingTime);
             },
             confirm () {
-                if (!!this.timeout)
+                if (this.timeout)
                     clearTimeout(this.timeout);
 
                 this.waitingState = 0;

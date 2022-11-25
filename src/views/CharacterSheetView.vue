@@ -116,7 +116,7 @@
 
         // Unpack all character attributes to memory
         for (let attribute in character) {
-          if (!!character[attribute])
+          if (character[attribute])
             for (let innerAttribute in character[attribute]) {
               this[attribute][innerAttribute] = character[attribute][innerAttribute];
             }
@@ -464,14 +464,14 @@
       },
 
       availableSpells() {
-        if (!!this.chosenClass)
+        if (this.chosenClass)
           return this.chosenClass.availableSpells;
         else
           return [];
       },
 
       spellAmount() {
-        if (!!this.chosenClass)
+        if (this.chosenClass)
           return this.chosenClass.spellAmount;
         else
           return 0;
@@ -482,6 +482,8 @@
           if (this.backgroundList[bId].chosen)
             return this.backgroundList[bId];
         }
+
+        return null;
       },
 
       classListArray() {
@@ -500,7 +502,7 @@
       if (typeof this.$route.params.character !== "undefined")
         this.passedCharacter = JSON.parse(this.$route.params.character) ?? null;
 
-      if (!!this.passedCharacter) {
+      if (this.passedCharacter) {
 
         console.log("Przekazano postać!", this.passedCharacter);
 
@@ -521,8 +523,8 @@
 
         let loadedCurrentCharacter = this.loadCurrentCharacter();
 
-        if (!!loadedCurrentCharacter) {
-          if (!!loadedCurrentCharacter) {
+        if (loadedCurrentCharacter) {
+          if (loadedCurrentCharacter) {
             this.setupCharacter(loadedCurrentCharacter);
           }
         } else {
