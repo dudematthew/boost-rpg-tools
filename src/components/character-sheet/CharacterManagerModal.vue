@@ -134,12 +134,7 @@
                         <i class="fa-solid fa-file"></i>
                     </span>
                 </button>
-                <button class="button is-danger" @click="$emit('deleteAllCharacters'); active = false;">
-                    <span>Usuń wszystko</span>
-                    <span class="icon is-small">
-                        <i class="fa-solid fa-trash"></i>
-                    </span>
-                </button>
+                <AutoConfirmButton title="Usuń wszystkie postacie" class="is-danger" icon="fa-trash" @confirmClick="$emit('deleteAllCharacters'); active = false;">Usuń wszystko &nbsp;</AutoConfirmButton>
             </footer>
             <footer class="modal-card-foot is-hidden-mobile">
                 <router-link to="/generator" class="button is-success" @click="active = false">
@@ -154,12 +149,7 @@
                         <i class="fa-solid fa-file"></i>
                     </span>
                 </button>
-                <button class="button is-danger" @click="$emit('deleteAllCharacters'); active = false;">
-                    <span>Usuń wszystkie postacie</span>
-                    <span class="icon is-small">
-                        <i class="fa-solid fa-trash"></i>
-                    </span>
-                </button>
+                <AutoConfirmButton title="Usuń wszystkie postacie" class="is-danger" icon="fa-trash" @confirmClick="$emit('deleteAllCharacters'); active = false;">Usuń wszystkie postacie &nbsp;</AutoConfirmButton>
             </footer>
         </div>
     </div>
