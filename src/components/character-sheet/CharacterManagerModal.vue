@@ -123,7 +123,7 @@
                     <div class="is-divider" data-content="OR"></div>
                 </template>
             </section>
-            <footer class="modal-card-foot is-hidden-tablet-only is-hidden-desktop-only is-hidden-fullhd-only">
+            <footer class="modal-card-foot is-hidden-tablet">
                 <router-link to="/generator" class="button is-success" @click="active = false">
                     <span class="icon is-small">
                         <i class="fa-solid fa-file-signature"></i>
