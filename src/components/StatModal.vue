@@ -21,10 +21,10 @@
             return parseInt(this.throwStatistic.value);
         },
         resultText() {
-            return (this.result + this.modifier > this.target) ?
-                `Zabrakło ci ${Math.abs(this.target - this.result + this.modifier)}...` :
-                (this.result + this.modifier < this.target) ?
-                    `Przebiłeś wymagania o ${Math.abs(this.result + this.modifier - this.target)}!` :
+            return ((this.result + this.modifier) > this.target) ?
+                `Zabrakło ci ${Math.abs(this.target - (this.result + this.modifier))}...` :
+                ((this.result + this.modifier) < this.target) ?
+                    `Przebiłeś wymagania o ${Math.abs((this.result + this.modifier) - this.target)}!` :
                     "Trafiłeś idealnie!";
         }
     },
