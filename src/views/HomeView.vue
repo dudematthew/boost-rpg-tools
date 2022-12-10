@@ -1,5 +1,5 @@
 <script>
-  import Bulma, {
+  import {
     PanelTabs
   } from '@vizuaalog/bulmajs/src/plugins/panelTabs';
 
@@ -64,7 +64,11 @@
             type: "feature"
           },
           {
-            text: "Poprawiono wyświetlanie na telefonach.",
+            text: "Dodano grupowe akcje w Panelu Mistrza Gry.",
+            type: "feature"
+          },
+          {
+            text: "Poprawiono wyświetlanie na telefonach w dużej części aplikacji.",
             type: "fix"
           },
           {

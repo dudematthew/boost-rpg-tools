@@ -106,7 +106,7 @@
             spellAmount: 6,
             availableSpells: ["heal", "blast", "protect", "enchant", "curse", "bless", "ilusion", "telekinesis", "levitation", "polymorphy"],
             inventory: [
-              "Laska maga (+1 do Skupienia)",
+              "Laska maga (+1 do Many)",
               "Toga",
             ],
             ability: "Mag posiada 6 zaklęć do wyboru na start",
@@ -176,12 +176,12 @@
           },
           curse: {
             name: "Curse",
-            description: "Rzucasz na przeciwnika i zmniejszasz mu dwie statystyki o 4 (Musisz zdać na Skupienie) na 4 rundy",
+            description: "Rzucasz na przeciwnika i zmniejszasz mu dwie statystyki o 4 lub na bohatera i zmniejszasz mu statystykę o 3 (Musi nie zdać na Skupienie) na 4 rundy",
             chosen: false
           },
           bless: {
             name: "Bless",
-            description: "Dotykasz kogoś i zwiększasz mu daną statystykę o 4 przy jego następnym rzucie",
+            description: "Dotykasz kogoś i zwiększasz mu daną statystykę o 3 przy jego następnym rzucie",
             chosen: false
           },
           ilusion: {

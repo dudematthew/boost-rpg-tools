@@ -75,9 +75,9 @@
                 <div v-if="Object.keys(memoryCharacterList).length <= 0" class="mb-5 is-centered has-text-centered">
                     <div class="columns is-centered mt-3 is-fullwidth">
                         <div class="column is-one-third-desktop is-one-third-tablet is-one-third-mobile is-offset-4-mobile">
-                        <figure class="image is-5by4 is-fullwidth has-ratio" style="height: auto">
-                            <img src="@/assets/placeholder-image.png">
-                        </figure>
+                            <figure class="image is-5by4 is-fullwidth has-ratio" style="height: auto">
+                                <img src="@/assets/placeholder-image.png">
+                            </figure>
                         </div>
                     </div>
                     <div class="columns is-centered mb-0">
@@ -123,7 +123,7 @@
                     <div class="is-divider" data-content="OR"></div>
                 </template>
             </section>
-            <footer class="modal-card-foot is-hidden-tablet-only is-hidden-desktop-only is-hidden-fullhd-only">
+            <footer class="modal-card-foot is-hidden-tablet">
                 <router-link to="/generator" class="button is-success" @click="active = false">
                     <span class="icon is-small">
                         <i class="fa-solid fa-file-signature"></i>
@@ -134,12 +134,7 @@
                         <i class="fa-solid fa-file"></i>
                     </span>
                 </button>
-                <button class="button is-danger" @click="$emit('deleteAllCharacters'); active = false;">
-                    <span>Usuń wszystko</span>
-                    <span class="icon is-small">
-                        <i class="fa-solid fa-trash"></i>
-                    </span>
-                </button>
+                <AutoConfirmButton title="Usuń wszystkie postacie" class="is-danger" icon="fa-trash" @confirmClick="$emit('deleteAllCharacters'); active = false;">Usuń wszystko &nbsp;</AutoConfirmButton>
             </footer>
             <footer class="modal-card-foot is-hidden-mobile">
                 <router-link to="/generator" class="button is-success" @click="active = false">
@@ -154,12 +149,7 @@
                         <i class="fa-solid fa-file"></i>
                     </span>
                 </button>
-                <button class="button is-danger" @click="$emit('deleteAllCharacters'); active = false;">
-                    <span>Usuń wszystkie postacie</span>
-                    <span class="icon is-small">
-                        <i class="fa-solid fa-trash"></i>
-                    </span>
-                </button>
+                <AutoConfirmButton title="Usuń wszystkie postacie" class="is-danger" icon="fa-trash" @confirmClick="$emit('deleteAllCharacters'); active = false;">Usuń wszystkie postacie &nbsp;</AutoConfirmButton>
             </footer>
         </div>
     </div>

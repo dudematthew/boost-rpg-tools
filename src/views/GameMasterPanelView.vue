@@ -17,7 +17,6 @@
       Entity,
       D6Button,
       StatModal,
-      D6Button,
       AutoConfirmButton,
       SpellSelectModal
     },
@@ -173,7 +172,7 @@
                 entitiesToRemove.push(key);
                 break actions;
             }
-        };
+        }
 
         if (action != 'delete')
           return;
@@ -223,7 +222,7 @@
       },
 
       setSpells (spells) {
-        if (!!this.currentSpellsKey) {
+        if (this.currentSpellsKey) {
           console.log("Setting spell:", this.currentSpellsKey, spells);
           this.entities[this.currentSpellsKey].spells = spells;
         }
@@ -291,10 +290,6 @@
           console.log("Pobrano panel: ", returner);
         } catch (e) {
           console.log("Nie załadowano panelu:", data, e);
-        }
-
-        for (let key in returner.entities) {
-          let entity = returner.entities[key];
         }
 
         return returner;

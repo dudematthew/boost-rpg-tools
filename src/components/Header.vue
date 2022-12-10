@@ -102,4 +102,9 @@ export default {
   </nav>
 </template>
 
-
+<style scoped>
+  .navbar-item:focus {
+    background-color: #52525E;
+    color: white;
+  }
+</style>

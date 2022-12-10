@@ -223,7 +223,7 @@
           <li>Typ klasy: Magiczny</li>
           <li>Ekwipunek:</li>
           <ul>
-            <li>Laska maga (+1 do Skupienia)</li>
+            <li>Laska maga (+1 do Many)</li>
             <li>Toga</li>
           </ul>
           <li>Specjalna zasada: Mag posiada 6 zaklęć do wyboru na start</li>
