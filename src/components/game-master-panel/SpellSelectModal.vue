@@ -4,14 +4,13 @@
     props: {
         spellList: Object,
         spells: Array,
-        title: String
+        title: String,
+        type: String,
     },
     data() {
         return {
             active: false,
         };
-    },
-    computed: {
     },
     methods: {
         // Reset data and show the modal
@@ -25,7 +24,7 @@
             });
         },
         isChosen (spellId) {
-            if (this.spells.includes(spellId))
+            if (this.spells?.includes(spellId))
                 return true;
 
             return false;
@@ -40,7 +39,6 @@
     watch: {
         active: function (val) {
             document.querySelector("html").classList.toggle("is-clipped", val);
-            console.log(val);
         }
     },
     mounted() {
@@ -63,7 +61,7 @@
                 <div class="field is-grouped is-grouped-multiline is-flex" style="width: 100%">
                     <template v-for="(spell, spellId) in spellList" :key="spellId">
                         <p class="control is-flex-grow-1" style="max-width: 35%; flex: 1 1 auto;">
-                            <button class="button is-expanded" style="width: 100%" :class="{'is-success': isChosen(spellId)}" @click="switchSpell(spellId); $emit('change', spells)">
+                            <button class="button is-expanded" style="width: 100%" :class="{'is-success': isChosen(spellId)}" @click="switchSpell(spellId); $emit('change')">
                                 {{spell.name}}
                             </button>
                         </p>

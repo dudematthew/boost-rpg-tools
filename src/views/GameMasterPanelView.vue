@@ -140,7 +140,7 @@
             inteligence: false,
             focus: false,
           },
-          spells: this.entityForm.spells,
+          spells: Object.assign([], this.entityForm.spells),
         };
 
         this.entities.push(newEntity);
@@ -197,9 +197,7 @@
         this.$options.childInterface.showStatModal();
       },
 
-      showSpellSelectModal (key) {
-        this.currentSpellsKey = key;
-
+      showSpellSelectModal () {
         this.$options.childInterface.showSpellModal();
       },
 
@@ -332,17 +330,16 @@
        * Current value used by @SpellSelectModal
        */
       currentSpells () {
-        console.log(this.currentSpellsKey);
         if (this.currentSpellsKey != null)
           return this.entities[this.currentSpellsKey].spells;
         else
-          return this.entityForm.spells;
+          return [];
       },
       currentRank () {
         if (this.currentSpellsKey != null)
           return this.entities[this.currentSpellsKey].rank;
         else
-          return this.entityForm.rank;
+          return 1;
       },
       watchChanger() {
         return this.entities +
@@ -383,7 +380,6 @@
 
   <section class="hero is-primary mb-5" ref="tool">
     <div class="hero-body">
-      <p class="heading">BETA</p>
       <p class="title">
         Panel Mistrza Gry
       </p>
@@ -437,7 +433,7 @@
                       </span>
                     </button>
                   </div>
-                  <div class="control" style="min-width: 60px" v-if="showD20Additions">
+                  <div class="control" style="min-width: 40px; max-width: 80px" v-if="showD20Additions">
                     <input class="input" type="number" placeholder="Modyfikator..." v-model="throwD20Modifier"
                       title="Modyfikator K20">
                   </div>
@@ -448,7 +444,7 @@
                       </span>
                     </button>
                   </div>
-                  <div class="control" style="min-width: 60px">
+                  <div class="control" style="min-width: 40px; max-width: 80px">
                     <input class="input" placeholder="Wynik..." v-model="throwD20Result" disabled>
                   </div>
                 </div>
@@ -467,7 +463,7 @@
                       </span>
                     </button>
                   </div>
-                  <div class="control" style="min-width: 60px">
+                  <div class="control" style="min-width: 40px; max-width: 80px">
                     <input class="input" placeholder="Wynik..." v-model="throwD3Result" disabled>
                   </div>
                 </div>
@@ -480,7 +476,7 @@
                       </span>
                     </button>
                   </div>
-                  <div class="control" style="min-width: 60px">
+                  <div class="control" style="min-width: 40px; max-width: 80px">
                     <input class="input" placeholder="Wynik..." v-model="throwD2Result" disabled>
                   </div>
                 </div>
@@ -679,9 +675,11 @@
                   </button>
                 </div>
                 <div class="level-item">
-                  <button class="button is-fullwidth is-warning" @click="clearPanelSave(); $router.go($router.currentRoute)">
+                  <AutoConfirmButton title="Wyczyść zapisane dane" style="width: 100%" class="is-warning"
+                      @confirmClick="clearPanelSave(); $router.go($router.currentRoute)">Wyczyść zapisane dane</AutoConfirmButton>
+                  <!-- <button class="button is-fullwidth is-warning" @click="clearPanelSave(); $router.go($router.currentRoute)">
                     <span>Wyczyść zapisane dane</span>
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </nav>
@@ -694,7 +692,7 @@
 
   <StatModal :throwStatistic="throwStatistic" @interface="getChildInterface"></StatModal>
 
-  <SpellSelectModal :spells="currentSpells" :spellList="spellList" :title="`Wybierz zaklęcia (${currentSpells?.length}/${currentRank})`" @change="setSpells(spells);" @interface="getChildInterface"></SpellSelectModal>
+  <SpellSelectModal :spells="entityForm.spells" :spellList="spellList" :title="`Wybierz zaklęcia (${entityForm.spells?.length}/${entityForm.rank})`" @change="update();" @interface="getChildInterface"></SpellSelectModal>
 
   <!-- <DamageModal :other="other" :baseHP="chosenPoints.strength.value" @interface="getChildInterface"></DamageModal> -->
 </template>
