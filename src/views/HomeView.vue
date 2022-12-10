@@ -40,6 +40,10 @@
         },
         appChangelog: [
           {
+            text: "Dodano parę linków na stronie głównej.",
+            type: "typo"
+          },
+          {
             text: "Zmieniono wybór zaklęć na E-Karcie Postaci z formy listy na przyciski.",
             type: "fix"
           },
@@ -204,6 +208,9 @@
       <br />
       <br />
       Zerknij na <router-link class="link" to="/rulebook">Zasady Gry</router-link>.
+      <br />
+      <br />
+      Alternatywnie możesz od razu zobaczyć <router-link class="link" to="/generator">Generator Postaci</router-link>, <router-link class="link" to="/character-sheet">E-Kartę Postaci</router-link> czy <router-link class="link" to="/game-master-panel">Panel Mistrza Gry</router-link>!
     </h2>
   </section>
 
