@@ -22,3 +22,4 @@ deploy.log
 *.njsproj
 *.sln
 *.sw?
+.dependencygraph/setting.json
