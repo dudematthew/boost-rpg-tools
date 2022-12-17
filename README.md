@@ -136,8 +136,8 @@ That's why I created BOOST RPG which is a simple system for this kind of situati
 ## Roadmap
 
 - [x] Add Home Page
-- [x] BOOST manual page
-- [x] User panel
+- [x] BOOST Manual Page
+- [x] User Panel
 - [x] Game Master Panel
 - [ ] Multi-language Support
     - [x] Polish
