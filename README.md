@@ -21,7 +21,7 @@
 
   <p align="center">
     VueJS 3 App made for making it easy to play my simple RPG System.
-    Everything is written in polish language. Might translate someday, that's not a promise.
+    Currently only Polish language available.
     <br />
     <a href="http://www.boostrpg.pl"><strong>Explore the website »</strong></a>
     <br />
