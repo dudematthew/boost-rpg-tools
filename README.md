@@ -190,7 +190,7 @@ Project Link: [https://github.com/dudematthew/boost-rpg-tools](https://github.co
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* ([MIT License](https://choosealicense.com/licenses/mit/))
+* [MIT License](https://choosealicense.com/licenses/mit/)
 * [Img Shields](https://shields.io)
 * [GitHub Pages](https://pages.github.com)
 * [Font Awesome](https://fontawesome.com)
