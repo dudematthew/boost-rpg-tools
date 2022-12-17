@@ -64,7 +64,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
 There are many RPG systems but I didn't find one that would withstand one-shot sessions that could be run without any preparation with non abstract rules.
 
@@ -73,7 +73,7 @@ Example situations:
 * You want to introduce your friend to [RPG Sessions](https://rpgmuseum.fandom.com/wiki/Session) but you don't want to scare him
 * You want to create something lightweight without any preparation and just go with the flow :smile:
 
-That's why I created BOOST RPG which is a simple system for this kind of situations. Also that's why I created [BOOST RPG](www.boostrpg.pl) website to simple it down even more.
+That's why I created BOOST RPG which is a simple system for this kind of situations. Also that's why I created [BOOST RPG wbsite](www.boostrpg.pl) to simple it down even more.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
