@@ -201,15 +201,15 @@ Project Link: [https://github.com/dudematthew/boost-rpg-tools](https://github.co
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/dudematthew/boost-rpg-tools.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/dudematthew/boost-rpg-tools.svg?style=flat-square
 [contributors-url]: https://github.com/dudematthew/boost-rpg-tools/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/dudematthew/boost-rpg-tools.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/dudematthew/boost-rpg-tools.svg?style=flat-square
 [forks-url]: https://github.com/dudematthew/boost-rpg-tools/network/members
-[stars-shield]: https://img.shields.io/github/stars/dudematthew/boost-rpg-tools.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/dudematthew/boost-rpg-tools.svg?style=flat-square
 [stars-url]: https://github.com/dudematthew/boost-rpg-tools/stargazers
-[issues-shield]: https://img.shields.io/github/issues/dudematthew/boost-rpg-tools.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/dudematthew/boost-rpg-tools.svg?style=flat-square
 [issues-url]: https://github.com/dudematthew/boost-rpg-tools/issues
-[license-shield]: https://img.shields.io/github/license/dudematthew/boost-rpg-tools.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/dudematthew/boost-rpg-tools.svg?style=flat-square
 [license-url]: https://github.com/dudematthew/boost-rpg-tools/blob/master/LICENSE.txt
 [product-screenshot]: images/screenshot.png
 <!-- https://simpleicons.org -->
