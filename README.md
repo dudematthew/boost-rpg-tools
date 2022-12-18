@@ -103,7 +103,7 @@ That's why I created BOOST RPG which is a simple system for this kind of situati
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/your_username/boost-rpg-tools.git
+   git clone https://github.com/dudematthew/boost-rpg-tools.git
    ```
 2. Install NPM packages
    ```sh
