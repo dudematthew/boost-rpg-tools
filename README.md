@@ -210,7 +210,7 @@ Project Link: [https://github.com/dudematthew/boost-rpg-tools](https://github.co
 [issues-shield]: https://img.shields.io/github/issues/dudematthew/boost-rpg-tools.svg?style=flat-square
 [issues-url]: https://github.com/dudematthew/boost-rpg-tools/issues
 [license-shield]: https://img.shields.io/github/license/dudematthew/boost-rpg-tools.svg?style=flat-square
-[license-url]: https://github.com/dudematthew/boost-rpg-tools/blob/master/LICENSE.txt
+[license-url]: https://github.com/dudematthew/boost-rpg-tools/blob/master/LICENSE
 [product-screenshot]: images/screenshot.png
 <!-- https://simpleicons.org -->
 [Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
