@@ -1,17 +1,30 @@
 <script>
+import FeedbackModal from './FeedbackModal.vue'
+
 export default {
-  name: 'Header',
+  name: 'AppHeader',
+  components: {
+    FeedbackModal
+  },
   methods: {
-    closeNavbar () {
+    closeNavbar() {
       let navbarButton = this.$refs.navbarButton;
 
       if (navbarButton.className.match(/\bis-active\b/)) {
         navbarButton.click();
       }
+    },
+
+    showFeedbackModal() {
+      this.$options.childInterface.showFeedbackModal();
+    },
+
+    getChildInterface(childInterface) {
+      this.$options.childInterface = Object.assign(this.$options.childInterface ?? {}, childInterface);
     }
   },
   watch: {
-    $route (to, from) {
+    $route() {
       this.closeNavbar();
     }
   }
@@ -20,13 +33,14 @@ export default {
 
 
 <template>
-  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+  <nav class="is-fixed-top navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <router-link class="navbar-item" to="/">
         <img src="@/assets/logo.png" width="112" height="28">
       </router-link>
 
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNavbar" ref="navbarButton">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNavbar"
+        ref="navbarButton">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -59,6 +73,10 @@ export default {
           Pobierz Kartę Postaci
         </a>
 
+        <a class="navbar-item" @click="showFeedbackModal()">
+          Prześlij opinię
+        </a>
+
         <!-- <a class="navbar-item" href="assets/logo-single.png" target="_blank" download>
           Pobierz Kartę Postaci
         </a> -->
@@ -86,7 +104,7 @@ export default {
         </div>
       </div> -->
 
-      <!-- <div class="navbar-end">
+        <!-- <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
             <a class="button is-primary">
@@ -100,11 +118,13 @@ export default {
       </div>
     </div>
   </nav>
+
+  <FeedbackModal @interface="getChildInterface"></FeedbackModal>
 </template>
 
 <style scoped>
-  .navbar-item:focus {
-    background-color: #52525E;
-    color: white;
-  }
+.navbar-item:focus {
+  background-color: #52525E;
+  color: white;
+}
 </style>
