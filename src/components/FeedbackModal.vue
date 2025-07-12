@@ -254,9 +254,8 @@ export default {
 
             <section class="modal-card-body" v-if="isSuccess">
                 <div class="notification is-success">
-                    <h4 class="has-text-black title is-4">Dziękujemy!</h4>
-                    <p class="has-text-black">Twoja opinia została przesłana pomyślnie. Doceniamy Twój wkład w rozwój
-                        naszego systemu RPG!</p>
+                    <h4 class="has-text-black title is-4">Dziękuję!</h4>
+                    <p class="has-text-black">Twoja opinia została wysłana. Dziękuję za pomoc!</p>
                 </div>
             </section>
 
